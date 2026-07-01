@@ -21,6 +21,7 @@
   --color-success: #2bd47b;
   --color-danger: #ff6b6b;
   --color-whatsapp: #25d366;
+  --color-gold: #ffb020;
 
   /* Tipografía — usa next/font si la app lo provee, si no cae a la familia literal */
   --font-sans: var(--font-inter, "Inter"), ui-sans-serif, system-ui, sans-serif;
@@ -33,6 +34,11 @@
   /* Sombras */
   --shadow-blue: 0 18px 50px -12px rgb(30 107 255 / 0.55);
   --shadow-blue-strong: 0 24px 60px -10px rgb(30 107 255 / 0.7);
+
+  /* Animaciones (generan utilidades animate-*) */
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-aurora: aurora 16s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
 }
 
 /* Vars semánticas extra para el CSS artesanal de la landing
@@ -43,4 +49,45 @@
   --blue-glow: rgb(30 107 255 / 0.45);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --maxw: 1180px;
+}
+
+/* ============================================================
+   Keyframes de marca (marquee de logos, aurora del hero, float)
+   ============================================================ */
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(6%, -8%) scale(1.12);
+  }
+  66% {
+    transform: translate(-6%, 6%) scale(0.94);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Respetar reduced-motion: cortar las animaciones ambientales */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-aurora,
+  .animate-float {
+    animation: none !important;
+  }
 }

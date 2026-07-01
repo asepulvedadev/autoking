@@ -42,3 +42,10 @@
     animation: none;
   }
 }
+
+/* En mobile el CTA sticky del pie reemplaza al botón flotante */
+@media (max-width: 640px) {
+  .float {
+    display: none;
+  }
+}

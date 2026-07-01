@@ -1,4 +1,4 @@
-import { buttonVariants, WhatsAppIcon, cn } from "@autoking/ui";
+import { buttonVariants, WhatsAppIcon, AuroraBackground, cn } from "@autoking/ui";
 import { waHref } from "@/lib/site";
 import { WhatsAppMock } from "./whatsapp-mock";
 import styles from "./hero.module.css";
@@ -13,8 +13,7 @@ export function Hero() {
   return (
     <section className={styles.hero} id="hero">
       <div className="grid-bg" />
-      <div className={cn("glow-orb", styles.orbOne)} />
-      <div className={cn("glow-orb", styles.orbTwo)} />
+      <AuroraBackground />
 
       <div className={cn("container", styles.grid)}>
         <div>
