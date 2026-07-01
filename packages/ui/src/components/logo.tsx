@@ -1,14 +1,26 @@
 import { cn } from "../lib/cn";
-import { Crown } from "./crown";
 
-/** Logotipo AutoKing: corona + wordmark. */
-export function Logo({ className, crownClassName }: { className?: string; crownClassName?: string }) {
+/** Ruta pública del wordmark. Cada app que use <Logo> debe tener este
+ *  archivo en su carpeta `public/` (se sirve como `/AutoKing-logo.png`). */
+const LOGO_SRC = "/AutoKing-logo.png";
+const LOGO_RATIO = 712 / 176; // dimensiones reales del PNG
+
+/**
+ * Logotipo AutoKing (wordmark completo: corona-K + "AutoKing").
+ * Controlá el tamaño con `height` (px); el ancho se calcula por aspect ratio.
+ * Usa <img> a propósito para mantener el design system agnóstico de Next.
+ */
+export function Logo({ className, height = 34 }: { className?: string; height?: number }) {
   return (
-    <span className={cn("inline-flex items-center gap-[11px] font-display text-[23px] font-extrabold tracking-tight", className)}>
-      <Crown className={cn("h-[34px] w-[34px] flex-none", crownClassName)} />
-      <span>
-        Auto<b className="font-extrabold text-blue-bright">King</b>
-      </span>
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={LOGO_SRC}
+      alt="AutoKing"
+      width={Math.round(height * LOGO_RATIO)}
+      height={height}
+      draggable={false}
+      className={cn("block w-auto select-none", className)}
+      style={{ height }}
+    />
   );
 }
