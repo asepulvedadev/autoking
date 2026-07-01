@@ -1,0 +1,80 @@
+.wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.item {
+  background: var(--color-surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.item.open {
+  border-color: var(--line-strong);
+}
+.q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16.5px;
+  user-select: none;
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  text-align: left;
+  font-family: inherit;
+}
+.plus {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+.plus::before,
+.plus::after {
+  content: "";
+  position: absolute;
+  background: var(--color-blue-bright);
+  border-radius: 2px;
+}
+.plus::before {
+  top: 11px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+}
+.plus::after {
+  left: 11px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  transition: opacity 0.3s;
+}
+.item.open .plus::after {
+  opacity: 0;
+}
+.answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s var(--ease);
+}
+.item.open .answer {
+  grid-template-rows: 1fr;
+}
+.answer > div {
+  overflow: hidden;
+}
+.answer p {
+  padding: 0 24px 24px;
+  color: var(--color-muted);
+  font-size: 15.5px;
+  margin: 0;
+}

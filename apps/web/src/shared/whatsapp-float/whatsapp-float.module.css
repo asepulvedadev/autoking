@@ -1,0 +1,44 @@
+.float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25d366, #128c4b);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 30px -6px rgb(37 211 102 / 0.6);
+  cursor: pointer;
+  animation: pulse 2.6s ease-in-out infinite;
+  transition: transform 0.25s var(--ease);
+}
+.float:hover {
+  transform: scale(1.08);
+}
+.float svg {
+  width: 32px;
+  height: 32px;
+  color: #fff;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 12px 30px -6px rgb(37 211 102 / 0.6),
+      0 0 0 0 rgb(37 211 102 / 0.4);
+  }
+  50% {
+    box-shadow:
+      0 12px 30px -6px rgb(37 211 102 / 0.6),
+      0 0 0 14px rgb(37 211 102 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float {
+    animation: none;
+  }
+}
