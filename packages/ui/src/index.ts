@@ -6,6 +6,7 @@ export { WhatsAppIcon, CheckIcon } from "./components/icons";
 
 // Motion & layout primitives (R1 — web-pro-upgrade)
 export { CountUp, type CountUpProps } from "./components/count-up";
+export { AnimatedNumber, type AnimatedNumberProps } from "./components/animated-number";
 export { Spotlight, type SpotlightProps } from "./components/spotlight";
 export { ScrollProgress } from "./components/scroll-progress";
 export { Marquee, type MarqueeProps } from "./components/marquee";

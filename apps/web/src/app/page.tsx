@@ -8,11 +8,13 @@ import { Problem } from "@/features/problem/problem";
 import { Solution } from "@/features/solution/solution";
 import { Benefits } from "@/features/benefits/benefits";
 import { Stats } from "@/features/stats/stats";
+import { RoiCalculator } from "@/features/roi-calculator/roi-calculator";
 import { Comparison } from "@/features/comparison/comparison";
 import { Testimonials } from "@/features/testimonials/testimonials";
+import { Industries } from "@/features/industries/industries";
 import { Integrations } from "@/features/integrations/integrations";
+import { LiveDemo } from "@/features/live-demo/live-demo";
 import { Pricing } from "@/features/pricing/pricing";
-import { Demo } from "@/features/demo/demo";
 import { Faq } from "@/features/faq/faq";
 import { Footer } from "@/features/footer/footer";
 
@@ -27,11 +29,13 @@ export default function HomePage() {
         <Solution />
         <Benefits />
         <Stats />
+        <RoiCalculator />
         <Comparison />
         <Testimonials />
+        <Industries />
         <Integrations />
+        <LiveDemo />
         <Pricing />
-        <Demo />
         <Faq />
       </main>
       <Footer />

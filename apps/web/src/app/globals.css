@@ -234,6 +234,49 @@ img {
 }
 
 /* ============================================================
+   Range sliders (calculadora de pérdidas)
+   ============================================================ */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--color-blue-bright) var(--range-fill, 50%),
+    rgb(120 150 220 / 0.16) var(--range-fill, 50%)
+  );
+  outline: none;
+  cursor: pointer;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--color-blue-bright);
+  box-shadow: 0 2px 12px rgb(30 107 255 / 0.55);
+  transition: transform 0.15s var(--ease);
+}
+.range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--color-blue-bright);
+  box-shadow: 0 2px 12px rgb(30 107 255 / 0.55);
+}
+.range:focus-visible {
+  box-shadow: 0 0 0 3px rgb(30 107 255 / 0.3);
+}
+
+/* ============================================================
    Responsive de las grillas de tarjetas
    ============================================================ */
 @media (max-width: 940px) {
