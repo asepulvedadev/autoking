@@ -10,10 +10,10 @@ export function Pricing() {
         <div className="section-head reveal">
           <span className="eyebrow">Planes</span>
           <h2>
-            Elegí el nivel de tu <span className="text-blue">imperio</span>
+            Elige el nivel de tu <span className="text-blue">imperio</span>
           </h2>
           <p>
-            Empezá simple y subí de nivel cuando quieras. Todos incluyen setup, entrenamiento del
+            Empieza simple y sube de nivel cuando quieras. Todos incluyen instalación, entrenamiento del
             agente y soporte.
           </p>
         </div>
@@ -38,7 +38,7 @@ export function Pricing() {
                 <span className={styles.amount}>{plan.price}</span>
                 <span className={styles.per}>/mes</span>
               </div>
-              <div className={styles.setup}>Desde · + costo de setup inicial</div>
+              <div className={styles.setup}>Desde · + costo de instalación inicial</div>
 
               <ul className={styles.features}>
                 {plan.features.map((f) => (

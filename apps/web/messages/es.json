@@ -1,0 +1,267 @@
+{
+  "Meta": {
+    "title": "AutoKing — Agentes de IA que atienden y agendan por ti 24/7",
+    "description": "Deja de perder clientes y citas. AutoKing pone a trabajar un agente de IA que atiende, responde y agenda solo en WhatsApp, 24/7. Como un empleado que nunca duerme.",
+    "ogTitle": "AutoKing — Automatiza. Inteligencia. Imperio.",
+    "ogDescription": "Un agente de IA que atiende, responde y agenda solo en WhatsApp, 24/7."
+  },
+  "Common": {
+    "agendaDemo": "Agenda una demo",
+    "conoceMas": "Conoce más",
+    "tagline": "Automatiza. Inteligencia. Imperio.",
+    "waMessage": "Hola AutoKing 👑 Quiero agendar una demo y que un agente de IA atienda mi negocio."
+  },
+  "Nav": {
+    "problem": "El problema",
+    "solution": "Cómo funciona",
+    "benefits": "Beneficios",
+    "plans": "Planes",
+    "faq": "Preguntas"
+  },
+  "LangSwitch": { "aria": "Cambiar idioma" },
+  "Hero": {
+    "badge": "Un agente que nunca duerme · responde en segundos",
+    "titleA": "Deja de perder clientes y citas por",
+    "titleHighlight": "no responder a tiempo",
+    "subA": "AutoKing pone a trabajar un agente de inteligencia artificial que atiende, responde y agenda ",
+    "subStrong": "solo, 24/7",
+    "subB": " en tu WhatsApp. Como un empleado que nunca duerme, nunca se enferma y nunca pierde una venta.",
+    "proof": [
+      { "num": "24/7", "label": "Siempre disponible" },
+      { "num": "<5 seg", "label": "Tiempo de respuesta" },
+      { "num": "+40%", "label": "Más citas agendadas" }
+    ],
+    "agentName": "AutoKing · Asistente",
+    "online": "en línea",
+    "chat": [
+      { "dir": "in", "text": "Hola, ¿están abiertos? Quiero una cita para mañana 😊", "time": "23:47" },
+      { "dir": "out", "text": "¡Hola! 👋 Claro que sí, con gusto te agendo. Tengo espacio mañana a las 10:00, 1:30 p. m. y 5:00 p. m. ¿Cuál te sirve mejor?", "time": "23:47" },
+      { "dir": "in", "text": "Las 5:00 p. m. perfecto", "time": "23:48" },
+      { "dir": "out", "text": "¡Listo! ✅ Tu cita quedó agendada mañana a las 5:00 p. m. Te enviaré un recordatorio. ¿Me confirmas tu nombre?", "time": "23:48" }
+    ]
+  },
+  "Problem": {
+    "eyebrow": "El problema",
+    "titleA": "Cada mensaje sin responder es",
+    "titleHighlight": "una venta que se va",
+    "subtitle": "Mientras atiendes, duermes o descansas, tus clientes escriben. Y si nadie responde, se van con el de al lado. Así de fácil.",
+    "items": [
+      { "title": "Mensajes de madrugada sin responder", "text": "Tus clientes escriben a las 11 de la noche o un domingo. Para cuando ves el mensaje, ya buscaron a otro." },
+      { "title": "Citas que nunca se agendan", "text": "El cliente quería reservar, pero entre tanto mensaje se enfrió y nunca cerró la cita." },
+      { "title": "Clientes que se van con la competencia", "text": "El que responde primero, gana. Si te demoras horas, el cliente ya reservó en otro lado." },
+      { "title": "Horas perdidas en preguntas repetidas", "text": "\"¿Cuánto cuesta?\", \"¿Dónde están?\", \"¿Tienen cupo?\". Las mismas preguntas, mil veces, quitándote tiempo." }
+    ]
+  },
+  "Solution": {
+    "eyebrow": "La solución",
+    "titleA": "Tu agente de IA, listo en",
+    "titleHighlight": "3 pasos simples",
+    "subtitle": "Sin instalar nada raro, sin contratar gente, sin complicarte. Nosotros lo armamos por ti.",
+    "steps": [
+      { "n": "01", "title": "Conectamos tu WhatsApp", "text": "Usamos tu mismo número de WhatsApp Business. En minutos tu agente queda conectado y listo para atender." },
+      { "n": "02", "title": "Entrenamos al agente con tu negocio", "text": "Le cargamos tus precios, servicios, horarios y forma de hablar. Responde como tú lo harías, con tu estilo." },
+      { "n": "03", "title": "Atiende y agenda solo, 24/7", "text": "Desde ese momento responde, resuelve dudas y agenda citas sin que muevas un dedo. De día y de noche." }
+    ]
+  },
+  "InAction": {
+    "eyebrow": "En acción",
+    "titleA": "Tu marca,",
+    "titleHighlight": "en movimiento",
+    "subtitle": "Videos y piezas animadas generadas por código — listas para tus redes, con tu identidad."
+  },
+  "Benefits": {
+    "eyebrow": "Beneficios",
+    "titleA": "Lo que",
+    "titleHighlight": "ganas",
+    "titleB": "desde el primer día",
+    "subtitle": "Esto no es tecnología por moda. Es dinero que dejas de perder y clientes que dejas de regalar.",
+    "items": [
+      { "title": "Atención 24/7", "text": "Tu negocio responde a toda hora, todos los días. Nunca más un cliente esperando ni un mensaje sin contestar." },
+      { "title": "Agenda automática", "text": "Reserva citas directo en tu calendario, sin choques de horario." },
+      { "title": "Menos inasistencias", "text": "Recordatorios automáticos antes de cada cita." },
+      { "title": "Respuestas inmediatas", "text": "Contesta en segundos, no en horas. El que responde primero es el que cierra la venta." },
+      { "title": "Imagen profesional", "text": "Mensajes claros, ordenados y siempre amables. Tu negocio se ve de primer nivel." },
+      { "title": "Recuperas ventas", "text": "Esos mensajes que antes se perdían ahora se convierten en clientes." }
+    ]
+  },
+  "Stats": {
+    "items": [
+      { "to": 24, "prefix": "", "suffix": "/7", "label": "Atención, sin parar" },
+      { "to": 5, "prefix": "<", "suffix": " seg", "label": "Tiempo de respuesta" },
+      { "to": 40, "prefix": "+", "suffix": "%", "label": "Más citas agendadas" },
+      { "to": 3, "prefix": "", "suffix": " días", "label": "Y tu agente ya trabaja" }
+    ]
+  },
+  "Roi": {
+    "eyebrow": "Calculadora",
+    "titleA": "¿Cuánto dinero estás",
+    "titleHighlight": "dejando sobre la mesa?",
+    "subtitle": "Mueve los valores y mira lo que te cuesta no responder a tiempo. Sin vueltas.",
+    "fieldConsultas": "Personas que te escriben al mes",
+    "fieldTicket": "Valor promedio de una venta / cita",
+    "fieldFuera": "% que escribe fuera de horario o sin respuesta rápida",
+    "resultPre": "Estás perdiendo aprox.",
+    "resultSuffix": "al mes",
+    "clientsText": "clientes que se van con la competencia",
+    "planNoteA": "AutoKing desde ",
+    "planNoteBold": "$90/mes",
+    "planNoteB": " los responde a todos, 24/7.",
+    "cta": "Quiero recuperar ese dinero",
+    "disclaimer": "* Estimación orientativa: asume que un {pct}% de quienes no reciben respuesta a tiempo se va con la competencia.",
+    "waMessage": "Hola AutoKing 👑 Con la calculadora me dio que pierdo ~${amount} al mes. Quiero recuperarlo con un agente de IA."
+  },
+  "Comparison": {
+    "eyebrow": "La diferencia",
+    "titleA": "Con AutoKing vs.",
+    "titleHighlight": "seguir como estás",
+    "subtitle": "El que responde primero se queda con el cliente. Mira quién responde primero.",
+    "colAutoking": "AutoKing",
+    "colNone": "Sin agente",
+    "colEmployee": "Empleado humano",
+    "rows": [
+      { "feature": "Responde a toda hora (24/7)", "autoking": true, "none": false, "employee": "Solo en horario" },
+      { "feature": "Contesta en segundos", "autoking": true, "none": false, "employee": "Si está libre" },
+      { "feature": "Agenda citas automáticamente", "autoking": true, "none": false, "employee": true },
+      { "feature": "Nunca se enferma ni renuncia", "autoking": true, "none": false, "employee": false },
+      { "feature": "Atiende a mil personas a la vez", "autoking": true, "none": false, "employee": false },
+      { "feature": "Costo mensual", "autoking": "Desde $90", "none": "Clientes perdidos", "employee": "Sueldo + prestaciones" }
+    ]
+  },
+  "Testimonials": {
+    "eyebrow": "Clientes",
+    "titleA": "Negocios que dejaron de",
+    "titleHighlight": "perder clientes",
+    "subtitle": "Lo que pasa cuando un agente atiende por ti, sin descanso.",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "disclaimer": "* Testimonios ilustrativos — reemplazar por reales antes del lanzamiento.",
+    "items": [
+      { "quote": "Antes perdía clientes que escribían de noche. Ahora el agente responde al instante y me llena la agenda solo. Recuperé un montón de citas.", "name": "María G.", "role": "Spa · Placeholder" },
+      { "quote": "Dejé de contestar las mismas preguntas mil veces. El agente atiende, cotiza y agenda. Yo me dedico a atender a la gente que llega.", "name": "Diego R.", "role": "Barbería · Placeholder" },
+      { "quote": "Lo mejor es que nunca deja a nadie esperando. Contesta en segundos a cualquier hora. Mis pacientes lo notan y agendan más.", "name": "Dra. Carla V.", "role": "Consultorio dental · Placeholder" },
+      { "quote": "Es como tener una recepcionista que no duerme. Se conectó a mi WhatsApp de siempre y en tres días ya estaba trabajando por mí.", "name": "Sofía L.", "role": "Estética · Placeholder" }
+    ]
+  },
+  "Industries": {
+    "eyebrow": "Para tu negocio",
+    "titleA": "Habla el idioma de",
+    "titleHighlight": "tu sector",
+    "subtitle": "Elige tu tipo de negocio y mira cómo respondería tu agente. Se entrena con tus precios y servicios.",
+    "items": [
+      { "label": "Spa & Estética", "emoji": "💆", "question": "Hola, ¿tienen espacio para un masaje el sábado?", "answer": "¡Hola! 💆 Con gusto. El sábado tengo disponible a las 11:00 y 4:30 p. m. El masaje relajante de 60 min cuesta $650. ¿Te reservo alguno?" },
+      { "label": "Consultorio dental", "emoji": "🦷", "question": "¿Cuánto cuesta una limpieza dental?", "answer": "¡Hola! 🦷 La limpieza cuesta $80 e incluye revisión. Tengo cita mañana a las 10:00 o el jueves a las 5:00 p. m. ¿Cuál te sirve?" },
+      { "label": "Barbería", "emoji": "💈", "question": "¿Puedo pasar ahora sin cita?", "answer": "¡Qué más! 💈 Ahora hay 20 min de espera. Si quieres te agendo a las 6:15 p. m. y entras directo. ¿Lo dejo a tu nombre?" },
+      { "label": "Peluquería", "emoji": "💇", "question": "Quiero color y corte, ¿qué días tienes?", "answer": "¡Hola! 💇 Para color + corte necesito unas 2 horas. Tengo miércoles 3:00 p. m. o viernes 11:00. El combo desde $120. ¿Te agendo?" },
+      { "label": "Clínica estética", "emoji": "✨", "question": "¿Hacen limpieza facial? ¿Precio?", "answer": "¡Hola! ✨ Sí, la limpieza facial profunda cuesta $90 (dura 50 min). Tengo espacio el martes 12:00 y el sábado 10:00. ¿Reservo?" }
+    ]
+  },
+  "Integrations": {
+    "eyebrow": "Integraciones",
+    "titleA": "Se conecta con lo que",
+    "titleHighlight": "ya usas",
+    "subtitle": "Sin cambiar de herramientas. Tu agente trabaja sobre lo que ya tienes funcionando.",
+    "tools": ["WhatsApp", "Google Calendar", "Instagram", "Messenger", "Google Sheets", "Calendly", "Outlook"]
+  },
+  "LiveDemo": {
+    "eyebrow": "Pruébalo tú mismo",
+    "titleA": "Escríbele al agente",
+    "titleHighlight": "aquí mismo",
+    "subtitle": "Hazle una pregunta como si fueras un cliente. Así de rápido responde en tu WhatsApp.",
+    "agentName": "AutoKing · Asistente",
+    "online": "en línea",
+    "greeting": "¡Hola! 👋 Soy el asistente de AutoKing. Pregúntame lo que quieras: precios, horarios o pídeme una cita.",
+    "rules": [
+      { "match": ["precio", "cuesta", "cuánto", "cuanto", "vale", "costo"], "reply": "Depende del servicio 😊 Por ejemplo, una consulta desde $50. ¿Quieres la lista completa o te agendo de una vez?" },
+      { "match": ["horario", "abren", "abierto", "hora", "atienden"], "reply": "Atendemos de lunes a sábado de 9 a. m. a 8 p. m. Pero yo te respondo 24/7 👌 ¿Te busco una cita?" },
+      { "match": ["ubicaci", "donde", "dónde", "direcci", "llegar", "quedan"], "reply": "Estamos en el centro, a una cuadra del parque 📍 ¿Te reservo una cita?" },
+      { "match": ["cita", "agendar", "reservar", "mañana", "manana", "hoy", "sábado", "sabado", "disponible", "cupo"], "reply": "¡Genial! Tengo espacio mañana a las 10:00, 1:30 p. m. y 5:00 p. m. ✅ ¿Cuál te sirve? La dejo agendada de una." },
+      { "match": ["hola", "buenas", "buenos", "qué más", "que mas"], "reply": "¡Hola! 👋 ¿En qué te ayudo? Puedo darte precios, horarios o agendarte una cita." },
+      { "match": ["gracias", "genial", "perfecto", "listo", "de una"], "reply": "¡Con gusto! 🙌 Y ojo: con AutoKing esto lo hace tu negocio solo, las 24 horas." }
+    ],
+    "fallback": "Buena pregunta 🤔 En la versión real, tu agente respondería esto entrenado con la info de TU negocio. ¿Quieres ver precios, horarios o agendar una cita?",
+    "quick": ["¿Cuánto cuesta?", "¿Tienen cita para mañana?", "¿Dónde están?", "¿Qué horario tienen?"],
+    "placeholder": "Escribe tu mensaje…",
+    "disclaimer": "* Demo con respuestas de ejemplo. Tu agente real se entrena con la info de tu negocio.",
+    "cta": "Quiero mi agente de verdad"
+  },
+  "Pricing": {
+    "eyebrow": "Planes",
+    "titleA": "Elige el nivel de tu",
+    "titleHighlight": "imperio",
+    "subtitle": "Empieza simple y sube de nivel cuando quieras. Todos incluyen instalación, entrenamiento del agente y soporte.",
+    "perMonth": "/mes",
+    "fromSetup": "Desde · + costo de instalación inicial",
+    "recommended": "⭐ Recomendado",
+    "waMessage": "Hola AutoKing 👑 Me interesa el plan {name} \"{title}\".",
+    "plans": [
+      {
+        "name": "Básico",
+        "title": "Recepción",
+        "price": "$90",
+        "cta": "Empezar con Recepción",
+        "features": [
+          { "text": "Atención 24/7 por WhatsApp", "strong": true },
+          { "text": "Responde info de tu negocio (precios, horarios, ubicación)" },
+          { "text": "Deriva a una persona cuando hace falta" },
+          { "text": "Entrenado con tu estilo y tono" }
+        ]
+      },
+      {
+        "name": "Pro",
+        "title": "Agenda",
+        "price": "$150",
+        "cta": "Quiero el plan Agenda",
+        "features": [
+          { "text": "Todo lo del plan Recepción", "strong": true },
+          { "text": "Agendamiento conectado a tu calendario" },
+          { "text": "Recordatorios automáticos de citas" },
+          { "text": "Registro y base de datos de clientes" },
+          { "text": "Panel de métricas", "strong": true }
+        ]
+      },
+      {
+        "name": "Imperio",
+        "title": "Ventas",
+        "price": "$250",
+        "cta": "Construir mi Imperio",
+        "features": [
+          { "text": "Todo lo del plan Agenda", "strong": true },
+          { "text": "Calificación inteligente de prospectos" },
+          { "text": "Recomendación de servicios (más venta)" },
+          { "text": "Multicanal (WhatsApp, Instagram y más)" },
+          { "text": "Reportes mensuales de resultados", "strong": true }
+        ]
+      }
+    ]
+  },
+  "Faq": {
+    "eyebrow": "Preguntas frecuentes",
+    "titleA": "Lo que seguro te estás",
+    "titleHighlight": "preguntando",
+    "items": [
+      { "q": "¿En cuánto tiempo está listo mi agente?", "a": "En la mayoría de los casos, entre 3 y 7 días hábiles. Conectamos tu WhatsApp, entrenamos al agente con la info de tu negocio y lo dejamos atendiendo. Rápido y sin complicaciones." },
+      { "q": "¿Funciona con mi WhatsApp actual?", "a": "Sí. Usamos tu mismo número con WhatsApp Business. Tus clientes te siguen escribiendo al número de siempre; la diferencia es que ahora siempre hay alguien —bueno, algo— respondiendo al instante." },
+      { "q": "¿Necesito conocimientos técnicos?", "a": "Para nada. De la parte técnica nos encargamos nosotros 100%. Tú solo nos cuentas cómo funciona tu negocio y nosotros armamos, conectamos y entrenamos todo." },
+      { "q": "¿Puedo cancelar cuando quiera?", "a": "Claro. No hay contratos eternos ni letra pequeña. Es un servicio mensual y puedes cancelar cuando quieras. Confiamos en que te vas a quedar por los resultados, no por obligación." },
+      { "q": "¿El agente puede pasarme una conversación a mí?", "a": "Sí. Cuando una consulta necesita atención humana o el cliente lo pide, el agente te pasa la conversación al instante. Tú siempre tienes el control y puedes tomar el chat cuando quieras." }
+    ]
+  },
+  "Demo": {
+    "eyebrow": "Pruébalo tú mismo",
+    "titleA": "Habla con el agente",
+    "titleHighlight": "en vivo",
+    "titleB": "ahora mismo",
+    "subtitle": "No te lo contamos: pruébalo. Escríbele al agente por WhatsApp como si fueras un cliente y mira cómo responde y agenda en segundos.",
+    "cta": "Prueba el agente ahora",
+    "waMessage": "Hola AutoKing 👑 Quiero probar el agente de IA en vivo."
+  },
+  "StickyCta": { "label": "Agenda tu demo gratis" },
+  "Footer": {
+    "brandDesc": "Automatiza. Inteligencia. Imperio. Agentes de IA a la medida que atienden, responden y agendan por tu negocio, 24/7.",
+    "navTitle": "Navegación",
+    "contactTitle": "Contacto",
+    "waContact": "WhatsApp · Agenda una demo",
+    "plansLink": "Ver planes y precios",
+    "rights": "AutoKing — Automatiza. Inteligencia. Imperio."
+  }
+}

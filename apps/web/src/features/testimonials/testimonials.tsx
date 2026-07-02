@@ -11,7 +11,7 @@ import { Stars, cn } from "@autoking/ui";
 const TESTIMONIALS = [
   {
     quote:
-      "Antes perdía clientes que escribían de noche. Ahora el agente responde al toque y me llena la agenda solo. Recuperé un montón de citas.",
+      "Antes perdía clientes que escribían de noche. Ahora el agente responde al instante y me llena la agenda solo. Recuperé un montón de citas.",
     name: "María G.",
     role: "Spa · Placeholder",
     initial: "M",
@@ -52,7 +52,7 @@ export function Testimonials() {
           <h2>
             Negocios que dejaron de <span className="text-blue">perder clientes</span>
           </h2>
-          <p>Lo que pasa cuando un agente atiende por vos, sin descanso.</p>
+          <p>Lo que pasa cuando un agente atiende por ti, sin descanso.</p>
         </div>
 
         <div className="reveal">

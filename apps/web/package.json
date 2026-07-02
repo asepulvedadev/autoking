@@ -14,8 +14,11 @@
     "@autoking/ui": "workspace:*",
     "@autoking/video": "workspace:*",
     "@remotion/player": "^4.0.484",
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.110.0",
     "embla-carousel-react": "^8.6.0",
     "next": "^15.1.3",
+    "next-intl": "^4.13.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

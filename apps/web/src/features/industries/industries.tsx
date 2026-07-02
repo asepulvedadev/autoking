@@ -16,33 +16,33 @@ const INDUSTRIES: Industry[] = [
     key: "spa",
     label: "Spa & Estética",
     emoji: "💆",
-    question: "Hola, ¿tienen lugar para un masaje el sábado?",
+    question: "Hola, ¿tienen espacio para un masaje el sábado?",
     answer:
-      "¡Hola! 💆 Sí, el sábado tengo 11:00 y 16:30 disponibles. El masaje relajante de 60 min sale $650. ¿Te reservo alguno de los dos?",
+      "¡Hola! 💆 Con gusto. El sábado tengo disponible a las 11:00 y 4:30 p. m. El masaje relajante de 60 min cuesta $650. ¿Te reservo alguno?",
   },
   {
     key: "dental",
     label: "Consultorio dental",
     emoji: "🦷",
-    question: "¿Cuánto sale una limpieza dental?",
+    question: "¿Cuánto cuesta una limpieza dental?",
     answer:
-      "¡Hola! 🦷 La limpieza sale $800 e incluye revisión. Tengo turno mañana a las 10:00 o el jueves a las 17:00. ¿Cuál te acomoda?",
+      "¡Hola! 🦷 La limpieza cuesta $80 e incluye revisión. Tengo cita mañana a las 10:00 o el jueves a las 5:00 p. m. ¿Cuál te sirve?",
   },
   {
     key: "barber",
     label: "Barbería",
     emoji: "💈",
-    question: "¿Puedo pasar ahora sin turno?",
+    question: "¿Puedo pasar ahora sin cita?",
     answer:
-      "¡Qué tal! 💈 Ahora hay 20 min de espera. Si querés te agendo a las 18:15 y entrás directo. ¿Lo tomo a tu nombre?",
+      "¡Qué más! 💈 Ahora hay 20 min de espera. Si quieres te agendo a las 6:15 p. m. y entras directo. ¿Lo dejo a tu nombre?",
   },
   {
     key: "beauty",
     label: "Peluquería",
     emoji: "💇",
-    question: "Quiero color y corte, ¿qué días tenés?",
+    question: "Quiero color y corte, ¿qué días tienes?",
     answer:
-      "¡Hola! 💇 Para color + corte necesito unas 2 hs. Tengo miércoles 15:00 o viernes 11:00. El combo sale desde $1.200. ¿Te agendo?",
+      "¡Hola! 💇 Para color + corte necesito unas 2 horas. Tengo miércoles 3:00 p. m. o viernes 11:00. El combo desde $120. ¿Te agendo?",
   },
   {
     key: "clinic",
@@ -50,7 +50,7 @@ const INDUSTRIES: Industry[] = [
     emoji: "✨",
     question: "¿Hacen limpieza facial? ¿Precio?",
     answer:
-      "¡Hola! ✨ Sí, la limpieza facial profunda sale $900 (dura 50 min). Tengo lugar el martes 12:00 y el sábado 10:00. ¿Reservo?",
+      "¡Hola! ✨ Sí, la limpieza facial profunda cuesta $90 (dura 50 min). Tengo espacio el martes 12:00 y el sábado 10:00. ¿Reservo?",
   },
 ];
 
@@ -64,9 +64,9 @@ export function Industries() {
         <div className="section-head reveal">
           <span className="eyebrow">Para tu negocio</span>
           <h2>
-            Habla el idioma de <span className="text-blue">tu rubro</span>
+            Habla el idioma de <span className="text-blue">tu sector</span>
           </h2>
-          <p>Elegí tu tipo de negocio y mirá cómo respondería tu agente. Se entrena con tus precios y servicios.</p>
+          <p>Elige tu tipo de negocio y mira cómo respondería tu agente. Se entrena con tus precios y servicios.</p>
         </div>
 
         <div className="reveal mx-auto max-w-3xl">

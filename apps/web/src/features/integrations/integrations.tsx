@@ -26,9 +26,9 @@ export function Integrations() {
         <div className="section-head reveal">
           <span className="eyebrow">Integraciones</span>
           <h2>
-            Se conecta con lo que <span className="text-blue">ya usás</span>
+            Se conecta con lo que <span className="text-blue">ya usas</span>
           </h2>
-          <p>Sin cambiar de herramientas. Tu agente trabaja sobre lo que ya tenés funcionando.</p>
+          <p>Sin cambiar de herramientas. Tu agente trabaja sobre lo que ya tienes funcionando.</p>
         </div>
       </div>
 

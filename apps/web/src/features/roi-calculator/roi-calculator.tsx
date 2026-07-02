@@ -19,7 +19,7 @@ type Field = {
 };
 
 const FIELDS: Field[] = [
-  { key: "consultas", label: "Personas que te escriben por mes", min: 20, max: 1000, step: 10 },
+  { key: "consultas", label: "Personas que te escriben al mes", min: 20, max: 1000, step: 10 },
   { key: "ticket", label: "Valor promedio de una venta / cita", min: 100, max: 5000, step: 50, prefix: "$" },
   { key: "fuera", label: "% que escribe fuera de horario o sin respuesta rápida", min: 0, max: 100, step: 5, suffix: "%" },
 ];
@@ -37,7 +37,7 @@ export function RoiCalculator() {
 
   const waMsg = `Hola AutoKing 👑 Con la calculadora me dio que pierdo ~$${plataPerdida.toLocaleString(
     "es-MX",
-  )} por mes. Quiero recuperarlo con un agente de IA.`;
+  )} al mes. Quiero recuperarlo con un agente de IA.`;
 
   return (
     <section className="section" id="calculadora">
@@ -45,9 +45,9 @@ export function RoiCalculator() {
         <div className="section-head reveal">
           <span className="eyebrow">Calculadora</span>
           <h2>
-            ¿Cuánta plata estás <span className="text-blue">dejando sobre la mesa?</span>
+            ¿Cuánto dinero estás <span className="text-blue">dejando sobre la mesa?</span>
           </h2>
-          <p>Movés los valores y ves lo que te cuesta no responder a tiempo. Sin vueltas.</p>
+          <p>Mueves los valores y ves lo que te cuesta no responder a tiempo. Sin vueltas.</p>
         </div>
 
         <div className="reveal grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
@@ -90,7 +90,7 @@ export function RoiCalculator() {
             <div className="my-2 font-display text-[clamp(40px,8vw,64px)] font-extrabold leading-none text-[#ff6b6b]">
               <AnimatedNumber value={plataPerdida} prefix="$" />
             </div>
-            <p className="text-sm text-[var(--color-muted)]">por mes</p>
+            <p className="text-sm text-[var(--color-muted)]">al mes</p>
             <p className="mt-4 text-[15px] text-[var(--color-ink)]">
               ≈{" "}
               <AnimatedNumber value={clientesPerdidos} className="font-bold text-white" /> clientes que se
@@ -107,7 +107,7 @@ export function RoiCalculator() {
                 rel="noopener"
                 className={buttonVariants({ variant: "primary", className: "mt-4 w-full" })}
               >
-                <WhatsAppIcon /> Quiero recuperar esa plata
+                <WhatsAppIcon /> Quiero recuperar ese dinero
               </a>
             </div>
           </div>

@@ -8,7 +8,7 @@ const PAINS: Pain[] = [
     icon: (
       <path d="M12 2a7 7 0 00-7 7c0 5-2 6-2 6h18s-2-1-2-6a7 7 0 00-7-7zM9 20a3 3 0 006 0" />
     ),
-    title: "Mensajes a medianoche sin responder",
+    title: "Mensajes de madrugada sin responder",
     text: "Tus clientes escriben a las 11 de la noche o un domingo. Para cuando ves el mensaje, ya buscaron a otro.",
   },
   {
@@ -19,7 +19,7 @@ const PAINS: Pain[] = [
       </>
     ),
     title: "Citas que nunca se agendan",
-    text: "El cliente quería reservar, pero entre idas y vueltas de mensajes se enfrió y nunca cerró la cita.",
+    text: "El cliente quería reservar, pero entre tanto mensaje se enfrió y nunca cerró la cita.",
   },
   {
     icon: (
@@ -30,7 +30,7 @@ const PAINS: Pain[] = [
       </>
     ),
     title: "Clientes que se van con la competencia",
-    text: "El que responde primero, gana. Si tardás horas, el cliente ya está agendado en otro lado.",
+    text: "El que responde primero, gana. Si te demoras horas, el cliente ya reservó en otro lado.",
   },
   {
     icon: (
@@ -40,7 +40,7 @@ const PAINS: Pain[] = [
       </>
     ),
     title: "Horas perdidas en preguntas repetidas",
-    text: '"¿Cuánto cuesta?", "¿Dónde están?", "¿Tienen lugar?". Las mismas preguntas, mil veces, robándote tiempo.',
+    text: '"¿Cuánto cuesta?", "¿Dónde están?", "¿Tienen cupo?". Las mismas preguntas, mil veces, quitándote tiempo.',
   },
 ];
 
@@ -54,8 +54,8 @@ export function Problem() {
             Cada mensaje sin responder es <span className="text-blue">una venta que se va</span>
           </h2>
           <p>
-            Mientras vos atendés, dormís o descansás, tus clientes escriben. Y si nadie responde, se
-            van con el de al lado. Así de simple.
+            Mientras atiendes, duermes o descansas, tus clientes escriben. Y si nadie responde, se
+            van con el de al lado. Así de fácil.
           </p>
         </div>
 

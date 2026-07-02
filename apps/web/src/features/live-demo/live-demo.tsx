@@ -7,30 +7,30 @@ import { waHref } from "@/lib/site";
 type Msg = { from: "agent" | "user"; text: string };
 
 const GREETING =
-  "¡Hola! 👋 Soy el asistente de AutoKing. Preguntame lo que quieras: precios, horarios o pedime un turno.";
+  "¡Hola! 👋 Soy el asistente de AutoKing. Pregúntame lo que quieras: precios, horarios o pídeme una cita.";
 
 const RULES: { match: string[]; reply: string }[] = [
   {
     match: ["precio", "cuesta", "cuánto", "cuanto", "vale", "sale", "costo"],
     reply:
-      "Depende del servicio 😊 Por ejemplo, una consulta arranca en $500. ¿Querés la lista completa o te agendo directamente?",
+      "Depende del servicio 😊 Por ejemplo, una consulta arranca en $500. ¿Quieres la lista completa o te agendo de una vez?",
   },
   {
     match: ["horario", "abren", "abierto", "hora", "atienden"],
-    reply: "Atendemos de lunes a sábado de 9 a 20 hs. Pero yo te respondo 24/7 👌 ¿Te busco un turno?",
+    reply: "Atendemos de lunes a sábado de 9 a 20 hs. Pero yo te respondo 24/7 👌 ¿Te busco una cita?",
   },
   {
     match: ["ubicaci", "donde", "dónde", "direcci", "llegar", "quedan"],
-    reply: "Estamos en el centro, a una cuadra de la plaza 📍 ¿Te espero con un turno reservado?",
+    reply: "Estamos en el centro, a una cuadra de la plaza 📍 ¿Te reservo una cita?",
   },
   {
     match: ["turno", "cita", "agendar", "reservar", "mañana", "manana", "hoy", "sábado", "sabado", "disponible"],
     reply:
-      "¡Genial! Tengo lugar mañana a las 10:00, 13:30 y 17:00 ✅ ¿Cuál te queda mejor? Lo dejo agendado al toque.",
+      "¡Genial! Tengo espacio mañana a las 10:00, 1:30 p. m. y 5:00 p. m. ✅ ¿Cuál te sirve? La dejo agendada de una.",
   },
   {
     match: ["hola", "buenas", "buenos", "qué tal", "que tal"],
-    reply: "¡Hola! 👋 ¿En qué te ayudo? Puedo darte precios, horarios o agendarte un turno.",
+    reply: "¡Hola! 👋 ¿En qué te ayudo? Puedo darte precios, horarios o agendarte una cita.",
   },
   {
     match: ["gracias", "genial", "perfecto", "dale", "listo", "buenísimo"],
@@ -39,9 +39,9 @@ const RULES: { match: string[]; reply: string }[] = [
 ];
 
 const FALLBACK =
-  "Buena pregunta 🤔 En la versión real, tu agente respondería esto entrenado con la info de TU negocio. ¿Querés ver precios, horarios o agendar un turno?";
+  "Buena pregunta 🤔 En la versión real, tu agente respondería esto entrenado con la info de TU negocio. ¿Quieres ver precios, horarios o agendar una cita?";
 
-const QUICK = ["¿Cuánto cuesta?", "¿Tienen turno mañana?", "¿Dónde están?", "¿Qué horario tienen?"];
+const QUICK = ["¿Cuánto cuesta?", "¿Tienen cita para mañana?", "¿Dónde están?", "¿Qué horario tienen?"];
 
 function replyFor(text: string): string {
   const t = text.toLowerCase();
@@ -78,11 +78,11 @@ export function LiveDemo() {
     <section className="section" id="demo-vivo">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Probalo vos mismo</span>
+          <span className="eyebrow">Pruébalo tú mismo</span>
           <h2>
-            Escribile al agente <span className="text-blue">acá mismo</span>
+            Escríbele al agente <span className="text-blue">aquí mismo</span>
           </h2>
-          <p>Hacele una pregunta como si fueras un cliente. Así de rápido responde en tu WhatsApp.</p>
+          <p>Hazle una pregunta como si fueras un cliente. Así de rápido responde en tu WhatsApp.</p>
         </div>
 
         <div className="reveal mx-auto max-w-lg overflow-hidden rounded-[var(--radius-lg)] border border-[var(--line-strong)] bg-[var(--color-surface)] shadow-[var(--shadow-blue)]">
@@ -151,7 +151,7 @@ export function LiveDemo() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Escribí tu mensaje…"
+              placeholder="Escribe tu mensaje…"
               className="min-w-0 flex-1 rounded-full border border-[var(--line)] bg-[var(--color-bg-2)] px-4 py-2.5 text-sm text-white outline-none placeholder:text-[var(--color-faint)] focus:border-blue-bright"
             />
             <button

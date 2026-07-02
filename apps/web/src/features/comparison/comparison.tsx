@@ -45,7 +45,7 @@ export function Comparison() {
           <h2>
             Con AutoKing vs. <span className="text-blue">seguir como estás</span>
           </h2>
-          <p>El que responde primero se queda con el cliente. Mirá quién responde primero.</p>
+          <p>El que responde primero se queda con el cliente. Mira quién responde primero.</p>
         </div>
 
         <div className="reveal overflow-x-auto">

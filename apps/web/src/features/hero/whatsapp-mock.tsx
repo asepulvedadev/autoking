@@ -10,13 +10,13 @@ const CHAT: Msg[] = [
   { dir: "in", text: "Hola, ¿están abiertos? Quiero una cita para mañana 😊", time: "23:47" },
   {
     dir: "out",
-    text: "¡Hola! 👋 Sí, con gusto te agendo. Tenemos espacio mañana a las 10:00, 13:30 y 17:00. ¿Cuál te queda mejor?",
+    text: "¡Hola! 👋 Claro que sí, con gusto te agendo. Tengo espacio mañana a las 10:00, 1:30 p. m. y 5:00 p. m. ¿Cuál te sirve mejor?",
     time: "23:47",
   },
-  { dir: "in", text: "Las 17:00 perfecto", time: "23:48" },
+  { dir: "in", text: "Las 5:00 p. m. perfecto", time: "23:48" },
   {
     dir: "out",
-    text: "¡Listo! ✅ Tu cita quedó agendada mañana a las 17:00. Te mandaré un recordatorio. ¿Me confirmas tu nombre?",
+    text: "¡Listo! ✅ Tu cita quedó agendada mañana a las 5:00 p. m. Te enviaré un recordatorio. ¿Me confirmas tu nombre?",
     time: "23:48",
   },
 ];

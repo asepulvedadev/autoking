@@ -13,4 +13,6 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: resolve(here, "../../"),
 };
 
+// NOTA: i18n (next-intl) en pausa. Al retomar, re-envolver con
+// createNextIntlPlugin("./src/i18n/request.ts") + agregar middleware.ts + app/[locale].
 export default nextConfig;

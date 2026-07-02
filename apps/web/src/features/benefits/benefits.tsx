@@ -51,7 +51,7 @@ const BENEFITS: Benefit[] = [
         <path d="M17 6h6v6" />
       </>
     ),
-    title: "Recuperás ventas",
+    title: "Recuperas ventas",
     text: "Esos mensajes que antes se perdían ahora se convierten en clientes.",
   },
 ];
@@ -73,9 +73,9 @@ export function Benefits() {
         <div className="section-head reveal">
           <span className="eyebrow">Beneficios</span>
           <h2>
-            Lo que <span className="text-blue">ganás</span> desde el primer día
+            Lo que <span className="text-blue">ganas</span> desde el primer día
           </h2>
-          <p>Esto no es tecnología por moda. Es plata que dejás de perder y clientes que dejás de regalar.</p>
+          <p>Esto no es tecnología por moda. Es dinero que dejas de perder y clientes que dejas de regalar.</p>
         </div>
 
         <BentoGrid className="reveal">

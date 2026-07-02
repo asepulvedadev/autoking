@@ -20,7 +20,7 @@ export const PLANS: Plan[] = [
     features: [
       { text: "Atención 24/7 por WhatsApp", strong: true },
       { text: "Responde info de tu negocio (precios, horarios, ubicación)" },
-      { text: "Deriva a un humano cuando hace falta" },
+      { text: "Deriva a una persona cuando hace falta" },
       { text: "Entrenado con tu estilo y tono" },
     ],
   },
@@ -36,7 +36,7 @@ export const PLANS: Plan[] = [
       { text: "Agendamiento conectado a tu calendario" },
       { text: "Recordatorios automáticos de citas" },
       { text: "Registro y base de datos de clientes" },
-      { text: "Dashboard de métricas", strong: true },
+      { text: "Panel de métricas", strong: true },
     ],
   },
   {
@@ -48,8 +48,8 @@ export const PLANS: Plan[] = [
     features: [
       { text: "Todo lo del plan Agenda", strong: true },
       { text: "Calificación inteligente de prospectos" },
-      { text: "Recomendación de servicios (más ticket)" },
-      { text: "Multi-canal (WhatsApp, Instagram y más)" },
+      { text: "Recomendación de servicios (más venta)" },
+      { text: "Multicanal (WhatsApp, Instagram y más)" },
       { text: "Reportes mensuales de resultados", strong: true },
     ],
   },
