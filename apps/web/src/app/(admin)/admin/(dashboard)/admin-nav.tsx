@@ -40,6 +40,11 @@ const LINKS = [
     ),
   },
   {
+    href: "/admin/testimonios",
+    label: "Testimonios",
+    icon: <path d="M11.3 3.5l2.4 5 5.5.8-4 3.9.9 5.4-4.9-2.6-4.9 2.6.9-5.4-4-3.9 5.5-.8z" />,
+  },
+  {
     href: "/admin/perfil",
     label: "Mi perfil",
     icon: (
