@@ -5,7 +5,7 @@ export { BrandClip } from "./compositions/brand-clip";
 export const brandClip = {
   id: "BrandClip",
   fps: 30,
-  durationInFrames: 150,
+  durationInFrames: 330,
   width: 1600,
   height: 900,
 } as const;
