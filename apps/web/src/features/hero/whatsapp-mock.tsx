@@ -1,32 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@autoking/ui";
 import styles from "./hero.module.css";
 
 type Msg = { dir: "in" | "out"; text: string; time: string };
 
-const CHAT: Msg[] = [
-  { dir: "in", text: "Hola, ¿están abiertos? Quiero una cita para mañana 😊", time: "23:47" },
-  {
-    dir: "out",
-    text: "¡Hola! 👋 Claro que sí, con gusto te agendo. Tengo espacio mañana a las 10:00, 1:30 p. m. y 5:00 p. m. ¿Cuál te sirve mejor?",
-    time: "23:47",
-  },
-  { dir: "in", text: "Las 5:00 p. m. perfecto", time: "23:48" },
-  {
-    dir: "out",
-    text: "¡Listo! ✅ Tu cita quedó agendada mañana a las 5:00 p. m. Te enviaré un recordatorio. ¿Me confirmas tu nombre?",
-    time: "23:48",
-  },
-];
-
 const APPEAR_AT = [600, 1500, 2700, 3600];
 const LOOP_MS = 8000;
 
 export function WhatsAppMock() {
+  const t = useTranslations("Hero");
+  const chat = t.raw("chat") as Msg[];
   const bodyRef = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState<boolean[]>(() => CHAT.map(() => false));
+  const [shown, setShown] = useState<boolean[]>(() => chat.map(() => false));
 
   useEffect(() => {
     const body = bodyRef.current;
@@ -36,9 +24,9 @@ export function WhatsAppMock() {
     let loop: ReturnType<typeof setInterval> | undefined;
 
     const play = () => {
-      setShown(CHAT.map(() => false));
+      setShown(chat.map(() => false));
       timers.forEach(clearTimeout);
-      timers = CHAT.map((_, i) =>
+      timers = chat.map((_, i) =>
         setTimeout(() => setShown((prev) => prev.map((v, j) => (j === i ? true : v))), APPEAR_AT[i]),
       );
     };
@@ -61,6 +49,7 @@ export function WhatsAppMock() {
       timers.forEach(clearTimeout);
       if (loop) clearInterval(loop);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -73,13 +62,13 @@ export function WhatsAppMock() {
             </svg>
           </div>
           <div>
-            <div className={styles.waName}>AutoKing · Asistente</div>
-            <div className={styles.waStatus}>en línea</div>
+            <div className={styles.waName}>{t("agentName")}</div>
+            <div className={styles.waStatus}>{t("online")}</div>
           </div>
         </div>
 
         <div className={styles.waBody} ref={bodyRef}>
-          {CHAT.map((msg, i) => (
+          {chat.map((msg, i) => (
             <div
               key={i}
               className={cn(

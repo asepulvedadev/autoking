@@ -1,3 +1,4 @@
+import { setRequestLocale } from "next-intl/server";
 import { ScrollProgress } from "@autoking/ui";
 import { Header } from "@/shared/header/header";
 import { WhatsAppFloat } from "@/shared/whatsapp-float/whatsapp-float";
@@ -19,7 +20,10 @@ import { Pricing } from "@/features/pricing/pricing";
 import { Faq } from "@/features/faq/faq";
 import { Footer } from "@/features/footer/footer";
 
-export default function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <>
       <ScrollProgress />

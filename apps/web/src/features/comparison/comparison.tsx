@@ -1,16 +1,8 @@
+import { getTranslations } from "next-intl/server";
 import { CheckIcon, cn } from "@autoking/ui";
 
 type Cell = boolean | string;
 type Row = { feature: string; autoking: Cell; none: Cell; employee: Cell };
-
-const ROWS: Row[] = [
-  { feature: "Responde a toda hora (24/7)", autoking: true, none: false, employee: "Solo en horario" },
-  { feature: "Contesta en segundos", autoking: true, none: false, employee: "Si está libre" },
-  { feature: "Agenda citas automáticamente", autoking: true, none: false, employee: true },
-  { feature: "Nunca se enferma ni renuncia", autoking: true, none: false, employee: false },
-  { feature: "Atiende a mil personas a la vez", autoking: true, none: false, employee: false },
-  { feature: "Costo mensual", autoking: "Desde $90", none: "Clientes perdidos", employee: "Sueldo + prestaciones" },
-];
 
 function Value({ v, tone }: { v: Cell; tone: "good" | "bad" | "mid" }) {
   if (typeof v === "string") {
@@ -36,16 +28,19 @@ function Value({ v, tone }: { v: Cell; tone: "good" | "bad" | "mid" }) {
   );
 }
 
-export function Comparison() {
+export async function Comparison() {
+  const t = await getTranslations("Comparison");
+  const rows = t.raw("rows") as Row[];
+
   return (
     <section className="section" id="comparativa">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">La diferencia</span>
+          <span className="eyebrow">{t("eyebrow")}</span>
           <h2>
-            Con AutoKing vs. <span className="text-blue">seguir como estás</span>
+            {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
           </h2>
-          <p>El que responde primero se queda con el cliente. Mira quién responde primero.</p>
+          <p>{t("subtitle")}</p>
         </div>
 
         <div className="reveal overflow-x-auto">
@@ -54,20 +49,20 @@ export function Comparison() {
               <tr>
                 <th className="w-2/5 p-4 text-left text-sm font-medium text-[var(--color-faint)]"></th>
                 <th className="rounded-t-[var(--radius-card)] border-x border-t border-blue/50 bg-[linear-gradient(180deg,#0e1830,#0a1020)] p-4 text-center font-display text-base font-extrabold text-white">
-                  AutoKing
+                  {t("colAutoking")}
                 </th>
-                <th className="p-4 text-center text-sm font-semibold text-[var(--color-muted)]">Sin agente</th>
-                <th className="p-4 text-center text-sm font-semibold text-[var(--color-muted)]">Empleado humano</th>
+                <th className="p-4 text-center text-sm font-semibold text-[var(--color-muted)]">{t("colNone")}</th>
+                <th className="p-4 text-center text-sm font-semibold text-[var(--color-muted)]">{t("colEmployee")}</th>
               </tr>
             </thead>
             <tbody>
-              {ROWS.map((row, i) => (
+              {rows.map((row, i) => (
                 <tr key={row.feature}>
                   <td className="border-t border-[var(--line)] p-4 text-sm text-[var(--color-ink)]">{row.feature}</td>
                   <td
                     className={cn(
                       "border-x border-blue/50 bg-blue/[0.06] p-4 text-center",
-                      i === ROWS.length - 1 && "rounded-b-[var(--radius-card)] border-b",
+                      i === rows.length - 1 && "rounded-b-[var(--radius-card)] border-b",
                     )}
                   >
                     <Value v={row.autoking} tone="good" />

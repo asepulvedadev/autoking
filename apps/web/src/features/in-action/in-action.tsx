@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 import { BrandClip, brandClip } from "@autoking/video";
 
 // El Player es client-only (toca window) → carga diferida sin SSR.
@@ -10,15 +11,17 @@ const Player = dynamic(() => import("@remotion/player").then((m) => m.Player), {
 });
 
 export function InAction() {
+  const t = useTranslations("InAction");
+
   return (
     <section className="section" id="en-accion">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">En acción</span>
+          <span className="eyebrow">{t("eyebrow")}</span>
           <h2>
-            Tu marca, <span className="text-blue">en movimiento</span>
+            {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
           </h2>
-          <p>Videos y piezas animadas generados por código — listos para tus redes, en tu identidad.</p>
+          <p>{t("subtitle")}</p>
         </div>
 
         <div className="reveal mx-auto max-w-3xl overflow-hidden rounded-[var(--radius-lg)] border border-[var(--line-strong)] shadow-[var(--shadow-blue)]">

@@ -1,38 +1,24 @@
+import { getTranslations } from "next-intl/server";
 import { cn } from "@autoking/ui";
 import styles from "./solution.module.css";
 
-const STEPS = [
-  {
-    n: "01",
-    title: "Conectamos tu WhatsApp",
-    text: "Usamos tu mismo número de WhatsApp Business. En minutos tu agente queda conectado y listo para atender.",
-  },
-  {
-    n: "02",
-    title: "Entrenamos al agente con tu negocio",
-    text: "Le cargamos tus precios, servicios, horarios y forma de hablar. Responde como tú lo harías, con tu estilo.",
-  },
-  {
-    n: "03",
-    title: "Atiende y agenda solo, 24/7",
-    text: "Desde ese momento responde, resuelve dudas y agenda citas sin que muevas un dedo. De día y de noche.",
-  },
-];
+export async function Solution() {
+  const t = await getTranslations("Solution");
+  const steps = t.raw("steps") as { n: string; title: string; text: string }[];
 
-export function Solution() {
   return (
     <section className={cn("section", styles.section)} id="solucion">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">La solución</span>
+          <span className="eyebrow">{t("eyebrow")}</span>
           <h2>
-            Tu agente de IA, listo en <span className="text-blue">3 pasos simples</span>
+            {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
           </h2>
-          <p>Sin instalar nada raro, sin contratar gente, sin complicarte. Nosotros lo armamos por ti.</p>
+          <p>{t("subtitle")}</p>
         </div>
 
         <div className="grid cols-3">
-          {STEPS.map((step, i) => (
+          {steps.map((step, i) => (
             <div className={cn("card reveal", i > 0 && `d${i}`, styles.step)} key={step.n}>
               <span className={styles.ghost} aria-hidden="true">
                 {i + 1}

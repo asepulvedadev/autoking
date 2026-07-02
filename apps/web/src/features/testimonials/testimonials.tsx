@@ -2,44 +2,14 @@
 
 import { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { useTranslations } from "next-intl";
 import { Stars, cn } from "@autoking/ui";
 
-/**
- * ⚠️ PLACEHOLDER — testimonios ilustrativos. Reemplazá por reales
- * (con permiso del cliente) antes del lanzamiento. No inventamos clientes.
- */
-const TESTIMONIALS = [
-  {
-    quote:
-      "Antes perdía clientes que escribían de noche. Ahora el agente responde al instante y me llena la agenda solo. Recuperé un montón de citas.",
-    name: "María G.",
-    role: "Spa · Placeholder",
-    initial: "M",
-  },
-  {
-    quote:
-      "Dejé de contestar las mismas preguntas mil veces. El agente atiende, cotiza y agenda. Yo me dedico a atender a la gente que llega.",
-    name: "Diego R.",
-    role: "Barbería · Placeholder",
-    initial: "D",
-  },
-  {
-    quote:
-      "Lo mejor es que nunca deja a nadie esperando. Contesta en segundos a cualquier hora. Mis pacientes lo notan y agendan más.",
-    name: "Dra. Carla V.",
-    role: "Consultorio dental · Placeholder",
-    initial: "C",
-  },
-  {
-    quote:
-      "Es como tener una recepcionista que no duerme. Se conectó a mi WhatsApp de siempre y en tres días ya estaba trabajando por mí.",
-    name: "Sofía L.",
-    role: "Estética · Placeholder",
-    initial: "S",
-  },
-];
+type Item = { quote: string; name: string; role: string };
 
 export function Testimonials() {
+  const t = useTranslations("Testimonials");
+  const items = t.raw("items") as Item[];
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
   const prev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const next = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -48,33 +18,30 @@ export function Testimonials() {
     <section className="section" id="testimonios">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Clientes</span>
+          <span className="eyebrow">{t("eyebrow")}</span>
           <h2>
-            Negocios que dejaron de <span className="text-blue">perder clientes</span>
+            {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
           </h2>
-          <p>Lo que pasa cuando un agente atiende por ti, sin descanso.</p>
+          <p>{t("subtitle")}</p>
         </div>
 
         <div className="reveal">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex gap-5 [touch-action:pan-y]">
-              {TESTIMONIALS.map((t) => (
-                <article
-                  key={t.name}
-                  className="min-w-0 flex-[0_0_88%] sm:flex-[0_0_47%] lg:flex-[0_0_31.5%]"
-                >
+              {items.map((item) => (
+                <article key={item.name} className="min-w-0 flex-[0_0_88%] sm:flex-[0_0_47%] lg:flex-[0_0_31.5%]">
                   <div className="card flex h-full flex-col">
                     <Stars className="mb-4" />
                     <p className="grow text-[15.5px] leading-relaxed text-[var(--color-ink)]">
-                      &ldquo;{t.quote}&rdquo;
+                      &ldquo;{item.quote}&rdquo;
                     </p>
                     <div className="mt-6 flex items-center gap-3">
                       <div className="grid h-11 w-11 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-bright to-blue-deep font-display font-bold text-white">
-                        {t.initial}
+                        {item.name.charAt(0)}
                       </div>
                       <div>
-                        <div className="text-sm font-semibold">{t.name}</div>
-                        <div className="text-xs text-[var(--color-faint)]">{t.role}</div>
+                        <div className="text-sm font-semibold">{item.name}</div>
+                        <div className="text-xs text-[var(--color-faint)]">{item.role}</div>
                       </div>
                     </div>
                   </div>
@@ -85,8 +52,8 @@ export function Testimonials() {
 
           <div className="mt-8 flex items-center justify-center gap-3">
             {[
-              { label: "Anterior", onClick: prev, d: "M15 18l-6-6 6-6" },
-              { label: "Siguiente", onClick: next, d: "M9 18l6-6-6-6" },
+              { label: t("prev"), onClick: prev, d: "M15 18l-6-6 6-6" },
+              { label: t("next"), onClick: next, d: "M9 18l6-6-6-6" },
             ].map((b) => (
               <button
                 key={b.label}
@@ -106,9 +73,7 @@ export function Testimonials() {
           </div>
         </div>
 
-        <p className="mt-5 text-center text-xs text-[var(--color-faint)]">
-          * Testimonios ilustrativos — reemplazar por reales antes del lanzamiento.
-        </p>
+        <p className="mt-5 text-center text-xs text-[var(--color-faint)]">{t("disclaimer")}</p>
       </div>
     </section>
   );

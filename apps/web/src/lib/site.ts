@@ -17,12 +17,13 @@ export function waHref(message: string = WHATSAPP_MSG): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
+/** href + clave de traducción (namespace Nav). */
 export const NAV_LINKS = [
-  { href: "#problema", label: "El problema" },
-  { href: "#solucion", label: "Cómo funciona" },
-  { href: "#beneficios", label: "Beneficios" },
-  { href: "#planes", label: "Planes" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#problema", key: "problem" },
+  { href: "#solucion", key: "solution" },
+  { href: "#beneficios", key: "benefits" },
+  { href: "#planes", key: "plans" },
+  { href: "#faq", key: "faq" },
 ] as const;
 
 export const CONTACT = {

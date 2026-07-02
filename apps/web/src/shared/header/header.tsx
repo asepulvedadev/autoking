@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Logo, buttonVariants, cn } from "@autoking/ui";
 import { NAV_LINKS, waHref } from "@/lib/site";
+import { LangSwitch } from "@/shared/lang-switch/lang-switch";
 import styles from "./header.module.css";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const tNav = useTranslations("Nav");
+  const tCommon = useTranslations("Common");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -19,30 +23,31 @@ export function Header() {
   return (
     <header className={cn(styles.header, scrolled && styles.scrolled)}>
       <div className={cn("container", styles.nav)}>
-        <a href="#hero" aria-label="AutoKing — inicio">
+        <a href="#hero" aria-label="AutoKing">
           <Logo />
         </a>
 
         <nav className={cn(styles.links, open && styles.linksOpen)}>
           {NAV_LINKS.map((link) => (
             <a key={link.href} href={link.href} className={styles.navlink} onClick={() => setOpen(false)}>
-              {link.label}
+              {tNav(link.key)}
             </a>
           ))}
+          <LangSwitch />
           <a
-            href={waHref()}
+            href={waHref(tCommon("waMessage"))}
             target="_blank"
             rel="noopener"
             className={buttonVariants({ variant: "primary" })}
             onClick={() => setOpen(false)}
           >
-            Agenda una demo
+            {tCommon("agendaDemo")}
           </a>
         </nav>
 
         <button
           className={styles.toggle}
-          aria-label="Abrir menú"
+          aria-label="Menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >

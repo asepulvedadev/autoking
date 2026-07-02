@@ -1,60 +1,33 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { buttonVariants, WhatsAppIcon, cn } from "@autoking/ui";
 import { waHref } from "@/lib/site";
 
 type Msg = { from: "agent" | "user"; text: string };
-
-const GREETING =
-  "¡Hola! 👋 Soy el asistente de AutoKing. Pregúntame lo que quieras: precios, horarios o pídeme una cita.";
-
-const RULES: { match: string[]; reply: string }[] = [
-  {
-    match: ["precio", "cuesta", "cuánto", "cuanto", "vale", "sale", "costo"],
-    reply:
-      "Depende del servicio 😊 Por ejemplo, una consulta arranca en $500. ¿Quieres la lista completa o te agendo de una vez?",
-  },
-  {
-    match: ["horario", "abren", "abierto", "hora", "atienden"],
-    reply: "Atendemos de lunes a sábado de 9 a 20 hs. Pero yo te respondo 24/7 👌 ¿Te busco una cita?",
-  },
-  {
-    match: ["ubicaci", "donde", "dónde", "direcci", "llegar", "quedan"],
-    reply: "Estamos en el centro, a una cuadra de la plaza 📍 ¿Te reservo una cita?",
-  },
-  {
-    match: ["turno", "cita", "agendar", "reservar", "mañana", "manana", "hoy", "sábado", "sabado", "disponible"],
-    reply:
-      "¡Genial! Tengo espacio mañana a las 10:00, 1:30 p. m. y 5:00 p. m. ✅ ¿Cuál te sirve? La dejo agendada de una.",
-  },
-  {
-    match: ["hola", "buenas", "buenos", "qué tal", "que tal"],
-    reply: "¡Hola! 👋 ¿En qué te ayudo? Puedo darte precios, horarios o agendarte una cita.",
-  },
-  {
-    match: ["gracias", "genial", "perfecto", "dale", "listo", "buenísimo"],
-    reply: "¡De nada! 🙌 Y ojo: con AutoKing esto lo hace tu negocio solo, las 24 horas.",
-  },
-];
-
-const FALLBACK =
-  "Buena pregunta 🤔 En la versión real, tu agente respondería esto entrenado con la info de TU negocio. ¿Quieres ver precios, horarios o agendar una cita?";
-
-const QUICK = ["¿Cuánto cuesta?", "¿Tienen cita para mañana?", "¿Dónde están?", "¿Qué horario tienen?"];
-
-function replyFor(text: string): string {
-  const t = text.toLowerCase();
-  for (const r of RULES) if (r.match.some((m) => t.includes(m))) return r.reply;
-  return FALLBACK;
-}
+type Rule = { match: string[]; reply: string };
 
 export function LiveDemo() {
-  const [messages, setMessages] = useState<Msg[]>([{ from: "agent", text: GREETING }]);
+  const t = useTranslations("LiveDemo");
+  const tCommon = useTranslations("Common");
+
+  const greeting = t("greeting");
+  const rules = t.raw("rules") as Rule[];
+  const fallback = t("fallback");
+  const quick = t.raw("quick") as string[];
+
+  const [messages, setMessages] = useState<Msg[]>([{ from: "agent", text: greeting }]);
   const [typing, setTyping] = useState(false);
   const [input, setInput] = useState("");
   const bodyRef = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const replyFor = (text: string): string => {
+    const tt = text.toLowerCase();
+    for (const r of rules) if (r.match.some((m) => tt.includes(m.toLowerCase()))) return r.reply;
+    return fallback;
+  };
 
   useEffect(() => {
     bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight, behavior: "smooth" });
@@ -78,11 +51,11 @@ export function LiveDemo() {
     <section className="section" id="demo-vivo">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Pruébalo tú mismo</span>
+          <span className="eyebrow">{t("eyebrow")}</span>
           <h2>
-            Escríbele al agente <span className="text-blue">aquí mismo</span>
+            {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
           </h2>
-          <p>Hazle una pregunta como si fueras un cliente. Así de rápido responde en tu WhatsApp.</p>
+          <p>{t("subtitle")}</p>
         </div>
 
         <div className="reveal mx-auto max-w-lg overflow-hidden rounded-[var(--radius-lg)] border border-[var(--line-strong)] bg-[var(--color-surface)] shadow-[var(--shadow-blue)]">
@@ -92,9 +65,9 @@ export function LiveDemo() {
               AK
             </div>
             <div>
-              <div className="text-sm font-semibold text-white">AutoKing · Asistente</div>
+              <div className="text-sm font-semibold text-white">{t("agentName")}</div>
               <div className="flex items-center gap-1.5 text-xs text-[var(--color-success)]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-success)]" /> en línea
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-success)]" /> {t("online")}
               </div>
             </div>
           </div>
@@ -129,7 +102,7 @@ export function LiveDemo() {
 
           {/* quick replies */}
           <div className="flex flex-wrap gap-2 border-t border-[var(--line)] px-3 pt-3">
-            {QUICK.map((q) => (
+            {quick.map((q) => (
               <button
                 key={q}
                 onClick={() => send(q)}
@@ -151,7 +124,7 @@ export function LiveDemo() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Escribe tu mensaje…"
+              placeholder={t("placeholder")}
               className="min-w-0 flex-1 rounded-full border border-[var(--line)] bg-[var(--color-bg-2)] px-4 py-2.5 text-sm text-white outline-none placeholder:text-[var(--color-faint)] focus:border-blue-bright"
             />
             <button
@@ -167,11 +140,14 @@ export function LiveDemo() {
         </div>
 
         <div className="reveal mt-6 text-center">
-          <p className="mb-4 text-xs text-[var(--color-faint)]">
-            * Demo con respuestas de ejemplo. Tu agente real se entrena con la info de tu negocio.
-          </p>
-          <a href={waHref()} target="_blank" rel="noopener" className={buttonVariants({ variant: "primary", size: "lg" })}>
-            <WhatsAppIcon /> Quiero mi agente de verdad
+          <p className="mb-4 text-xs text-[var(--color-faint)]">{t("disclaimer")}</p>
+          <a
+            href={waHref(tCommon("waMessage"))}
+            target="_blank"
+            rel="noopener"
+            className={buttonVariants({ variant: "primary", size: "lg" })}
+          >
+            <WhatsAppIcon /> {t("cta")}
           </a>
         </div>
       </div>

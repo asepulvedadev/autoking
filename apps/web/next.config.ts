@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -13,6 +14,6 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: resolve(here, "../../"),
 };
 
-// NOTA: i18n (next-intl) en pausa. Al retomar, re-envolver con
-// createNextIntlPlugin("./src/i18n/request.ts") + agregar middleware.ts + app/[locale].
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+export default withNextIntl(nextConfig);

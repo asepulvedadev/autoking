@@ -1,14 +1,5 @@
+import { getTranslations } from "next-intl/server";
 import { Marquee } from "@autoking/ui";
-
-const TOOLS = [
-  "WhatsApp",
-  "Google Calendar",
-  "Instagram",
-  "Messenger",
-  "Google Sheets",
-  "Calendly",
-  "Outlook",
-];
 
 function Chip({ label }: { label: string }) {
   return (
@@ -19,16 +10,19 @@ function Chip({ label }: { label: string }) {
   );
 }
 
-export function Integrations() {
+export async function Integrations() {
+  const t = await getTranslations("Integrations");
+  const tools = t.raw("tools") as string[];
+
   return (
     <section className="section" id="integraciones">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Integraciones</span>
+          <span className="eyebrow">{t("eyebrow")}</span>
           <h2>
-            Se conecta con lo que <span className="text-blue">ya usas</span>
+            {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
           </h2>
-          <p>Sin cambiar de herramientas. Tu agente trabaja sobre lo que ya tienes funcionando.</p>
+          <p>{t("subtitle")}</p>
         </div>
       </div>
 
@@ -40,8 +34,8 @@ export function Integrations() {
         }}
       >
         <Marquee speed={34}>
-          {TOOLS.map((t) => (
-            <Chip key={t} label={t} />
+          {tools.map((tool) => (
+            <Chip key={tool} label={tool} />
           ))}
         </Marquee>
       </div>

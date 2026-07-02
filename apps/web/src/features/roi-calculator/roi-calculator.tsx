@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatedNumber, buttonVariants, WhatsAppIcon } from "@autoking/ui";
 import { waHref } from "@/lib/site";
 
@@ -10,7 +11,7 @@ const TASA_FUGA = 0.35;
 
 type Field = {
   key: "consultas" | "ticket" | "fuera";
-  label: string;
+  tkey: "fieldConsultas" | "fieldTicket" | "fieldFuera";
   min: number;
   max: number;
   step: number;
@@ -19,12 +20,13 @@ type Field = {
 };
 
 const FIELDS: Field[] = [
-  { key: "consultas", label: "Personas que te escriben al mes", min: 20, max: 1000, step: 10 },
-  { key: "ticket", label: "Valor promedio de una venta / cita", min: 100, max: 5000, step: 50, prefix: "$" },
-  { key: "fuera", label: "% que escribe fuera de horario o sin respuesta rápida", min: 0, max: 100, step: 5, suffix: "%" },
+  { key: "consultas", tkey: "fieldConsultas", min: 20, max: 1000, step: 10 },
+  { key: "ticket", tkey: "fieldTicket", min: 100, max: 5000, step: 50, prefix: "$" },
+  { key: "fuera", tkey: "fieldFuera", min: 0, max: 100, step: 5, suffix: "%" },
 ];
 
 export function RoiCalculator() {
+  const t = useTranslations("Roi");
   const [values, setValues] = useState({ consultas: 200, ticket: 500, fuera: 40 });
 
   const { clientesPerdidos, plataPerdida } = useMemo(() => {
@@ -35,19 +37,17 @@ export function RoiCalculator() {
 
   const set = (key: Field["key"], v: number) => setValues((s) => ({ ...s, [key]: v }));
 
-  const waMsg = `Hola AutoKing 👑 Con la calculadora me dio que pierdo ~$${plataPerdida.toLocaleString(
-    "es-MX",
-  )} al mes. Quiero recuperarlo con un agente de IA.`;
+  const waMsg = t("waMessage", { amount: plataPerdida.toLocaleString("es-MX") });
 
   return (
     <section className="section" id="calculadora">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Calculadora</span>
+          <span className="eyebrow">{t("eyebrow")}</span>
           <h2>
-            ¿Cuánto dinero estás <span className="text-blue">dejando sobre la mesa?</span>
+            {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
           </h2>
-          <p>Mueves los valores y ves lo que te cuesta no responder a tiempo. Sin vueltas.</p>
+          <p>{t("subtitle")}</p>
         </div>
 
         <div className="reveal grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
@@ -60,7 +60,7 @@ export function RoiCalculator() {
                 <div key={f.key}>
                   <div className="mb-3 flex items-baseline justify-between gap-4">
                     <label htmlFor={f.key} className="text-sm text-[var(--color-muted)]">
-                      {f.label}
+                      {t(f.tkey)}
                     </label>
                     <span className="font-display text-lg font-bold text-white">
                       {f.prefix}
@@ -86,20 +86,20 @@ export function RoiCalculator() {
 
           {/* Resultado */}
           <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-[rgb(255_90_90_/_0.28)] bg-[radial-gradient(ellipse_80%_120%_at_50%_0%,rgb(255_80_80_/_0.14),transparent_60%),linear-gradient(180deg,#160c0e,#0a0709)] p-8 text-center">
-            <p className="text-sm text-[var(--color-muted)]">Estás perdiendo aprox.</p>
+            <p className="text-sm text-[var(--color-muted)]">{t("resultPre")}</p>
             <div className="my-2 font-display text-[clamp(40px,8vw,64px)] font-extrabold leading-none text-[#ff6b6b]">
               <AnimatedNumber value={plataPerdida} prefix="$" />
             </div>
-            <p className="text-sm text-[var(--color-muted)]">al mes</p>
+            <p className="text-sm text-[var(--color-muted)]">{t("resultSuffix")}</p>
             <p className="mt-4 text-[15px] text-[var(--color-ink)]">
-              ≈{" "}
-              <AnimatedNumber value={clientesPerdidos} className="font-bold text-white" /> clientes que se
-              van con la competencia
+              ≈ <AnimatedNumber value={clientesPerdidos} className="font-bold text-white" /> {t("clientsText")}
             </p>
 
             <div className="mt-7 w-full rounded-2xl border border-[rgb(30_107_255_/_0.3)] bg-blue/[0.06] p-4">
               <p className="text-sm text-[var(--color-muted)]">
-                AutoKing desde <b className="text-white">$90/mes</b> los responde a todos, 24/7.
+                {t("planNoteA")}
+                <b className="text-white">{t("planNoteBold")}</b>
+                {t("planNoteB")}
               </p>
               <a
                 href={waHref(waMsg)}
@@ -107,15 +107,14 @@ export function RoiCalculator() {
                 rel="noopener"
                 className={buttonVariants({ variant: "primary", className: "mt-4 w-full" })}
               >
-                <WhatsAppIcon /> Quiero recuperar ese dinero
+                <WhatsAppIcon /> {t("cta")}
               </a>
             </div>
           </div>
         </div>
 
         <p className="reveal mt-5 text-center text-xs text-[var(--color-faint)]">
-          * Estimación orientativa: asume que un {Math.round(TASA_FUGA * 100)}% de quienes no reciben
-          respuesta a tiempo se va con la competencia.
+          {t("disclaimer", { pct: Math.round(TASA_FUGA * 100) })}
         </p>
       </div>
     </section>

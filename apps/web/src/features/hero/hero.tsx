@@ -1,48 +1,52 @@
+import { getTranslations } from "next-intl/server";
 import { buttonVariants, WhatsAppIcon, AuroraBackground, cn } from "@autoking/ui";
 import { waHref } from "@/lib/site";
 import { WhatsAppMock } from "./whatsapp-mock";
 import styles from "./hero.module.css";
 
-const PROOF = [
-  { num: "24/7", lbl: "Siempre disponible" },
-  { num: "<5 seg", lbl: "Tiempo de respuesta" },
-  { num: "+40%", lbl: "Más citas agendadas" },
-];
+export async function Hero() {
+  const t = await getTranslations("Hero");
+  const tCommon = await getTranslations("Common");
+  const proof = t.raw("proof") as { num: string; label: string }[];
 
-export function Hero() {
   return (
     <section className={styles.hero} id="hero">
       <div className="grid-bg" />
       <AuroraBackground />
 
       <div className={cn("container", styles.grid)}>
-        <div>
+        <div className="hero-copy">
           <span className={cn(styles.badge, "reveal")}>
-            <span className={styles.badgeDot} /> Un agente que nunca duerme · responde en segundos
+            <span className={styles.badgeDot} /> {t("badge")}
           </span>
           <h1 className={cn(styles.title, "reveal", "d1", "glow-text")}>
-            Deja de perder clientes <br />y citas por <span>no responder a tiempo</span>
+            {t("titleA")} <span>{t("titleHighlight")}</span>
           </h1>
           <p className={cn(styles.sub, "reveal", "d2")}>
-            AutoKing te pone un agente de inteligencia artificial que atiende, responde y agenda{" "}
-            <b>solo, 24/7</b> en tu WhatsApp. Como un empleado que nunca duerme, nunca se enferma y
-            nunca pierde una venta.
+            {t("subA")}
+            <b>{t("subStrong")}</b>
+            {t("subB")}
           </p>
 
           <div className={cn(styles.cta, "reveal", "d3")}>
-            <a href={waHref()} target="_blank" rel="noopener" className={buttonVariants({ variant: "primary", size: "lg" })}>
-              <WhatsAppIcon /> Agenda una demo
+            <a
+              href={waHref(tCommon("waMessage"))}
+              target="_blank"
+              rel="noopener"
+              className={buttonVariants({ variant: "primary", size: "lg" })}
+            >
+              <WhatsAppIcon /> {tCommon("agendaDemo")}
             </a>
             <a href="#solucion" className={buttonVariants({ variant: "secondary", size: "lg" })}>
-              Conoce más
+              {tCommon("conoceMas")}
             </a>
           </div>
 
           <div className={cn(styles.proof, "reveal", "d4")}>
-            {PROOF.map((p) => (
-              <div className={styles.proofItem} key={p.lbl}>
+            {proof.map((p) => (
+              <div className={styles.proofItem} key={p.label}>
                 <span className={styles.proofNum}>{p.num}</span>
-                <span className={styles.proofLbl}>{p.lbl}</span>
+                <span className={styles.proofLbl}>{p.label}</span>
               </div>
             ))}
           </div>

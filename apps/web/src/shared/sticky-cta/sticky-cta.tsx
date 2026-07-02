@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { buttonVariants, WhatsAppIcon, cn } from "@autoking/ui";
 import { waHref } from "@/lib/site";
 
-/** Barra de CTA fija al pie, solo en mobile, que aparece al scrollear.
- *  En desktop se usa el botón flotante de WhatsApp (ver whatsapp-float). */
+/** Barra de CTA fija al pie, solo en mobile, que aparece al scrollear. */
 export function StickyCta() {
   const [show, setShow] = useState(false);
+  const t = useTranslations("StickyCta");
+  const tCommon = useTranslations("Common");
 
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 700);
@@ -25,12 +27,12 @@ export function StickyCta() {
       )}
     >
       <a
-        href={waHref()}
+        href={waHref(tCommon("waMessage"))}
         target="_blank"
         rel="noopener"
         className={buttonVariants({ variant: "primary", className: "w-full" })}
       >
-        <WhatsAppIcon /> Agenda tu demo gratis
+        <WhatsAppIcon /> {t("label")}
       </a>
     </div>
   );
