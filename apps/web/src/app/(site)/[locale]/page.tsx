@@ -18,6 +18,7 @@ import { Integrations } from "@/features/integrations/integrations";
 import { LiveDemo } from "@/features/live-demo/live-demo";
 import { Pricing } from "@/features/pricing/pricing";
 import { Faq } from "@/features/faq/faq";
+import { LeadForm } from "@/features/lead-form/lead-form";
 import { Footer } from "@/features/footer/footer";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -43,6 +44,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <LiveDemo />
         <Pricing />
         <Faq />
+        <LeadForm />
       </main>
       <Footer />
       <WhatsAppFloat />

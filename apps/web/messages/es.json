@@ -246,6 +246,22 @@
       { "q": "¿El agente puede pasarme una conversación a mí?", "a": "Sí. Cuando una consulta necesita atención humana o el cliente lo pide, el agente te pasa la conversación al instante. Tú siempre tienes el control y puedes tomar el chat cuando quieras." }
     ]
   },
+  "LeadForm": {
+    "eyebrow": "Agenda tu demo",
+    "titleA": "Déjanos tus datos y",
+    "titleHighlight": "te contactamos",
+    "subtitle": "¿Prefieres que te escribamos nosotros? Déjanos tu info y un asesor te contacta para montar tu agente.",
+    "name": "Tu nombre",
+    "business": "Tu negocio",
+    "whatsapp": "WhatsApp",
+    "email": "Email (opcional)",
+    "message": "¿Algo que quieras contarnos? (opcional)",
+    "submit": "Quiero mi demo",
+    "sending": "Enviando…",
+    "success": "¡Listo! Te contactamos muy pronto. 🙌",
+    "required": "Completa tu nombre y WhatsApp.",
+    "error": "Algo salió mal. Intenta de nuevo o escríbenos por WhatsApp."
+  },
   "Demo": {
     "eyebrow": "Pruébalo tú mismo",
     "titleA": "Habla con el agente",

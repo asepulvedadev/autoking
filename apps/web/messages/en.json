@@ -246,6 +246,22 @@
       { "q": "Can the agent hand a conversation over to me?", "a": "Yes. When a query needs a human or the client asks, the agent hands the conversation to you instantly. You always have control and can take the chat whenever you want." }
     ]
   },
+  "LeadForm": {
+    "eyebrow": "Book your demo",
+    "titleA": "Leave your details and",
+    "titleHighlight": "we'll reach out",
+    "subtitle": "Prefer we contact you? Leave your info and an advisor will reach out to set up your agent.",
+    "name": "Your name",
+    "business": "Your business",
+    "whatsapp": "WhatsApp",
+    "email": "Email (optional)",
+    "message": "Anything you'd like to tell us? (optional)",
+    "submit": "I want my demo",
+    "sending": "Sending…",
+    "success": "Done! We'll reach out very soon. 🙌",
+    "required": "Please fill in your name and WhatsApp.",
+    "error": "Something went wrong. Try again or message us on WhatsApp."
+  },
   "Demo": {
     "eyebrow": "Try it yourself",
     "titleA": "Talk to the agent",
