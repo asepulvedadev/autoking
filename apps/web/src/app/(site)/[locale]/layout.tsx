@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import { StructuredData } from "@/shared/structured-data";
-import "../globals.css";
+import "../../globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
