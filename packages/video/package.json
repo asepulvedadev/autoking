@@ -10,14 +10,19 @@
   "scripts": {
     "studio": "remotion studio",
     "render": "remotion render",
+    "render:upload": "node scripts/render-and-upload.mjs",
+    "browser": "remotion browser ensure",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.110.0",
     "remotion": "^4.0.484"
   },
   "devDependencies": {
     "@autoking/config": "workspace:*",
+    "@remotion/bundler": "^4.0.484",
     "@remotion/cli": "^4.0.484",
+    "@remotion/renderer": "^4.0.484",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "react": "^19.0.0",
