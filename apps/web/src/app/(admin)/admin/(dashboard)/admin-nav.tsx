@@ -19,6 +19,17 @@ const LINKS = [
     ),
   },
   {
+    href: "/admin/clientes",
+    label: "Clientes",
+    icon: (
+      <>
+        <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+      </>
+    ),
+  },
+  {
     href: "/admin/perfil",
     label: "Mi perfil",
     icon: (
@@ -44,7 +55,8 @@ export function AdminNav() {
   return (
     <nav className="flex flex-1 flex-col gap-1">
       {LINKS.map((link) => {
-        const active = pathname === link.href;
+        const active =
+          link.href === "/admin" ? pathname === "/admin" : pathname.startsWith(link.href);
         return (
           <Link
             key={link.href}
