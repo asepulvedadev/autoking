@@ -1,5 +1,6 @@
 import {
   AbsoluteFill,
+  Img,
   Sequence,
   useCurrentFrame,
   useVideoConfig,
@@ -34,17 +35,6 @@ const Glow: React.FC = () => {
     />
   );
 };
-
-/** Corona-K de marca (SVG). */
-const Crown: React.FC<{ size: number }> = ({ size }) => (
-  <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
-    <path d="M8 16l7 7 9-13 9 13 7-7-3 23H11L8 16z" fill={BLUE_BRIGHT} />
-    <path d="M14 41h20l-1.4 4H15.4L14 41z" fill={BLUE} />
-    <circle cx="8" cy="14" r="3" fill={BLUE_BRIGHT} />
-    <circle cx="40" cy="14" r="3" fill={BLUE_BRIGHT} />
-    <circle cx="24" cy="8" r="3.4" fill={BLUE_BRIGHT} />
-  </svg>
-);
 
 /** Burbuja de chat con entrada por spring. */
 const Bubble: React.FC<{
@@ -121,7 +111,6 @@ const ChatScene: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
-  // Badge "cita agendada"
   const badgeDelay = 150;
   const bs = spring({ frame: frame - badgeDelay, fps: 30, config: { damping: 14 } });
   const badgeOp = interpolate(frame - badgeDelay, [0, 8], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -162,36 +151,44 @@ const ChatScene: React.FC = () => {
   );
 };
 
-/** Escena 2 — cierre de marca. */
+/** Escena 2 — cierre de marca: LOGO (imagen) + slogan + CTA. */
 const BrandScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps, height } = useVideoConfig();
 
   const logoS = spring({ frame, fps, config: { damping: 14, stiffness: 90 } });
-  const logoScale = interpolate(logoS, [0, 1], [0.75, 1]);
+  const logoScale = interpolate(logoS, [0, 1], [0.78, 1]);
   const logoOp = interpolate(frame, [0, 14], [0, 1], { extrapolateRight: "clamp" });
 
-  const tagY = interpolate(frame, [16, 38], [24, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const tagOp = interpolate(frame, [16, 38], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const tagY = interpolate(frame, [18, 40], [24, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const tagOp = interpolate(frame, [18, 40], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
-  const ctaS = spring({ frame: frame - 44, fps, config: { damping: 16 } });
-  const ctaOp = interpolate(frame - 44, [0, 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const ctaS = spring({ frame: frame - 46, fps, config: { damping: 16 } });
+  const ctaOp = interpolate(frame - 46, [0, 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 22, opacity: logoOp, transform: `scale(${logoScale})` }}>
-        <Crown size={height * 0.16} />
-        <div style={{ display: "flex", fontSize: height * 0.15, fontWeight: 800, letterSpacing: -3, fontFamily: FONT }}>
-          <span style={{ color: "#f4f7ff" }}>Auto</span>
-          <span style={{ color: BLUE_BRIGHT }}>King</span>
-        </div>
-      </div>
-      <div style={{ fontSize: height * 0.05, fontWeight: 700, color: "#c3cde0", letterSpacing: 2, marginTop: 28, fontFamily: FONT, opacity: tagOp, transform: `translateY(${tagY}px)` }}>
-        Automatiza. Inteligencia. Imperio.
+      <Img
+        src="/AutoKing-logo.png"
+        style={{ width: height * 0.86, height: "auto", opacity: logoOp, transform: `scale(${logoScale})` }}
+      />
+      <div
+        style={{
+          fontSize: height * 0.052,
+          fontWeight: 700,
+          color: "#c3cde0",
+          letterSpacing: 1,
+          marginTop: 30,
+          fontFamily: FONT,
+          opacity: tagOp,
+          transform: `translateY(${tagY}px)`,
+        }}
+      >
+        El agente que nunca duerme.
       </div>
       <div
         style={{
-          marginTop: 46,
+          marginTop: 44,
           padding: "20px 44px",
           borderRadius: 999,
           background: "linear-gradient(135deg,#4d8bff,#1450c7)",
