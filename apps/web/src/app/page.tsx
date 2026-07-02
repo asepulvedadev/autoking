@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/shared/scroll-reveal";
 import { Hero } from "@/features/hero/hero";
 import { Problem } from "@/features/problem/problem";
 import { Solution } from "@/features/solution/solution";
+import { InAction } from "@/features/in-action/in-action";
 import { Benefits } from "@/features/benefits/benefits";
 import { Stats } from "@/features/stats/stats";
 import { RoiCalculator } from "@/features/roi-calculator/roi-calculator";
@@ -27,6 +28,7 @@ export default function HomePage() {
         <Hero />
         <Problem />
         <Solution />
+        <InAction />
         <Benefits />
         <Stats />
         <RoiCalculator />

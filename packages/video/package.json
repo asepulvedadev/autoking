@@ -1,0 +1,26 @@
+{
+  "name": "@autoking/video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/entry.ts",
+    "./compositions/*": "./src/compositions/*/index.tsx"
+  },
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "remotion": "^4.0.484"
+  },
+  "devDependencies": {
+    "@autoking/config": "workspace:*",
+    "@remotion/cli": "^4.0.484",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

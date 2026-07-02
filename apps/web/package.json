@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@autoking/ui": "workspace:*",
+    "@autoking/video": "workspace:*",
+    "@remotion/player": "^4.0.484",
     "embla-carousel-react": "^8.6.0",
     "next": "^15.1.3",
     "react": "^19.0.0",
