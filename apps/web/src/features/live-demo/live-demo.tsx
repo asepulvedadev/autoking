@@ -17,6 +17,7 @@ export function LiveDemo() {
 
   const [messages, setMessages] = useState<Msg[]>([{ from: "agent", text: greeting }]);
   const [typing, setTyping] = useState(false);
+  const [slowHint, setSlowHint] = useState(false);
   const [input, setInput] = useState("");
   const bodyRef = useRef<HTMLDivElement>(null);
   const [sessionId] = useState(() =>
@@ -25,7 +26,7 @@ export function LiveDemo() {
 
   useEffect(() => {
     bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, typing]);
+  }, [messages, typing, slowHint]);
 
   const send = async (text: string) => {
     const clean = text.trim();
@@ -33,18 +34,29 @@ export function LiveDemo() {
     setInput("");
     setMessages((m) => [...m, { from: "user", text: clean }]);
     setTyping(true);
+
+    // El modelo puede tardar unos segundos: tras 4s mostramos un aviso para que
+    // no parezca colgado, y a los 35s abortamos con un mensaje amable.
+    const hintTimer = setTimeout(() => setSlowHint(true), 4000);
+    const controller = new AbortController();
+    const abortTimer = setTimeout(() => controller.abort(), 35000);
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: clean, session: sessionId }),
+        signal: controller.signal,
       });
       const data = (await res.json()) as { reply?: string };
       setMessages((m) => [...m, { from: "agent", text: data.reply || fallback }]);
     } catch {
       setMessages((m) => [...m, { from: "agent", text: fallback }]);
     } finally {
+      clearTimeout(hintTimer);
+      clearTimeout(abortTimer);
       setTyping(false);
+      setSlowHint(false);
     }
   };
 
@@ -89,14 +101,21 @@ export function LiveDemo() {
               </div>
             ))}
             {typing && (
-              <div className="flex items-center gap-1 self-start rounded-2xl rounded-bl-md bg-[#1b2630] px-4 py-3">
-                {[0, 1, 2].map((d) => (
-                  <span
-                    key={d}
-                    className="h-1.5 w-1.5 rounded-full bg-[var(--color-muted)]"
-                    style={{ animation: `float 1s ${d * 0.15}s infinite` }}
-                  />
-                ))}
+              <div className="flex flex-col gap-1.5 self-start">
+                <div className="flex items-center gap-1 rounded-2xl rounded-bl-md bg-[#1b2630] px-4 py-3">
+                  {[0, 1, 2].map((d) => (
+                    <span
+                      key={d}
+                      className="h-1.5 w-1.5 rounded-full bg-[var(--color-muted)]"
+                      style={{ animation: `float 1s ${d * 0.15}s infinite` }}
+                    />
+                  ))}
+                </div>
+                {slowHint && (
+                  <span className="px-1 text-xs text-[var(--color-faint)]">
+                    Pensando la mejor respuesta… 💭
+                  </span>
+                )}
               </div>
             )}
           </div>
