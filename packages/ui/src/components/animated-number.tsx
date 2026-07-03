@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import { motion, useSpring, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 export interface AnimatedNumberProps {
   value: number;
@@ -13,7 +12,8 @@ export interface AnimatedNumberProps {
 }
 
 /** Número que transiciona suavemente cada vez que `value` cambia.
- *  Ideal para resultados reactivos (calculadoras, dashboards). */
+ *  Ideal para resultados reactivos (calculadoras, dashboards).
+ *  Sin framer-motion: tween con requestAnimationFrame (easeOutCubic). */
 export function AnimatedNumber({
   value,
   decimals = 0,
@@ -22,19 +22,41 @@ export function AnimatedNumber({
   locale = "es-MX",
   className,
 }: AnimatedNumberProps) {
-  const spring = useSpring(value, { stiffness: 90, damping: 18, mass: 0.6 });
+  const [display, setDisplay] = useState(value);
+  const fromRef = useRef(value);
+  const rafRef = useRef(0);
 
   useEffect(() => {
-    spring.set(value);
-  }, [value, spring]);
+    const from = fromRef.current;
+    const to = value;
+    if (from === to) return;
+    const duration = 500; // ms
+    let startTs = 0;
+    const step = (ts: number) => {
+      if (!startTs) startTs = ts;
+      const t = Math.min((ts - startTs) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const current = from + (to - from) * eased;
+      setDisplay(current);
+      fromRef.current = current;
+      if (t < 1) rafRef.current = requestAnimationFrame(step);
+      else fromRef.current = to;
+    };
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [value]);
 
-  const text = useTransform(spring, (v) => {
-    const n = v.toLocaleString(locale, {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    });
-    return `${prefix}${n}${suffix}`;
+  const formatted = display.toLocaleString(locale, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
   });
 
-  return <motion.span className={className}>{text}</motion.span>;
+  return (
+    <span className={className}>
+      {prefix}
+      {formatted}
+      {suffix}
+    </span>
+  );
 }

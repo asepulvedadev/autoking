@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "motion/react";
 
 export interface CountUpProps {
   to: number;
@@ -15,7 +14,8 @@ export interface CountUpProps {
 }
 
 /** Anima un número de `from` a `to` la primera vez que entra en viewport.
- *  Respeta prefers-reduced-motion (salta directo al valor final). */
+ *  Respeta prefers-reduced-motion (salta directo al valor final).
+ *  Sin dependencias externas: IntersectionObserver + requestAnimationFrame. */
 export function CountUp({
   to,
   from = 0,
@@ -27,8 +27,24 @@ export function CountUp({
   className,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const [inView, setInView] = useState(false);
   const [value, setValue] = useState(from);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "-40px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!inView) return;
