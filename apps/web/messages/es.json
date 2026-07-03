@@ -181,7 +181,7 @@
     "fallback": "Buena pregunta 🤔 En la versión real, tu agente respondería esto entrenado con la info de TU negocio. ¿Quieres ver precios, horarios o agendar una cita?",
     "quick": ["¿Cuánto cuesta?", "¿Tienen cita para mañana?", "¿Dónde están?", "¿Qué horario tienen?"],
     "placeholder": "Escribe tu mensaje…",
-    "disclaimer": "* Demo con respuestas de ejemplo. Tu agente real se entrena con la info de tu negocio.",
+    "disclaimer": "* Estás hablando con un agente de IA real de AutoKing. Así de rápido y bien atendería tu negocio.",
     "cta": "Quiero mi agente de verdad"
   },
   "Pricing": {

@@ -6,14 +6,12 @@ import { buttonVariants, WhatsAppIcon, cn } from "@autoking/ui";
 import { waHref } from "@/lib/site";
 
 type Msg = { from: "agent" | "user"; text: string };
-type Rule = { match: string[]; reply: string };
 
 export function LiveDemo() {
   const t = useTranslations("LiveDemo");
   const tCommon = useTranslations("Common");
 
   const greeting = t("greeting");
-  const rules = t.raw("rules") as Rule[];
   const fallback = t("fallback");
   const quick = t.raw("quick") as string[];
 
@@ -21,30 +19,33 @@ export function LiveDemo() {
   const [typing, setTyping] = useState(false);
   const [input, setInput] = useState("");
   const bodyRef = useRef<HTMLDivElement>(null);
-  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
-
-  const replyFor = (text: string): string => {
-    const tt = text.toLowerCase();
-    for (const r of rules) if (r.match.some((m) => tt.includes(m.toLowerCase()))) return r.reply;
-    return fallback;
-  };
+  const [sessionId] = useState(() =>
+    typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2),
+  );
 
   useEffect(() => {
     bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, typing]);
 
-  useEffect(() => () => clearTimeout(timer.current), []);
-
-  const send = (text: string) => {
+  const send = async (text: string) => {
     const clean = text.trim();
     if (!clean || typing) return;
     setInput("");
     setMessages((m) => [...m, { from: "user", text: clean }]);
     setTyping(true);
-    timer.current = setTimeout(() => {
-      setMessages((m) => [...m, { from: "agent", text: replyFor(clean) }]);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: clean, session: sessionId }),
+      });
+      const data = (await res.json()) as { reply?: string };
+      setMessages((m) => [...m, { from: "agent", text: data.reply || fallback }]);
+    } catch {
+      setMessages((m) => [...m, { from: "agent", text: fallback }]);
+    } finally {
       setTyping(false);
-    }, 900);
+    }
   };
 
   return (

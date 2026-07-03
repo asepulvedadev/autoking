@@ -181,7 +181,7 @@
     "fallback": "Good question 🤔 In the real version, your agent would answer this trained on YOUR business info. Want to see prices, hours or book an appointment?",
     "quick": ["How much is it?", "Any appointment tomorrow?", "Where are you?", "What are your hours?"],
     "placeholder": "Type your message…",
-    "disclaimer": "* Demo with sample replies. Your real agent is trained on your business info.",
+    "disclaimer": "* You're chatting with a real AutoKing AI agent. This is how well it would handle your business.",
     "cta": "I want my real agent"
   },
   "Pricing": {
