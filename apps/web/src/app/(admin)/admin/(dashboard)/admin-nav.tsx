@@ -30,6 +30,16 @@ const LINKS = [
     ),
   },
   {
+    href: "/admin/agentes",
+    label: "Agentes",
+    icon: (
+      <>
+        <rect x="4" y="8" width="16" height="11" rx="2.5" />
+        <path d="M9 3v5M15 3v5M9 13h.01M15 13h.01M8.5 19v2M15.5 19v2" strokeLinecap="round" />
+      </>
+    ),
+  },
+  {
     href: "/admin/leads",
     label: "Leads",
     icon: (
