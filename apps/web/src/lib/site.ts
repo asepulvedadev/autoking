@@ -5,7 +5,7 @@
 
 /** URL pública del sitio (para SEO: canonical, sitemap, OG). Cambiá cuando
  *  conectes el dominio propio. Podés overridear con NEXT_PUBLIC_SITE_URL. */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://autoking-chi.vercel.app";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.autoking.pro";
 
 /** ⚠️ TU número con código de país, sin "+" ni espacios. Ej MX: 5215512345678 */
 export const WHATSAPP_NUMBER = "521XXXXXXXXXX";
