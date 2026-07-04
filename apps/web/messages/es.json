@@ -188,9 +188,10 @@
     "eyebrow": "Planes",
     "titleA": "Elige el nivel de tu",
     "titleHighlight": "imperio",
-    "subtitle": "Empieza simple y sube de nivel cuando quieras. Todos incluyen instalación, entrenamiento del agente y soporte.",
+    "subtitle": "Empieza simple y sube de nivel cuando quieras. Todos incluyen entrenamiento del agente y soporte continuo.",
     "perMonth": "/mes",
-    "fromSetup": "Desde · + costo de instalación inicial",
+    "fromSetup": "Mensual · + instalación única (setup y conexión de tu WhatsApp)",
+    "noPermanence": "Sin permanencia · cancela cuando quieras · sin contratos eternos",
     "recommended": "⭐ Recomendado",
     "waMessage": "Hola AutoKing 👑 Me interesa el plan {name} \"{title}\".",
     "plans": [

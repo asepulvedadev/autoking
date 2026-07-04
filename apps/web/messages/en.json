@@ -188,9 +188,10 @@
     "eyebrow": "Plans",
     "titleA": "Choose the level of your",
     "titleHighlight": "empire",
-    "subtitle": "Start simple and level up whenever you want. All include setup, agent training and support.",
+    "subtitle": "Start simple and level up whenever you want. All include agent training and ongoing support.",
     "perMonth": "/mo",
-    "fromSetup": "From · + initial setup cost",
+    "fromSetup": "Monthly · + one-time setup (install & WhatsApp connection)",
+    "noPermanence": "No lock-in · cancel anytime · no long contracts",
     "recommended": "⭐ Recommended",
     "waMessage": "Hi AutoKing 👑 I'm interested in the {name} \"{title}\" plan.",
     "plans": [
