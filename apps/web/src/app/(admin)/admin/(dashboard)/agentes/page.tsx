@@ -28,7 +28,14 @@ function AgentCard({ agent }: { agent: TenantAgent }) {
             <code className="text-[var(--color-muted)]">{agent.agentId}</code>
           </p>
         </div>
-        <AgentChat agentId={agent.agentId} assistant={agent.assistant} />
+        <div className="flex flex-none items-center gap-3">
+          {agent.type !== "system" && (
+            <Link href={`/admin/agentes/${agent.agentId}`} className="text-sm font-semibold text-blue-bright hover:underline">
+              Editar
+            </Link>
+          )}
+          <AgentChat agentId={agent.agentId} assistant={agent.assistant} />
+        </div>
       </div>
     </div>
   );

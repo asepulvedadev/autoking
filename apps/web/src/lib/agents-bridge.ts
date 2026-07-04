@@ -54,6 +54,19 @@ export async function provisionAgent(config: AgentConfig): Promise<{ agentId: st
   return call("/provision", { method: "POST", body: JSON.stringify(config) });
 }
 
+export async function getAgentConfig(agentId: string): Promise<(AgentConfig & { agentId?: string }) | null> {
+  try {
+    const { config } = await call<{ config: AgentConfig & { agentId?: string } }>(`/agents/${encodeURIComponent(agentId)}`);
+    return config ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export async function deleteAgent(agentId: string): Promise<void> {
+  await call(`/agents/${encodeURIComponent(agentId)}`, { method: "DELETE" });
+}
+
 export async function chatAgent(agent: string, message: string, session: string): Promise<string> {
   const { reply } = await call<{ reply: string }>("/chat", {
     method: "POST",

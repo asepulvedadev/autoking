@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AgentForm } from "../agent-form";
+import { saveAgent } from "../actions";
 
 export default function NuevoAgentePage() {
   return (
@@ -9,7 +10,7 @@ export default function NuevoAgentePage() {
       <p className="mt-1 text-sm text-[var(--color-muted)]">
         Creá la recepcionista de IA de un negocio. Se entrena con sus servicios, precios y horarios.
       </p>
-      <AgentForm />
+      <AgentForm action={saveAgent} />
     </div>
   );
 }

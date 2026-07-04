@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { provisionAgent, chatAgent, type AgentConfig } from "@/lib/agents-bridge";
+import { provisionAgent, deleteAgent, chatAgent, type AgentConfig } from "@/lib/agents-bridge";
 
 export type AgentFormState = { error?: string };
 
@@ -15,7 +15,8 @@ async function currentUser() {
   return user;
 }
 
-export async function createAgent(_prev: AgentFormState, formData: FormData): Promise<AgentFormState> {
+// Crea o edita: si viene `slug`, sobrescribe el mismo agente; si no, crea uno nuevo.
+export async function saveAgent(_prev: AgentFormState, formData: FormData): Promise<AgentFormState> {
   const user = await currentUser();
   if (!user) return { error: "No autenticado." };
 
@@ -36,6 +37,7 @@ export async function createAgent(_prev: AgentFormState, formData: FormData): Pr
 
   const config: AgentConfig = {
     business_name,
+    slug: str("slug") || undefined,
     industry: str("industry") || undefined,
     assistant_name: str("assistant_name") || undefined,
     emoji: str("emoji") || undefined,
@@ -49,9 +51,18 @@ export async function createAgent(_prev: AgentFormState, formData: FormData): Pr
   try {
     await provisionAgent(config);
   } catch (e) {
-    return { error: `No se pudo crear el agente: ${(e as Error).message}` };
+    return { error: `No se pudo guardar el agente: ${(e as Error).message}` };
   }
 
+  revalidatePath("/admin/agentes");
+  redirect("/admin/agentes");
+}
+
+export async function deleteAgentAction(formData: FormData) {
+  const user = await currentUser();
+  if (!user) return;
+  const agentId = String(formData.get("agentId") ?? "");
+  if (agentId) await deleteAgent(agentId);
   revalidatePath("/admin/agentes");
   redirect("/admin/agentes");
 }
