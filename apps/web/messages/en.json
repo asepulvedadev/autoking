@@ -266,6 +266,11 @@
     "submit": "I want my demo",
     "sending": "Sending…",
     "success": "Done! We'll reach out very soon. 🙌",
+    "successTitle": "Got it, {name}! 👑",
+    "agentName": "AutoKing · Assistant",
+    "online": "online",
+    "preparing": "Your agent is writing you a reply…",
+    "continueWa": "Continue on WhatsApp",
     "required": "Please fill in your name and WhatsApp.",
     "error": "Something went wrong. Try again or message us on WhatsApp."
   },
