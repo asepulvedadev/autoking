@@ -200,6 +200,7 @@
         "title": "Reception",
         "desc": "To get started: your business never leaves a message unanswered, day or night.",
         "price": "$90",
+        "setup": "+ one-time setup: $149 USD (one-off · setup and WhatsApp connection)",
         "cta": "Start with Reception",
         "features": [
           { "text": "24/7 attention via WhatsApp", "strong": true },
@@ -213,6 +214,7 @@
         "title": "Scheduling",
         "desc": "Most popular: on top of replying, it books appointments and sends reminders on its own.",
         "price": "$150",
+        "setup": "+ one-time setup: $249 USD (one-off · setup, calendar and WhatsApp)",
         "cta": "I want the Scheduling plan",
         "features": [
           { "text": "Everything in the Reception plan", "strong": true },
@@ -227,6 +229,7 @@
         "title": "Sales",
         "desc": "To scale: qualifies leads, recommends services and sells across all your channels.",
         "price": "$250",
+        "setup": "+ one-time setup: $399 USD (one-off · full multichannel setup)",
         "cta": "Build my Empire",
         "features": [
           { "text": "Everything in the Scheduling plan", "strong": true },

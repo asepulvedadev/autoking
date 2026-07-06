@@ -15,6 +15,7 @@ type Plan = {
   title: string;
   desc: string;
   price: string;
+  setup: string;
   cta: string;
   features: { text: string; strong?: boolean }[];
 };
@@ -54,7 +55,7 @@ export async function Pricing() {
                   <span className={styles.amount}>{plan.price}</span>
                   <span className={styles.per}>{t("perMonth")}</span>
                 </div>
-                <div className={styles.setup}>{t("fromSetup")}</div>
+                <div className={styles.setup}>{plan.setup}</div>
 
                 <ul className={styles.features}>
                   {plan.features.map((f) => (

@@ -200,6 +200,7 @@
         "title": "Recepción",
         "desc": "Para arrancar: que tu negocio nunca deje un mensaje sin responder, de día y de noche.",
         "price": "$90",
+        "setup": "+ instalación única: $149 USD (pago único · setup y conexión de tu WhatsApp)",
         "cta": "Empezar con Recepción",
         "features": [
           { "text": "Atención 24/7 por WhatsApp", "strong": true },
@@ -213,6 +214,7 @@
         "title": "Agenda",
         "desc": "El más elegido: además de atender, agenda las citas solo y manda recordatorios.",
         "price": "$150",
+        "setup": "+ instalación única: $249 USD (pago único · setup, calendario y conexión de WhatsApp)",
         "cta": "Quiero el plan Agenda",
         "features": [
           { "text": "Todo lo del plan Recepción", "strong": true },
@@ -227,6 +229,7 @@
         "title": "Ventas",
         "desc": "Para escalar: califica prospectos, recomienda servicios y vende en todos tus canales.",
         "price": "$250",
+        "setup": "+ instalación única: $399 USD (pago único · setup multicanal y configuración completa)",
         "cta": "Construir mi Imperio",
         "features": [
           { "text": "Todo lo del plan Agenda", "strong": true },
