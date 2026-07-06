@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { AnimatedNumber, buttonVariants, WhatsAppIcon } from "@autoking/ui";
 import { waHref } from "@/lib/site";
 
@@ -9,25 +9,28 @@ import { waHref } from "@/lib/site";
 // una parte se va con la competencia. Conservador y declarado en la UI.
 const TASA_FUGA = 0.35;
 
-type Field = {
-  key: "consultas" | "ticket" | "fuera";
-  tkey: "fieldConsultas" | "fieldTicket" | "fieldFuera";
-  min: number;
-  max: number;
-  step: number;
-  prefix?: string;
-  suffix?: string;
-};
+// El "ticket" y la plata perdida se muestran en la moneda del idioma:
+// español → pesos colombianos (COP); inglés → dólares (USD).
+const CURRENCY = {
+  es: { locale: "es-CO", ticket: { min: 20000, max: 1000000, step: 10000, def: 80000 } },
+  en: { locale: "en-US", ticket: { min: 100, max: 5000, step: 50, def: 500 } },
+} as const;
 
-const FIELDS: Field[] = [
-  { key: "consultas", tkey: "fieldConsultas", min: 20, max: 1000, step: 10 },
-  { key: "ticket", tkey: "fieldTicket", min: 100, max: 5000, step: 50, prefix: "$" },
-  { key: "fuera", tkey: "fieldFuera", min: 0, max: 100, step: 5, suffix: "%" },
-];
+type FieldKey = "consultas" | "ticket" | "fuera";
 
 export function RoiCalculator() {
   const t = useTranslations("Roi");
-  const [values, setValues] = useState({ consultas: 200, ticket: 500, fuera: 40 });
+  const locale = useLocale();
+  const cur = locale.startsWith("en") ? CURRENCY.en : CURRENCY.es;
+  const fmt = (n: number) => n.toLocaleString(cur.locale);
+
+  const [values, setValues] = useState({ consultas: 200, ticket: cur.ticket.def, fuera: 40 });
+
+  const fields: { key: FieldKey; tkey: "fieldConsultas" | "fieldTicket" | "fieldFuera"; min: number; max: number; step: number; prefix?: string; suffix?: string }[] = [
+    { key: "consultas", tkey: "fieldConsultas", min: 20, max: 1000, step: 10 },
+    { key: "ticket", tkey: "fieldTicket", min: cur.ticket.min, max: cur.ticket.max, step: cur.ticket.step, prefix: "$" },
+    { key: "fuera", tkey: "fieldFuera", min: 0, max: 100, step: 5, suffix: "%" },
+  ];
 
   const { clientesPerdidos, plataPerdida } = useMemo(() => {
     const sinResponder = values.consultas * (values.fuera / 100);
@@ -35,9 +38,9 @@ export function RoiCalculator() {
     return { clientesPerdidos: perdidos, plataPerdida: perdidos * values.ticket };
   }, [values]);
 
-  const set = (key: Field["key"], v: number) => setValues((s) => ({ ...s, [key]: v }));
+  const set = (key: FieldKey, v: number) => setValues((s) => ({ ...s, [key]: v }));
 
-  const waMsg = t("waMessage", { amount: plataPerdida.toLocaleString("es-MX") });
+  const waMsg = t("waMessage", { amount: fmt(plataPerdida) });
 
   return (
     <section className="section" id="calculadora">
@@ -53,7 +56,7 @@ export function RoiCalculator() {
         <div className="reveal grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
           {/* Inputs */}
           <div className="card flex flex-col justify-center gap-8">
-            {FIELDS.map((f) => {
+            {fields.map((f) => {
               const val = values[f.key];
               const fill = ((val - f.min) / (f.max - f.min)) * 100;
               return (
@@ -64,7 +67,7 @@ export function RoiCalculator() {
                     </label>
                     <span className="font-display text-lg font-bold text-white">
                       {f.prefix}
-                      {val.toLocaleString("es-MX")}
+                      {fmt(val)}
                       {f.suffix}
                     </span>
                   </div>
@@ -88,11 +91,11 @@ export function RoiCalculator() {
           <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-[rgb(255_90_90_/_0.28)] bg-[radial-gradient(ellipse_80%_120%_at_50%_0%,rgb(255_80_80_/_0.14),transparent_60%),linear-gradient(180deg,#160c0e,#0a0709)] p-8 text-center">
             <p className="text-sm text-[var(--color-muted)]">{t("resultPre")}</p>
             <div className="my-2 font-display text-[clamp(40px,8vw,64px)] font-extrabold leading-none text-[#ff6b6b]">
-              <AnimatedNumber value={plataPerdida} prefix="$" />
+              <AnimatedNumber value={plataPerdida} prefix="$" locale={cur.locale} />
             </div>
             <p className="text-sm text-[var(--color-muted)]">{t("resultSuffix")}</p>
             <p className="mt-4 text-[15px] text-[var(--color-ink)]">
-              ≈ <AnimatedNumber value={clientesPerdidos} className="font-bold text-white" /> {t("clientsText")}
+              ≈ <AnimatedNumber value={clientesPerdidos} locale={cur.locale} className="font-bold text-white" /> {t("clientsText")}
             </p>
 
             <div className="mt-7 w-full rounded-2xl border border-[rgb(30_107_255_/_0.3)] bg-blue/[0.06] p-4">
