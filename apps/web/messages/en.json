@@ -198,6 +198,7 @@
       {
         "name": "Basic",
         "title": "Reception",
+        "desc": "To get started: your business never leaves a message unanswered, day or night.",
         "price": "$90",
         "cta": "Start with Reception",
         "features": [
@@ -210,6 +211,7 @@
       {
         "name": "Pro",
         "title": "Scheduling",
+        "desc": "Most popular: on top of replying, it books appointments and sends reminders on its own.",
         "price": "$150",
         "cta": "I want the Scheduling plan",
         "features": [
@@ -223,6 +225,7 @@
       {
         "name": "Empire",
         "title": "Sales",
+        "desc": "To scale: qualifies leads, recommends services and sells across all your channels.",
         "price": "$250",
         "cta": "Build my Empire",
         "features": [

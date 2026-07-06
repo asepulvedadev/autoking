@@ -13,6 +13,7 @@ const META = [
 type Plan = {
   name: string;
   title: string;
+  desc: string;
   price: string;
   cta: string;
   features: { text: string; strong?: boolean }[];
@@ -48,6 +49,7 @@ export async function Pricing() {
 
                 <div className={styles.name}>{plan.name}</div>
                 <div className={styles.title}>{plan.title}</div>
+                <p className="mb-4 mt-1.5 text-[13.5px] leading-snug text-[var(--color-muted)]">{plan.desc}</p>
                 <div className={styles.price}>
                   <span className={styles.amount}>{plan.price}</span>
                   <span className={styles.per}>{t("perMonth")}</span>

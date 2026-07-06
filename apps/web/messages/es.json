@@ -198,6 +198,7 @@
       {
         "name": "Básico",
         "title": "Recepción",
+        "desc": "Para arrancar: que tu negocio nunca deje un mensaje sin responder, de día y de noche.",
         "price": "$90",
         "cta": "Empezar con Recepción",
         "features": [
@@ -210,6 +211,7 @@
       {
         "name": "Pro",
         "title": "Agenda",
+        "desc": "El más elegido: además de atender, agenda las citas solo y manda recordatorios.",
         "price": "$150",
         "cta": "Quiero el plan Agenda",
         "features": [
@@ -223,6 +225,7 @@
       {
         "name": "Imperio",
         "title": "Ventas",
+        "desc": "Para escalar: califica prospectos, recomienda servicios y vende en todos tus canales.",
         "price": "$250",
         "cta": "Construir mi Imperio",
         "features": [
