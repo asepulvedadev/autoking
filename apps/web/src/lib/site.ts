@@ -8,7 +8,7 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.autoking.pro";
 
 /** ⚠️ TU número con código de país, sin "+" ni espacios. Ej MX: 5215512345678 */
-export const WHATSAPP_NUMBER = "521XXXXXXXXXX";
+export const WHATSAPP_NUMBER = "573044643461";
 export const WHATSAPP_MSG =
   "Hola AutoKing 👑 Quiero agendar una demo y que un agente de IA atienda mi negocio.";
 
