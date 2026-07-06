@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { ClienteForm, type Cliente } from "../cliente-form";
 import { updateCliente } from "../actions";
 import { DeleteClienteButton } from "./delete-button";
+import { AgentSection } from "./agent-section";
 
 export default async function EditClientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -18,6 +19,8 @@ export default async function EditClientePage({ params }: { params: Promise<{ id
       <h1 className="mt-2 font-display text-[clamp(24px,4vw,32px)] font-extrabold text-white">{cliente.business_name}</h1>
 
       <ClienteForm cliente={cliente} action={updateCliente} />
+
+      <AgentSection clienteId={cliente.id} agentId={cliente.agent_id} />
 
       <div className="mt-10 border-t border-[var(--line)] pt-6">
         <p className="mb-3 text-sm text-[var(--color-faint)]">Zona peligrosa</p>

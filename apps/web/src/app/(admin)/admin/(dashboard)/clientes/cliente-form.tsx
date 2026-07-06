@@ -15,6 +15,7 @@ export type Cliente = {
   status: string;
   industry: string | null;
   notes: string | null;
+  agent_id: string | null;
 };
 
 export const PLANES = [
