@@ -1,29 +1,20 @@
 import { getTranslations } from "next-intl/server";
 import { CrownMark, CheckIcon, buttonVariants, cn } from "@autoking/ui";
-import { waHref, USD_TO_COP, formatCop } from "@/lib/site";
+import { waHref } from "@/lib/site";
+import { getPais, getPlanes, formatMoneda } from "@/lib/planes";
 import styles from "./pricing.module.css";
 
-// Nivel (coronas) y destacado viven en código; los textos vienen de i18n.
-const META = [
-  { level: 1, featured: false },
-  { level: 2, featured: true },
-  { level: 3, featured: false },
-];
+export const dynamic = "force-dynamic"; // precios por ubicación del visitante
 
-type Plan = {
-  name: string;
-  title: string;
-  desc: string;
-  price: string;
-  usd: number;
-  setup: string;
-  cta: string;
-  features: { text: string; strong?: boolean }[];
-};
+// Cantidad de coronas por posición (el destacado viene de la DB).
+const CROWNS = [1, 2, 3];
 
 export async function Pricing() {
   const t = await getTranslations("Pricing");
-  const plans = t.raw("plans") as Plan[];
+  const pais = await getPais();
+  const planes = await getPlanes(pais);
+
+  if (planes.length === 0) return null; // si la DB no responde, no rompemos la landing
 
   return (
     <section className={cn("section", styles.section)} id="planes">
@@ -37,51 +28,56 @@ export async function Pricing() {
         </div>
 
         <div className={styles.grid}>
-          {plans.map((plan, i) => {
-            const meta = META[i]!;
-            return (
-              <div className={cn(styles.plan, meta.featured && styles.featured, "reveal", `d${i}`)} key={plan.title}>
-                {meta.featured && <span className={styles.tag}>{t("recommended")}</span>}
+          {planes.map((plan, i) => (
+            <div className={cn(styles.plan, plan.destacado && styles.featured, "reveal", `d${i}`)} key={plan.slug}>
+              {plan.destacado && <span className={styles.tag}>{t("recommended")}</span>}
 
-                <div className={styles.crowns}>
-                  {Array.from({ length: meta.level }).map((_, k) => (
-                    <CrownMark key={k} />
-                  ))}
-                </div>
-
-                <div className={styles.name}>{plan.name}</div>
-                <div className={styles.title}>{plan.title}</div>
-                <p className="mb-4 mt-1.5 text-[13.5px] leading-snug text-[var(--color-muted)]">{plan.desc}</p>
-                <div className={styles.price}>
-                  <span className={styles.amount}>{plan.price}</span>
-                  <span className={styles.per}>{t("perMonth")}</span>
-                </div>
-                {/* Equivalente aproximado en pesos (tasa única en site.ts). */}
-                <div className="mt-1 text-xs text-[var(--color-faint)]">
-                  ≈ {formatCop(plan.usd * USD_TO_COP)} COP/mes
-                </div>
-                <div className={styles.setup}>{plan.setup}</div>
-
-                <ul className={styles.features}>
-                  {plan.features.map((f) => (
-                    <li key={f.text}>
-                      <CheckIcon />
-                      {f.strong ? <b>{f.text}</b> : f.text}
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href={waHref(t("waMessage", { name: plan.name, title: plan.title }))}
-                  target="_blank"
-                  rel="noopener"
-                  className={buttonVariants({ variant: meta.featured ? "primary" : "secondary", className: "w-full" })}
-                >
-                  {plan.cta}
-                </a>
+              <div className={styles.crowns}>
+                {Array.from({ length: CROWNS[i] ?? 1 }).map((_, k) => (
+                  <CrownMark key={k} />
+                ))}
               </div>
-            );
-          })}
+
+              <div className={styles.name}>{plan.nombre}</div>
+              <div className={styles.title}>{plan.titulo}</div>
+              {plan.descripcion && (
+                <p className="mb-4 mt-1.5 text-[13.5px] leading-snug text-[var(--color-muted)]">{plan.descripcion}</p>
+              )}
+
+              <div className={styles.price}>
+                <span className={styles.amount}>{formatMoneda(plan.precioMensual, plan.moneda, plan.simbolo)}</span>
+                <span className={styles.per}>
+                  {t("perMonth")} {plan.moneda}
+                </span>
+              </div>
+              <div className={styles.setup}>
+                {t("instalacionLabel")} {formatMoneda(plan.precioInstalacion, plan.moneda, plan.simbolo)} {plan.moneda}
+              </div>
+              {plan.instalacionIncluye && (
+                <p className="mb-2 mt-1 text-[11.5px] leading-snug text-[var(--color-faint)]">
+                  {plan.instalacionIncluye}
+                </p>
+              )}
+
+              <ul className={styles.features}>
+                {plan.features.map((f) => (
+                  <li key={f.texto}>
+                    <CheckIcon />
+                    {f.destacado ? <b>{f.texto}</b> : f.texto}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={waHref(t("waMessage", { name: plan.nombre, title: plan.titulo }))}
+                target="_blank"
+                rel="noopener"
+                className={buttonVariants({ variant: plan.destacado ? "primary" : "secondary", className: "w-full" })}
+              >
+                {t("planCta", { name: plan.nombre })}
+              </a>
+            </div>
+          ))}
         </div>
 
         {/* Garantía destacada — borde azul eléctrico */}

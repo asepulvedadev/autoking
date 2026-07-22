@@ -217,6 +217,8 @@
     "titleHighlight": "empire",
     "subtitle": "Start simple and level up whenever you want. All include agent training and ongoing support.",
     "perMonth": "/mo",
+    "planCta": "I want the {name} plan",
+    "instalacionLabel": "+ one-time setup:",
     "fromSetup": "Monthly · + one-time setup (install & WhatsApp connection)",
     "noPermanence": "No lock-in · cancel anytime · no long contracts",
     "guaranteeTitle": "30-day guarantee",

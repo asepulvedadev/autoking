@@ -217,6 +217,8 @@
     "titleHighlight": "imperio",
     "subtitle": "Empieza simple y sube de nivel cuando quieras. Todos incluyen entrenamiento del agente y soporte continuo.",
     "perMonth": "/mes",
+    "planCta": "Quiero el plan {name}",
+    "instalacionLabel": "+ instalación única:",
     "fromSetup": "Mensual · + instalación única (setup y conexión de tu WhatsApp)",
     "noPermanence": "Sin permanencia · cancela cuando quieras · sin contratos eternos",
     "guaranteeTitle": "Garantía de 30 días",
