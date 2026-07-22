@@ -94,6 +94,15 @@
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 /* Respetar reduced-motion: cortar las animaciones ambientales */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,

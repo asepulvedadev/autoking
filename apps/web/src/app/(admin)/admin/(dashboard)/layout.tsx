@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { Logo } from "@autoking/ui";
 import { createClient } from "@/lib/supabase/server";
 import { AdminNav } from "./admin-nav";
+import { AdminMobileNav } from "./admin-mobile-nav";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -17,18 +18,26 @@ export default async function DashboardLayout({ children }: { children: React.Re
     .eq("id", user.id)
     .single();
 
+  const userName = profile?.full_name || "Admin";
+  const userEmail = user.email ?? "";
+
   return (
-    <div className="flex min-h-screen bg-[var(--color-bg)]">
+    <div className="min-h-screen bg-[var(--color-bg)] md:flex">
+      {/* Sidebar fijo — escritorio */}
       <aside className="hidden w-64 flex-col border-r border-[var(--line)] bg-[var(--color-bg-2)] p-5 md:flex">
         <div className="mb-8 px-2">
           <Logo height={28} />
         </div>
         <AdminNav />
         <div className="mt-auto rounded-xl border border-[var(--line)] bg-[var(--color-surface)] p-3">
-          <div className="truncate text-sm font-medium text-white">{profile?.full_name || "Admin"}</div>
-          <div className="truncate text-xs text-[var(--color-faint)]">{user.email}</div>
+          <div className="truncate text-sm font-medium text-white">{userName}</div>
+          <div className="truncate text-xs text-[var(--color-faint)]">{userEmail}</div>
         </div>
       </aside>
+
+      {/* Barra + drawer — móvil */}
+      <AdminMobileNav userName={userName} userEmail={userEmail} />
+
       <main className="flex-1 overflow-x-hidden p-6 sm:p-10">{children}</main>
     </div>
   );
