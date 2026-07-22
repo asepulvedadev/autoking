@@ -50,6 +50,17 @@ const LINKS = [
     ),
   },
   {
+    href: "/admin/prospeccion",
+    label: "Prospección",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="4.5" />
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" strokeLinecap="round" />
+      </>
+    ),
+  },
+  {
     href: "/admin/testimonios",
     label: "Testimonios",
     icon: <path d="M11.3 3.5l2.4 5 5.5.8-4 3.9.9 5.4-4.9-2.6-4.9 2.6.9-5.4-4-3.9 5.5-.8z" />,

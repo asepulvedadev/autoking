@@ -95,6 +95,67 @@ export function demoConfirmed(args: { name: string; when?: string | null }) {
   });
 }
 
+/** Propuesta en frío a un prospecto descubierto (Google Maps → prospección).
+ *  Incluye beneficios, precios y opt-out (BAJA) para cumplir Habeas Data (Ley 1581/2012). */
+export function proposalOutreach(args: { businessName: string; category?: string | null; city?: string | null }) {
+  const nombre = args.businessName;
+  const rubro = args.category ? (String(args.category).split(",")[0] ?? "").trim() : "negocio";
+  const waMsg = encodeURIComponent(
+    `Hola, soy de ${nombre}. Vi la propuesta de AutoKing y quiero saber más sobre el agente para mi negocio.`,
+  );
+  const ctaUrl = `${WA}?text=${waMsg}`;
+
+  const benefits = [
+    "Responde al instante, a cualquier hora — nunca dejás a un cliente esperando.",
+    "Agenda citas y cotiza solo, directo en tu WhatsApp de siempre.",
+    "Contesta las mismas preguntas de siempre por vos (precios, horarios, ubicación).",
+    "Listo en días, sin apps nuevas ni cambiar cómo trabajás.",
+  ];
+  const benefitsHtml =
+    `<p style="margin:20px 0 6px;font-size:13px;font-weight:800;color:#7fd0ff;text-transform:uppercase;letter-spacing:.5px;">Qué hace por vos</p>` +
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0">` +
+    benefits
+      .map(
+        (t) =>
+          `<tr><td style="padding:6px 0;vertical-align:top;width:26px;color:#1e6bff;font-size:15px;">✓</td>` +
+          `<td style="padding:6px 0;font-size:14.5px;line-height:1.55;color:#9fb4cc;">${escRow(t)}</td></tr>`,
+      )
+      .join("") +
+    `</table>`;
+
+  const planes = [
+    { name: "Básico", price: "$90", desc: "Responde y agenda por WhatsApp 24/7.", best: false },
+    { name: "Pro", price: "$150", desc: "+ calendario y seguimiento de clientes.", best: true },
+    { name: "Imperio", price: "$250", desc: "+ multicanal y configuración completa.", best: false },
+  ];
+  const pricingHtml =
+    `<p style="margin:22px 0 6px;font-size:13px;font-weight:800;color:#7fd0ff;text-transform:uppercase;letter-spacing:.5px;">Planes</p>` +
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>` +
+    planes
+      .map((pl) => {
+        const border = pl.best ? "#1e6bff" : "#1a2230";
+        const tag = pl.best
+          ? `<div style="font-size:10px;font-weight:800;letter-spacing:.5px;color:#1e6bff;text-transform:uppercase;margin-bottom:4px;">Recomendado</div>`
+          : "";
+        return `<td width="33%" valign="top" style="padding:6px;"><div style="border:1px solid ${border};border-radius:12px;padding:14px 12px;text-align:center;background:#0a0f16;">${tag}<div style="font-size:13px;font-weight:700;color:#eaf2ff;">${pl.name}</div><div style="font-size:22px;font-weight:800;color:#fff;margin:2px 0;">${pl.price}<span style="font-size:12px;color:#6b7d92;font-weight:500;"> USD/mes</span></div><div style="font-size:11.5px;line-height:1.45;color:#6b7d92;">${escRow(pl.desc)}</div></div></td>`;
+      })
+      .join("") +
+    `</tr></table>` +
+    `<p style="margin:8px 0 0;font-size:11.5px;color:#6b7d92;text-align:center;">Instalación única desde $149 USD · sin permanencia · cancelás cuando quieras.</p>`;
+
+  return build(`${nombre}, un empleado que atiende tu WhatsApp 24/7 👑`, {
+    preheader: "Un agente de IA que atiende y agenda por tu WhatsApp 24/7.",
+    heading: `${nombre}: ¿cuántos clientes se te escapan por no contestar a tiempo? 👑`,
+    paragraphs: [
+      `Te escribimos de AutoKing. Ayudamos a negocios como ${nombre} a no perder un solo cliente: montamos un agente de inteligencia artificial que atiende, responde y agenda por WhatsApp 24/7, como un empleado que nunca duerme.`,
+      `Sabemos que en un ${rubro} cada mensaje sin responder es una cita perdida. Tu agente contesta al instante, incluso de noche o cuando estás ocupado atendiendo.`,
+    ],
+    bodyHtml: benefitsHtml + pricingHtml,
+    cta: { label: "Quiero ver una demo por WhatsApp", url: ctaUrl },
+    footnote: `Recibiste este correo porque ${nombre} aparece como negocio público en Google Maps y creemos que AutoKing puede ayudarte. Si no querés recibir más, respondé BAJA y te quitamos de la lista al instante.`,
+  });
+}
+
 /** El agente de un cliente ya está activo. */
 export function agentReady(args: { businessName: string; assistant: string }) {
   return build(`Tu agente ${args.assistant} ya está atendiendo 👑`, {
