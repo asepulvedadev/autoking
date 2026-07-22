@@ -12,8 +12,8 @@ const TASA_FUGA = 0.35;
 // El "ticket" y la plata perdida se muestran en la moneda del idioma:
 // español → pesos colombianos (COP); inglés → dólares (USD).
 const CURRENCY = {
-  es: { locale: "es-CO", ticket: { min: 20000, max: 1000000, step: 10000, def: 80000 } },
-  en: { locale: "en-US", ticket: { min: 100, max: 5000, step: 50, def: 500 } },
+  es: { locale: "es-CO", code: "COP", ticket: { min: 20000, max: 1000000, step: 10000, def: 80000 } },
+  en: { locale: "en-US", code: "USD", ticket: { min: 100, max: 5000, step: 50, def: 500 } },
 } as const;
 
 type FieldKey = "consultas" | "ticket" | "fuera";
@@ -28,7 +28,7 @@ export function RoiCalculator() {
 
   const fields: { key: FieldKey; tkey: "fieldConsultas" | "fieldTicket" | "fieldFuera"; min: number; max: number; step: number; prefix?: string; suffix?: string }[] = [
     { key: "consultas", tkey: "fieldConsultas", min: 20, max: 1000, step: 10 },
-    { key: "ticket", tkey: "fieldTicket", min: cur.ticket.min, max: cur.ticket.max, step: cur.ticket.step, prefix: "$" },
+    { key: "ticket", tkey: "fieldTicket", min: cur.ticket.min, max: cur.ticket.max, step: cur.ticket.step, prefix: "$", suffix: ` ${cur.code}` },
     { key: "fuera", tkey: "fieldFuera", min: 0, max: 100, step: 5, suffix: "%" },
   ];
 
@@ -92,6 +92,7 @@ export function RoiCalculator() {
             <p className="text-sm text-[var(--color-muted)]">{t("resultPre")}</p>
             <div className="my-2 font-display text-[clamp(40px,8vw,64px)] font-extrabold leading-none text-[#ff6b6b]">
               <AnimatedNumber value={plataPerdida} prefix="$" locale={cur.locale} />
+              <span className="ml-2 align-middle text-[0.35em] font-bold text-[var(--color-faint)]">{cur.code}</span>
             </div>
             <p className="text-sm text-[var(--color-muted)]">{t("resultSuffix")}</p>
             <p className="mt-4 text-[15px] text-[var(--color-ink)]">

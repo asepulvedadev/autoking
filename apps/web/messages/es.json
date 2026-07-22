@@ -29,7 +29,7 @@
     "proof": [
       { "num": "24/7", "label": "Siempre disponible" },
       { "num": "<5 seg", "label": "Tiempo de respuesta" },
-      { "num": "+40%", "label": "Más citas agendadas" }
+      { "num": "0", "label": "Mensajes sin responder" }
     ],
     "agentName": "AutoKing · Asistente",
     "online": "en línea",
@@ -88,7 +88,7 @@
     "items": [
       { "to": 24, "prefix": "", "suffix": "/7", "label": "Atención, sin parar" },
       { "to": 5, "prefix": "<", "suffix": " seg", "label": "Tiempo de respuesta" },
-      { "to": 40, "prefix": "+", "suffix": "%", "label": "Más citas agendadas" },
+      { "to": 0, "prefix": "", "suffix": "", "label": "Mensajes sin responder" },
       { "to": 3, "prefix": "", "suffix": " días", "label": "Y tu agente ya trabaja" }
     ]
   },
@@ -124,22 +124,49 @@
       { "feature": "Agenda citas automáticamente", "autoking": true, "none": false, "employee": true },
       { "feature": "Nunca se enferma ni renuncia", "autoking": true, "none": false, "employee": false },
       { "feature": "Atiende a mil personas a la vez", "autoking": true, "none": false, "employee": false },
-      { "feature": "Costo mensual", "autoking": "Desde $90", "none": "Clientes perdidos", "employee": "Sueldo + prestaciones" }
+      { "feature": "Costo mensual", "autoking": "Desde $90 USD", "none": "Clientes perdidos", "employee": "≈ $2.000.000 COP" }
     ]
   },
-  "Testimonials": {
-    "eyebrow": "Clientes",
-    "titleA": "Negocios que dejaron de",
-    "titleHighlight": "perder clientes",
-    "subtitle": "Lo que pasa cuando un agente atiende por ti, sin descanso.",
-    "prev": "Anterior",
-    "next": "Siguiente",
-    "disclaimer": "* Testimonios ilustrativos — reemplazar por reales antes del lanzamiento.",
-    "items": [
-      { "quote": "Antes perdía clientes que escribían de noche. Ahora el agente responde al instante y me llena la agenda solo. Recuperé un montón de citas.", "name": "María G.", "role": "Spa · Placeholder" },
-      { "quote": "Dejé de contestar las mismas preguntas mil veces. El agente atiende, cotiza y agenda. Yo me dedico a atender a la gente que llega.", "name": "Diego R.", "role": "Barbería · Placeholder" },
-      { "quote": "Lo mejor es que nunca deja a nadie esperando. Contesta en segundos a cualquier hora. Mis pacientes lo notan y agendan más.", "name": "Dra. Carla V.", "role": "Consultorio dental · Placeholder" },
-      { "quote": "Es como tener una recepcionista que no duerme. Se conectó a mi WhatsApp de siempre y en tres días ya estaba trabajando por mí.", "name": "Sofía L.", "role": "Estética · Placeholder" }
+  "AgentChat": {
+    "eyebrow": "Así conversa tu agente",
+    "titleA": "Mirá cómo",
+    "titleHighlight": "responde por vos",
+    "subtitle": "Conversaciones simuladas por tipo de negocio. Tu agente se entrena con tus precios y servicios, y responde así las 24 horas.",
+    "online": "en línea",
+    "cards": [
+      {
+        "label": "Spa & Estética",
+        "emoji": "💆",
+        "messages": [
+          { "from": "user", "text": "Hola, ¿tienen espacio para un masaje el sábado?" },
+          { "from": "agent", "text": "¡Hola! 💆 El sábado tengo 11:00 y 4:30 p. m. El masaje de 60 min cuesta $120.000. ¿Te reservo?" },
+          { "from": "user", "text": "El de las 11 porfa" },
+          { "from": "agent", "text": "¡Listo! Quedaste el sábado a las 11:00 a. m. Te envío un recordatorio un día antes. 🙌" }
+        ],
+        "result": "Agenda la cita sin intervención humana"
+      },
+      {
+        "label": "Barbería",
+        "emoji": "💈",
+        "messages": [
+          { "from": "user", "text": "¿Puedo pasar ahora sin cita?" },
+          { "from": "agent", "text": "¡Qué más! 💈 Ahora hay 20 min de espera. Si querés te agendo a las 6:15 p. m. y entrás directo." },
+          { "from": "user", "text": "Listo, a las 6:15" },
+          { "from": "agent", "text": "Hecho ✅ Te espero a las 6:15 p. m. a tu nombre." }
+        ],
+        "result": "Responde en menos de 5 segundos, a cualquier hora"
+      },
+      {
+        "label": "Consultorio dental",
+        "emoji": "🦷",
+        "messages": [
+          { "from": "user", "text": "Buenas, ¿cuánto vale una limpieza dental?" },
+          { "from": "agent", "text": "¡Hola! 🦷 La limpieza cuesta $150.000 e incluye revisión. Tengo mañana 10:00 o el jueves 5:00 p. m." },
+          { "from": "user", "text": "Mañana a las 10 está bien" },
+          { "from": "agent", "text": "¡Perfecto! Quedaste mañana a las 10:00 a. m. Cualquier cambio, escribime por acá. 😉" }
+        ],
+        "result": "Nunca deja un mensaje sin responder"
+      }
     ]
   },
   "Industries": {
@@ -148,11 +175,11 @@
     "titleHighlight": "tu sector",
     "subtitle": "Elige tu tipo de negocio y mira cómo respondería tu agente. Se entrena con tus precios y servicios.",
     "items": [
-      { "label": "Spa & Estética", "emoji": "💆", "question": "Hola, ¿tienen espacio para un masaje el sábado?", "answer": "¡Hola! 💆 Con gusto. El sábado tengo disponible a las 11:00 y 4:30 p. m. El masaje relajante de 60 min cuesta $650. ¿Te reservo alguno?" },
-      { "label": "Consultorio dental", "emoji": "🦷", "question": "¿Cuánto cuesta una limpieza dental?", "answer": "¡Hola! 🦷 La limpieza cuesta $80 e incluye revisión. Tengo cita mañana a las 10:00 o el jueves a las 5:00 p. m. ¿Cuál te sirve?" },
+      { "label": "Spa & Estética", "emoji": "💆", "question": "Hola, ¿tienen espacio para un masaje el sábado?", "answer": "¡Hola! 💆 Con gusto. El sábado tengo disponible a las 11:00 y 4:30 p. m. El masaje relajante de 60 min cuesta $120.000. ¿Te reservo alguno?" },
+      { "label": "Consultorio dental", "emoji": "🦷", "question": "¿Cuánto cuesta una limpieza dental?", "answer": "¡Hola! 🦷 La limpieza cuesta $150.000 e incluye revisión. Tengo cita mañana a las 10:00 o el jueves a las 5:00 p. m. ¿Cuál te sirve?" },
       { "label": "Barbería", "emoji": "💈", "question": "¿Puedo pasar ahora sin cita?", "answer": "¡Qué más! 💈 Ahora hay 20 min de espera. Si quieres te agendo a las 6:15 p. m. y entras directo. ¿Lo dejo a tu nombre?" },
-      { "label": "Peluquería", "emoji": "💇", "question": "Quiero color y corte, ¿qué días tienes?", "answer": "¡Hola! 💇 Para color + corte necesito unas 2 horas. Tengo miércoles 3:00 p. m. o viernes 11:00. El combo desde $120. ¿Te agendo?" },
-      { "label": "Clínica estética", "emoji": "✨", "question": "¿Hacen limpieza facial? ¿Precio?", "answer": "¡Hola! ✨ Sí, la limpieza facial profunda cuesta $90 (dura 50 min). Tengo espacio el martes 12:00 y el sábado 10:00. ¿Reservo?" }
+      { "label": "Peluquería", "emoji": "💇", "question": "Quiero color y corte, ¿qué días tienes?", "answer": "¡Hola! 💇 Para color + corte necesito unas 2 horas. Tengo miércoles 3:00 p. m. o viernes 11:00. El combo desde $120.000. ¿Te agendo?" },
+      { "label": "Clínica estética", "emoji": "✨", "question": "¿Hacen limpieza facial? ¿Precio?", "answer": "¡Hola! ✨ Sí, la limpieza facial profunda cuesta $90.000 (dura 50 min). Tengo espacio el martes 12:00 y el sábado 10:00. ¿Reservo?" }
     ]
   },
   "Integrations": {
@@ -192,6 +219,8 @@
     "perMonth": "/mes",
     "fromSetup": "Mensual · + instalación única (setup y conexión de tu WhatsApp)",
     "noPermanence": "Sin permanencia · cancela cuando quieras · sin contratos eternos",
+    "guaranteeTitle": "Garantía de 30 días",
+    "guaranteeText": "Si tu agente no te agenda citas en el primer mes, te devolvemos la instalación completa.",
     "recommended": "⭐ Recomendado",
     "waMessage": "Hola AutoKing 👑 Me interesa el plan {name} \"{title}\".",
     "plans": [
@@ -200,6 +229,7 @@
         "title": "Recepción",
         "desc": "Para arrancar: que tu negocio nunca deje un mensaje sin responder, de día y de noche.",
         "price": "$90",
+        "usd": 90,
         "setup": "+ instalación única: $149 USD (pago único · setup y conexión de tu WhatsApp)",
         "cta": "Empezar con Recepción",
         "features": [
@@ -214,6 +244,7 @@
         "title": "Agenda",
         "desc": "El más elegido: además de atender, agenda las citas solo y manda recordatorios.",
         "price": "$150",
+        "usd": 150,
         "setup": "+ instalación única: $249 USD (pago único · setup, calendario y conexión de WhatsApp)",
         "cta": "Quiero el plan Agenda",
         "features": [
@@ -229,6 +260,7 @@
         "title": "Ventas",
         "desc": "Para escalar: califica prospectos, recomienda servicios y vende en todos tus canales.",
         "price": "$250",
+        "usd": 250,
         "setup": "+ instalación única: $399 USD (pago único · setup multicanal y configuración completa)",
         "cta": "Construir mi Imperio",
         "features": [
@@ -272,7 +304,9 @@
     "preparing": "Tu agente te está escribiendo una respuesta…",
     "continueWa": "Seguir por WhatsApp",
     "required": "Completa tu nombre y WhatsApp.",
-    "error": "Algo salió mal. Intenta de nuevo o escríbenos por WhatsApp."
+    "error": "Algo salió mal. Intenta de nuevo o escríbenos por WhatsApp.",
+    "consent": "Autorizo el tratamiento de mis datos según la <link>Política de Privacidad</link> (Ley 1581 de 2012).",
+    "consentRequired": "Necesitamos tu autorización para contactarte."
   },
   "Demo": {
     "eyebrow": "Pruébalo tú mismo",
@@ -290,6 +324,9 @@
     "contactTitle": "Contacto",
     "waContact": "WhatsApp · Agenda una demo",
     "plansLink": "Ver planes y precios",
+    "legalTitle": "Legal",
+    "privacy": "Política de privacidad",
+    "terms": "Términos y condiciones",
     "rights": "AutoKing — Automatiza. Inteligencia. Imperio."
   }
 }

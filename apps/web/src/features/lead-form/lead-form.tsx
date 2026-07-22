@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { buttonVariants, WhatsAppIcon, cn } from "@autoking/ui";
+import { Link } from "@/i18n/navigation";
 import { waHref } from "@/lib/site";
 import { submitLead, getAgentReply, type LeadState, type Lead } from "./actions";
 
@@ -114,9 +115,38 @@ export function LeadForm() {
               </div>
               <input name="email" type="email" placeholder={t("email")} className={field} autoComplete="email" />
               <textarea name="message" rows={2} placeholder={t("message")} className={field} />
+
+              {/* Consentimiento obligatorio (Habeas Data, Ley 1581/2012). */}
+              <label className="flex items-start gap-2.5 text-xs leading-snug text-[var(--color-muted)]">
+                <input
+                  type="checkbox"
+                  name="consent"
+                  required
+                  className="mt-0.5 h-4 w-4 flex-none accent-[var(--color-primary,#1e6bff)]"
+                />
+                <span>
+                  {t.rich("consent", {
+                    link: (chunks) => (
+                      <Link
+                        href="/privacidad"
+                        target="_blank"
+                        rel="noopener"
+                        className="text-blue-bright underline hover:text-white"
+                      >
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
+                </span>
+              </label>
+
               {state.error && (
                 <p className="text-sm text-[var(--color-danger)]">
-                  {state.error === "required" ? t("required") : t("error")}
+                  {state.error === "required"
+                    ? t("required")
+                    : state.error === "consent"
+                      ? t("consentRequired")
+                      : t("error")}
                 </p>
               )}
               <button

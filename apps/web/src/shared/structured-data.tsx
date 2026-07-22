@@ -17,7 +17,7 @@ export async function StructuredData() {
     description: tMeta("description"),
     slogan: tCommon("tagline"),
     email: CONTACT.email,
-    sameAs: [CONTACT.instagram, CONTACT.facebook, CONTACT.linkedin].filter((u) => u && u !== "#"),
+    // sameAs: agregar acá las URLs de redes cuando existan perfiles reales.
   };
 
   const faqPage = {

@@ -6,7 +6,7 @@ import { newLeadInternal, leadThanks } from "@/lib/email/templates";
 import { chatAgent } from "@/lib/agents-bridge";
 
 export type Lead = { name: string; business: string | null; message: string | null };
-export type LeadState = { ok?: boolean; error?: "required" | "fail"; lead?: Lead };
+export type LeadState = { ok?: boolean; error?: "required" | "consent" | "fail"; lead?: Lead };
 
 // Fase 1: captura instantánea. Guarda el lead + notifica al equipo + agradece al
 // prospecto. Rápido (~0.5s) para que el usuario tenga confirmación inmediata.
@@ -15,6 +15,9 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
   const name = str("name");
   const whatsapp = str("whatsapp");
   if (!name || !whatsapp) return { error: "required" };
+  // Consentimiento obligatorio (Habeas Data, Ley 1581/2012). Se valida también
+  // en el server, no solo con el `required` del checkbox.
+  if (!formData.get("consent")) return { error: "consent" };
 
   const lead = {
     name,

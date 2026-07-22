@@ -12,7 +12,7 @@ import { Benefits } from "@/features/benefits/benefits";
 import { Stats } from "@/features/stats/stats";
 import { RoiCalculator } from "@/features/roi-calculator/roi-calculator";
 import { Comparison } from "@/features/comparison/comparison";
-import { Testimonials } from "@/features/testimonials/testimonials";
+import { AgentChat } from "@/features/agent-chat/agent-chat";
 import { Industries } from "@/features/industries/industries";
 import { Integrations } from "@/features/integrations/integrations";
 import { LiveDemo } from "@/features/live-demo/live-demo";
@@ -38,7 +38,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <Stats />
         <RoiCalculator />
         <Comparison />
-        <Testimonials />
+        <AgentChat />
         <Industries />
         <Integrations />
         <LiveDemo />

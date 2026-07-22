@@ -29,7 +29,7 @@
     "proof": [
       { "num": "24/7", "label": "Always available" },
       { "num": "<5 sec", "label": "Response time" },
-      { "num": "+40%", "label": "More bookings" }
+      { "num": "0", "label": "Unanswered messages" }
     ],
     "agentName": "AutoKing · Assistant",
     "online": "online",
@@ -88,7 +88,7 @@
     "items": [
       { "to": 24, "prefix": "", "suffix": "/7", "label": "Attention, nonstop" },
       { "to": 5, "prefix": "<", "suffix": " sec", "label": "Response time" },
-      { "to": 40, "prefix": "+", "suffix": "%", "label": "More bookings" },
+      { "to": 0, "prefix": "", "suffix": "", "label": "Unanswered messages" },
       { "to": 3, "prefix": "", "suffix": " days", "label": "And your agent's working" }
     ]
   },
@@ -124,22 +124,49 @@
       { "feature": "Books appointments automatically", "autoking": true, "none": false, "employee": true },
       { "feature": "Never gets sick or quits", "autoking": true, "none": false, "employee": false },
       { "feature": "Handles a thousand people at once", "autoking": true, "none": false, "employee": false },
-      { "feature": "Monthly cost", "autoking": "From $90", "none": "Lost clients", "employee": "Salary + benefits" }
+      { "feature": "Monthly cost", "autoking": "From $90 USD", "none": "Lost clients", "employee": "≈ $2,000,000 COP" }
     ]
   },
-  "Testimonials": {
-    "eyebrow": "Clients",
-    "titleA": "Businesses that stopped",
-    "titleHighlight": "losing clients",
-    "subtitle": "What happens when an agent handles it for you, without rest.",
-    "prev": "Previous",
-    "next": "Next",
-    "disclaimer": "* Illustrative testimonials — replace with real ones before launch.",
-    "items": [
-      { "quote": "I used to lose clients who wrote at night. Now the agent replies instantly and fills my calendar on its own. I recovered a ton of appointments.", "name": "María G.", "role": "Spa · Placeholder" },
-      { "quote": "I stopped answering the same questions a thousand times. The agent replies, quotes and books. I focus on the people who show up.", "name": "Diego R.", "role": "Barbershop · Placeholder" },
-      { "quote": "The best part is it never leaves anyone waiting. It answers in seconds at any hour. My patients notice and book more.", "name": "Dr. Carla V.", "role": "Dental office · Placeholder" },
-      { "quote": "It's like having a receptionist who never sleeps. It connected to my usual WhatsApp and in three days it was already working for me.", "name": "Sofía L.", "role": "Aesthetics · Placeholder" }
+  "AgentChat": {
+    "eyebrow": "How your agent talks",
+    "titleA": "See how it",
+    "titleHighlight": "replies for you",
+    "subtitle": "Simulated conversations by business type. Your agent is trained with your prices and services, and replies like this 24/7.",
+    "online": "online",
+    "cards": [
+      {
+        "label": "Spa & Aesthetics",
+        "emoji": "💆",
+        "messages": [
+          { "from": "user", "text": "Hi, do you have space for a massage on Saturday?" },
+          { "from": "agent", "text": "Hi! 💆 On Saturday I have 11:00 and 4:30 PM. The 60-min massage is $120,000 COP. Shall I book it?" },
+          { "from": "user", "text": "The 11 one please" },
+          { "from": "agent", "text": "Done! You're set for Saturday at 11:00 AM. I'll send a reminder the day before. 🙌" }
+        ],
+        "result": "Books the appointment with no human involved"
+      },
+      {
+        "label": "Barbershop",
+        "emoji": "💈",
+        "messages": [
+          { "from": "user", "text": "Can I come now without an appointment?" },
+          { "from": "agent", "text": "Hey! 💈 There's a 20-min wait right now. If you want I'll book you at 6:15 PM and you go straight in." },
+          { "from": "user", "text": "Sure, 6:15" },
+          { "from": "agent", "text": "Done ✅ See you at 6:15 PM under your name." }
+        ],
+        "result": "Replies in under 5 seconds, any hour"
+      },
+      {
+        "label": "Dental office",
+        "emoji": "🦷",
+        "messages": [
+          { "from": "user", "text": "Hi, how much is a dental cleaning?" },
+          { "from": "agent", "text": "Hi! 🦷 The cleaning is $150,000 COP and includes a checkup. I have tomorrow 10:00 or Thursday 5:00 PM." },
+          { "from": "user", "text": "Tomorrow at 10 works" },
+          { "from": "agent", "text": "Perfect! You're set for tomorrow at 10:00 AM. Any change, just message me here. 😉" }
+        ],
+        "result": "Never leaves a message unanswered"
+      }
     ]
   },
   "Industries": {
@@ -148,11 +175,11 @@
     "titleHighlight": "your industry",
     "subtitle": "Pick your type of business and see how your agent would reply. It's trained on your prices and services.",
     "items": [
-      { "label": "Spa & Aesthetics", "emoji": "💆", "question": "Hi, do you have space for a massage on Saturday?", "answer": "Hi! 💆 Happy to help. On Saturday I have 11:00 and 4:30 PM available. The 60-min relaxing massage is $650. Shall I book one for you?" },
-      { "label": "Dental office", "emoji": "🦷", "question": "How much is a dental cleaning?", "answer": "Hi! 🦷 The cleaning is $80 and includes a checkup. I have an opening tomorrow at 10:00 or Thursday at 5:00 PM. Which works?" },
+      { "label": "Spa & Aesthetics", "emoji": "💆", "question": "Hi, do you have space for a massage on Saturday?", "answer": "Hi! 💆 Happy to help. On Saturday I have 11:00 and 4:30 PM available. The 60-min relaxing massage is $120,000 COP. Shall I book one for you?" },
+      { "label": "Dental office", "emoji": "🦷", "question": "How much is a dental cleaning?", "answer": "Hi! 🦷 The cleaning is $150,000 COP and includes a checkup. I have an opening tomorrow at 10:00 or Thursday at 5:00 PM. Which works?" },
       { "label": "Barbershop", "emoji": "💈", "question": "Can I come now without an appointment?", "answer": "Hey! 💈 There's a 20-min wait right now. If you want I'll book you at 6:15 PM and you go straight in. Shall I put it under your name?" },
-      { "label": "Hair salon", "emoji": "💇", "question": "I want color and a cut, what days do you have?", "answer": "Hi! 💇 For color + cut I need about 2 hours. I have Wednesday 3:00 PM or Friday 11:00. The combo starts at $120. Shall I book you?" },
-      { "label": "Aesthetic clinic", "emoji": "✨", "question": "Do you do facials? Price?", "answer": "Hi! ✨ Yes, the deep facial is $90 (50 min). I have space Tuesday 12:00 and Saturday 10:00. Shall I book it?" }
+      { "label": "Hair salon", "emoji": "💇", "question": "I want color and a cut, what days do you have?", "answer": "Hi! 💇 For color + cut I need about 2 hours. I have Wednesday 3:00 PM or Friday 11:00. The combo starts at $120,000 COP. Shall I book you?" },
+      { "label": "Aesthetic clinic", "emoji": "✨", "question": "Do you do facials? Price?", "answer": "Hi! ✨ Yes, the deep facial is $90,000 COP (50 min). I have space Tuesday 12:00 and Saturday 10:00. Shall I book it?" }
     ]
   },
   "Integrations": {
@@ -192,6 +219,8 @@
     "perMonth": "/mo",
     "fromSetup": "Monthly · + one-time setup (install & WhatsApp connection)",
     "noPermanence": "No lock-in · cancel anytime · no long contracts",
+    "guaranteeTitle": "30-day guarantee",
+    "guaranteeText": "If your agent doesn't book you appointments in the first month, we refund the full installation.",
     "recommended": "⭐ Recommended",
     "waMessage": "Hi AutoKing 👑 I'm interested in the {name} \"{title}\" plan.",
     "plans": [
@@ -200,6 +229,7 @@
         "title": "Reception",
         "desc": "To get started: your business never leaves a message unanswered, day or night.",
         "price": "$90",
+        "usd": 90,
         "setup": "+ one-time setup: $149 USD (one-off · setup and WhatsApp connection)",
         "cta": "Start with Reception",
         "features": [
@@ -214,6 +244,7 @@
         "title": "Scheduling",
         "desc": "Most popular: on top of replying, it books appointments and sends reminders on its own.",
         "price": "$150",
+        "usd": 150,
         "setup": "+ one-time setup: $249 USD (one-off · setup, calendar and WhatsApp)",
         "cta": "I want the Scheduling plan",
         "features": [
@@ -229,6 +260,7 @@
         "title": "Sales",
         "desc": "To scale: qualifies leads, recommends services and sells across all your channels.",
         "price": "$250",
+        "usd": 250,
         "setup": "+ one-time setup: $399 USD (one-off · full multichannel setup)",
         "cta": "Build my Empire",
         "features": [
@@ -272,7 +304,9 @@
     "preparing": "Your agent is writing you a reply…",
     "continueWa": "Continue on WhatsApp",
     "required": "Please fill in your name and WhatsApp.",
-    "error": "Something went wrong. Try again or message us on WhatsApp."
+    "error": "Something went wrong. Try again or message us on WhatsApp.",
+    "consent": "I authorize the processing of my data under the <link>Privacy Policy</link> (Law 1581 of 2012).",
+    "consentRequired": "We need your authorization to contact you."
   },
   "Demo": {
     "eyebrow": "Try it yourself",
@@ -290,6 +324,9 @@
     "contactTitle": "Contact",
     "waContact": "WhatsApp · Book a demo",
     "plansLink": "See plans and pricing",
+    "legalTitle": "Legal",
+    "privacy": "Privacy policy",
+    "terms": "Terms & conditions",
     "rights": "AutoKing — Automate. Intelligence. Empire."
   }
 }

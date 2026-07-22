@@ -48,7 +48,7 @@ export async function generateMetadata({
       url: SITE_URL,
       siteName: "AutoKing",
       type: "website",
-      locale: locale === "es" ? "es_MX" : "en_US",
+      locale: locale === "es" ? "es_CO" : "en_US",
     },
     twitter: {
       card: "summary_large_image",
