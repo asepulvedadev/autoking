@@ -2,13 +2,13 @@
   "Meta": {
     "title": "AutoKing — Agentes de IA que atienden y agendan por ti 24/7",
     "description": "Deja de perder clientes y citas. AutoKing pone a trabajar un agente de IA que atiende, responde y agenda solo en WhatsApp, 24/7. Como un empleado que nunca duerme.",
-    "ogTitle": "AutoKing — Automatiza. Inteligencia. Imperio.",
+    "ogTitle": "AutoKing — Tu imperio en piloto automático",
     "ogDescription": "Un agente de IA que atiende, responde y agenda solo en WhatsApp, 24/7."
   },
   "Common": {
     "agendaDemo": "Agenda una demo",
     "conoceMas": "Conoce más",
-    "tagline": "Automatiza. Inteligencia. Imperio.",
+    "tagline": "Tu imperio en piloto automático",
     "waMessage": "Hola AutoKing 👑 Quiero agendar una demo y que un agente de IA atienda mi negocio."
   },
   "Nav": {
@@ -321,7 +321,7 @@
   },
   "StickyCta": { "label": "Agenda tu demo gratis" },
   "Footer": {
-    "brandDesc": "Automatiza. Inteligencia. Imperio. Agentes de IA a la medida que atienden, responden y agendan por tu negocio, 24/7.",
+    "brandDesc": "Tu imperio en piloto automático. Agentes de IA a la medida que atienden, responden y agendan por tu negocio, 24/7.",
     "navTitle": "Navegación",
     "contactTitle": "Contacto",
     "waContact": "WhatsApp · Agenda una demo",
@@ -329,6 +329,6 @@
     "legalTitle": "Legal",
     "privacy": "Política de privacidad",
     "terms": "Términos y condiciones",
-    "rights": "AutoKing — Automatiza. Inteligencia. Imperio."
+    "rights": "AutoKing — Tu imperio en piloto automático"
   }
 }

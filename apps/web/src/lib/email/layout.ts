@@ -83,7 +83,7 @@ export function renderEmail(c: EmailContent): string {
           ${body}
         </td></tr>
         <tr><td style="padding:22px 32px 28px;border-top:1px solid ${C.line};font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-          <p style="margin:0 0 6px;font-size:13px;color:${C.glow};font-weight:700;">Automatiza. Inteligencia. Imperio. 👑</p>
+          <p style="margin:0 0 6px;font-size:13px;color:${C.glow};font-weight:700;">Tu imperio en piloto automático 👑</p>
           <p style="margin:0;font-size:12px;color:${C.faint};">
             AutoKing · <a href="mailto:${SUPPORT}" style="color:${C.blue};text-decoration:none;">${SUPPORT}</a> ·
             <a href="${SITE}" target="_blank" rel="noopener" style="color:${C.blue};text-decoration:none;">autoking.pro</a>
@@ -101,7 +101,7 @@ export function renderEmail(c: EmailContent): string {
 export function renderText(c: EmailContent): string {
   const lines = [c.heading, "", ...(c.paragraphs ?? [])];
   if (c.cta) lines.push("", `${c.cta.label}: ${c.cta.url}`);
-  lines.push("", "— AutoKing · Automatiza. Inteligencia. Imperio.", `${SUPPORT} · ${SITE}`);
+  lines.push("", "— AutoKing · Tu imperio en piloto automático", `${SUPPORT} · ${SITE}`);
   if (c.footnote) lines.push("", c.footnote);
   return lines.join("\n");
 }

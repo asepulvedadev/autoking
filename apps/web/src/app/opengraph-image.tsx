@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "AutoKing — Automatiza. Inteligencia. Imperio.";
+export const alt = "AutoKing — Tu imperio en piloto automático";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -33,7 +33,7 @@ export default function OpengraphImage() {
           <span style={{ color: "#4d8bff" }}>King</span>
         </div>
         <div style={{ fontSize: 40, color: "#c3cde0", fontWeight: 700, marginTop: 26 }}>
-          Automatiza. Inteligencia. Imperio.
+          Tu imperio en piloto automático
         </div>
         <div style={{ fontSize: 27, color: "#9aa6be", marginTop: 26, maxWidth: 820, textAlign: "center" }}>
           Un agente de IA que atiende, responde y agenda solo en WhatsApp, 24/7.

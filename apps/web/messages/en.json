@@ -2,13 +2,13 @@
   "Meta": {
     "title": "AutoKing — AI agents that reply and book for you 24/7",
     "description": "Stop losing clients and appointments. AutoKing puts an AI agent to work that replies, answers and books on its own via WhatsApp, 24/7. Like an employee who never sleeps.",
-    "ogTitle": "AutoKing — Automate. Intelligence. Empire.",
+    "ogTitle": "AutoKing — Your empire on autopilot",
     "ogDescription": "An AI agent that replies, answers and books on its own via WhatsApp, 24/7."
   },
   "Common": {
     "agendaDemo": "Book a demo",
     "conoceMas": "Learn more",
-    "tagline": "Automate. Intelligence. Empire.",
+    "tagline": "Your empire on autopilot",
     "waMessage": "Hi AutoKing 👑 I want to book a demo and have an AI agent handle my business."
   },
   "Nav": {
@@ -321,7 +321,7 @@
   },
   "StickyCta": { "label": "Book your free demo" },
   "Footer": {
-    "brandDesc": "Automate. Intelligence. Empire. Custom AI agents that reply, answer and book for your business, 24/7.",
+    "brandDesc": "Your empire on autopilot. Custom AI agents that reply, answer and book for your business, 24/7.",
     "navTitle": "Navigation",
     "contactTitle": "Contact",
     "waContact": "WhatsApp · Book a demo",
@@ -329,6 +329,6 @@
     "legalTitle": "Legal",
     "privacy": "Privacy policy",
     "terms": "Terms & conditions",
-    "rights": "AutoKing — Automate. Intelligence. Empire."
+    "rights": "AutoKing — Your empire on autopilot"
   }
 }
