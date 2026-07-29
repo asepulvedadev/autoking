@@ -29,5 +29,12 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return { response, user };
+  // El rol vive en profiles (fuente de verdad). Solo se consulta si hay sesión.
+  let role: string | null = null;
+  if (user) {
+    const { data } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+    role = (data?.role as string | null) ?? null;
+  }
+
+  return { response, user, role };
 }

@@ -28,7 +28,7 @@ export async function AgentSection({ clienteId, agentId }: { clienteId: string; 
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <Link
               href={`/admin/agentes/${agentId}`}
-              className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-4 py-2 text-sm font-semibold text-white shadow-[var(--shadow-blue)] transition-transform hover:-translate-y-0.5"
+              className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-4 py-2 text-sm font-semibold text-white shadow-cta transition-transform hover:-translate-y-0.5"
             >
               Editar agente
             </Link>
@@ -45,7 +45,7 @@ export async function AgentSection({ clienteId, agentId }: { clienteId: string; 
             <input type="hidden" name="clienteId" value={clienteId} />
             <button
               type="submit"
-              className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-blue)] transition-transform hover:-translate-y-0.5"
+              className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-5 py-2.5 text-sm font-semibold text-white shadow-cta transition-transform hover:-translate-y-0.5"
             >
               + Crear agente para este cliente
             </button>

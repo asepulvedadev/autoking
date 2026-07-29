@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@autoking/ui";
 import { createClient } from "@/lib/supabase/client";
+import { canAccessPath } from "@/lib/roles";
 
 const LINKS = [
   {
@@ -29,6 +30,9 @@ const LINKS = [
       </>
     ),
   },
+  // Leads, Conversaciones y Prospección NO van acá: viven DENTRO de cada agente
+  // (/admin/agentes/[id]/…), porque son datos de ese agente y no del panel.
+  // Sacarlos del menú es lo que evita que un vendedor de un agente vea lo del otro.
   {
     href: "/admin/agentes",
     label: "Agentes",
@@ -40,32 +44,50 @@ const LINKS = [
     ),
   },
   {
-    href: "/admin/leads",
-    label: "Leads",
+    href: "/admin/mcp",
+    label: "Conexiones",
+    privileged: true,
     icon: (
       <>
-        <path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" />
-        <path d="M22 7l-10 6L2 7" />
+        <path d="M9 2v6M15 2v6" strokeLinecap="round" />
+        <path d="M6 8h12v4a6 6 0 01-6 6 6 6 0 01-6-6V8z" />
+        <path d="M12 18v4" strokeLinecap="round" />
       </>
     ),
   },
   {
-    href: "/admin/conversaciones",
-    label: "Conversaciones",
+    href: "/admin/infraestructura",
+    label: "Infraestructura",
+    privileged: true,
     icon: (
       <>
-        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="3" y="4" width="18" height="6" rx="1.5" />
+        <rect x="3" y="14" width="18" height="6" rx="1.5" />
+        <path d="M7 7h.01M7 17h.01" strokeLinecap="round" />
       </>
     ),
   },
   {
-    href: "/admin/prospeccion",
-    label: "Prospección",
+    href: "/admin/usuarios",
+    label: "Usuarios",
+    privileged: true,
     icon: (
       <>
-        <circle cx="12" cy="12" r="9" />
-        <circle cx="12" cy="12" r="4.5" />
-        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" strokeLinecap="round" />
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+      </>
+    ),
+  },
+  {
+    href: "/admin/equipo",
+    label: "Equipo",
+    privileged: true,
+    icon: (
+      <>
+        <circle cx="9" cy="7" r="3.5" />
+        <path d="M2 21v-1a5 5 0 015-5h4a5 5 0 015 5v1" />
+        <path d="M17 11l2 2 3-3" strokeLinecap="round" strokeLinejoin="round" />
       </>
     ),
   },
@@ -86,7 +108,7 @@ const LINKS = [
   },
 ];
 
-export function AdminNav() {
+export function AdminNav({ role }: { role?: string | null }) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -99,7 +121,7 @@ export function AdminNav() {
 
   return (
     <nav className="flex flex-1 flex-col gap-1">
-      {LINKS.map((link) => {
+      {LINKS.filter((link) => canAccessPath(role, link.href)).map((link) => {
         const active =
           link.href === "/admin" ? pathname === "/admin" : pathname.startsWith(link.href);
         return (

@@ -1,111 +1,98 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { cn } from "@autoking/ui";
-import { listAgents, type TenantAgent } from "@/lib/agents-bridge";
-import { AgentChat } from "./agent-chat";
+import { listarPackages, type PackageResumen } from "@/lib/control";
+import { getSessionProfile } from "@/lib/session";
+import { agentesDelUsuario } from "@/lib/agentes";
+import { isPrivileged } from "@/lib/roles";
+import { NuevoAgente } from "./nuevo-agente";
 
 export const dynamic = "force-dynamic";
 
-function AgentCard({ agent }: { agent: TenantAgent }) {
-  return (
-    <div className="rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--color-surface)] p-5">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h3 className="font-semibold text-white">{agent.business}</h3>
-            <span
-              className={cn(
-                "rounded-full border px-2 py-0.5 text-[11px] font-medium",
-                agent.type === "system"
-                  ? "border-[var(--line)] bg-white/[0.05] text-[var(--color-faint)]"
-                  : "border-[rgb(30_107_255_/_0.3)] bg-blue/[0.12] text-blue-bright",
-              )}
-            >
-              {agent.type === "system" ? "AutoKing" : "Cliente"}
-            </span>
-          </div>
-          <p className="mt-0.5 text-xs text-[var(--color-faint)]">
-            {agent.assistant ? `${agent.assistant} · ` : ""}
-            <code className="text-[var(--color-muted)]">{agent.agentId}</code>
-          </p>
-        </div>
-        <div className="flex flex-none items-center gap-3">
-          {agent.type !== "system" && (
-            <Link href={`/admin/agentes/${agent.agentId}`} className="text-sm font-semibold text-blue-bright hover:underline">
-              Editar
-            </Link>
-          )}
-          <AgentChat agentId={agent.agentId} assistant={agent.assistant} />
-        </div>
-      </div>
-    </div>
-  );
-}
+/**
+ * Listado de agentes que el usuario tiene permitido ver.
+ *
+ * No filtra por ROL sino por MEMBRESÍA: un vendedor atado a Mayand ve un solo
+ * agente; el staff del tenant los ve todos. Adentro de cada uno están sus
+ * conversaciones, leads, prospección y creativos.
+ */
+export default async function PlataformaAgentesPage() {
+  const me = await getSessionProfile();
+  if (!me) redirect("/admin/login");
 
-export default async function AgentesPage() {
-  let agents: TenantAgent[] = [];
-  let error: string | null = null;
-  try {
-    agents = await listAgents();
-  } catch (e) {
-    error = (e as Error).message;
+  const agentes = await agentesDelUsuario();
+  const puedeCrear = isPrivileged(me.role);
+
+  // Datos del AgentPackage (skills, tools) — solo informativos y solo para staff
+  // privilegiado, que es quien configura. Si el VPS no responde, la lista igual sale.
+  let packages: PackageResumen[] = [];
+  if (puedeCrear) {
+    try {
+      packages = await listarPackages();
+    } catch {
+      /* la lista de la DB es la fuente de verdad; el detalle del VPS es opcional */
+    }
   }
-
-  const system = agents.filter((a) => a.type === "system");
-  const clients = agents.filter((a) => a.type !== "system");
+  const infoDe = (slug: string) => packages.find((p) => p.id === slug);
 
   return (
     <div className="mx-auto max-w-5xl">
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <h1 className="font-display text-[clamp(24px,4vw,32px)] font-extrabold text-white">Agentes</h1>
-          <p className="mt-1 text-sm text-[var(--color-muted)]">
-            La recepcionista de IA de cada negocio. {clients.length} {clients.length === 1 ? "cliente" : "clientes"}.
-          </p>
-        </div>
-        <Link
-          href="/admin/agentes/nuevo"
-          className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-blue)] transition-transform hover:-translate-y-0.5"
-        >
-          + Nuevo agente
-        </Link>
+      <h1 className="font-display text-[clamp(24px,4vw,32px)] font-extrabold text-white">
+        {agentes.length === 1 ? "Mi agente" : "Agentes"}
+      </h1>
+      <p className="mt-1 text-sm text-[var(--color-muted)]">
+        Cada agente es una <b className="text-white">unidad autocontenida</b>: su número, sus conversaciones,
+        sus leads, su prospección, sus creativos y su conocimiento. Entrá a uno para trabajarlo.
+      </p>
+
+      <div className="mt-6 flex flex-col gap-2">
+        {agentes.length === 0 ? (
+          <div className="rounded-[var(--radius-card)] border border-dashed border-[var(--line-strong)] p-10 text-center text-sm text-[var(--color-muted)]">
+            No tenés ningún agente asignado. Pedile a un administrador que te dé acceso.
+          </div>
+        ) : (
+          agentes.map((a) => {
+            const info = infoDe(a.slug);
+            const bandera = a.pais === "mexico" ? "🇲🇽" : a.pais === "colombia" ? "🇨🇴" : "🌎";
+            return (
+              <Link
+                key={a.id}
+                href={`/admin/agentes/${a.slug}`}
+                className="flex items-center gap-4 rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--color-surface)] p-4 transition-colors hover:border-blue-bright/40"
+              >
+                <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[var(--color-bg-2)] text-lg">
+                  {bandera}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-medium text-white">{a.nombre ?? a.slug}</span>
+                    <code className="rounded bg-white/[0.06] px-1.5 py-0.5 text-[11px] text-[var(--color-gold)]">
+                      {a.slug}
+                    </code>
+                    <span
+                      className={cn(
+                        "rounded-full border px-2 py-0.5 text-[11px] font-medium",
+                        a.estado === "activo"
+                          ? "bg-[rgb(43_212_123_/_0.14)] text-[var(--color-success)] border-[rgb(43_212_123_/_0.3)]"
+                          : "border-[var(--line-strong)] text-[var(--color-muted)]",
+                      )}
+                    >
+                      {a.estado}
+                    </span>
+                  </div>
+                  <div className="mt-1 text-xs text-[var(--color-faint)]">
+                    {a.whatsapp_display ?? "sin número vinculado"}
+                    {info ? ` · ${info.skills.length} skill(s) · ${info.toolsPermitidas} herramienta(s)` : ""}
+                  </div>
+                </div>
+                <span className="flex-none text-sm text-blue-bright">Entrar →</span>
+              </Link>
+            );
+          })
+        )}
       </div>
 
-      {error ? (
-        <div className="mt-10 rounded-[var(--radius-card)] border border-[rgb(255_90_90_/_0.3)] bg-[rgb(255_80_80_/_0.06)] p-6 text-sm text-[var(--color-danger)]">
-          No pude conectar con el backend de agentes: {error}
-        </div>
-      ) : (
-        <div className="mt-6 space-y-8">
-          {system.length > 0 && (
-            <section>
-              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--color-faint)]">Asistente de AutoKing</h2>
-              <div className="space-y-3">
-                {system.map((a) => (
-                  <AgentCard key={a.agentId} agent={a} />
-                ))}
-              </div>
-            </section>
-          )}
-
-          <section>
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--color-faint)]">Agentes de clientes</h2>
-            {clients.length === 0 ? (
-              <div className="rounded-[var(--radius-card)] border border-dashed border-[var(--line-strong)] p-12 text-center">
-                <p className="text-[var(--color-muted)]">Todavía no hay agentes de clientes.</p>
-                <Link href="/admin/agentes/nuevo" className="mt-3 inline-block text-sm font-semibold text-blue-bright hover:underline">
-                  Crear el primero →
-                </Link>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {clients.map((a) => (
-                  <AgentCard key={a.agentId} agent={a} />
-                ))}
-              </div>
-            )}
-          </section>
-        </div>
-      )}
+      {puedeCrear && <NuevoAgente />}
     </div>
   );
 }

@@ -27,11 +27,13 @@ export default async function ClientesPage() {
       <div className="flex items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-[clamp(24px,4vw,32px)] font-extrabold text-white">Clientes</h1>
-          <p className="mt-1 text-sm text-[var(--color-muted)]">{clientes.length} negocio(s) registrado(s).</p>
+          <p className="mt-1 text-sm text-[var(--color-muted)]">
+            {clientes.length} <b className="text-white">negocio(s)</b> que compraron AutoKing, con su plan y su agente.
+          </p>
         </div>
         <Link
           href="/admin/clientes/nuevo"
-          className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-blue)] transition-transform hover:-translate-y-0.5"
+          className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-5 py-2.5 text-sm font-semibold text-white shadow-cta transition-transform hover:-translate-y-0.5"
         >
           + Nuevo cliente
         </Link>

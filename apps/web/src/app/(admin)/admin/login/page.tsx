@@ -33,7 +33,7 @@ export default function LoginPage() {
   return (
     <main className="relative grid min-h-screen place-items-center overflow-hidden p-6">
       <AuroraBackground />
-      <div className="relative z-10 w-full max-w-sm rounded-[var(--radius-lg)] border border-[var(--line)] bg-[linear-gradient(180deg,var(--color-surface),var(--color-bg-2))] p-8 shadow-[var(--shadow-blue)]">
+      <div className="relative z-10 w-full max-w-sm rounded-[var(--radius-lg)] border border-[var(--line)] bg-[linear-gradient(180deg,var(--color-surface),var(--color-bg-2))] p-8 shadow-cta">
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
           <Logo />
           <p className="text-sm text-[var(--color-muted)]">Panel de administración</p>

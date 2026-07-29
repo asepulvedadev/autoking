@@ -8,7 +8,7 @@ import { AdminNav } from "./admin-nav";
 /** Menú móvil del admin: barra superior con hamburguesa + drawer lateral.
  *  Reusa el mismo <AdminNav /> que el sidebar de escritorio. Solo visible < md;
  *  en md+ el sidebar fijo toma el control y esto queda oculto. */
-export function AdminMobileNav({ userName, userEmail }: { userName: string; userEmail: string }) {
+export function AdminMobileNav({ userName, userEmail, role }: { userName: string; userEmail: string; role?: string | null }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -67,7 +67,7 @@ export function AdminMobileNav({ userName, userEmail }: { userName: string; user
                 </svg>
               </button>
             </div>
-            <AdminNav />
+            <AdminNav role={role} />
             <div className="mt-auto rounded-xl border border-[var(--line)] bg-[var(--color-surface)] p-3">
               <div className="truncate text-sm font-medium text-white">{userName}</div>
               <div className="truncate text-xs text-[var(--color-faint)]">{userEmail}</div>

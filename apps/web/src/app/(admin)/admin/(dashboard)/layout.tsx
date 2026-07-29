@@ -20,6 +20,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   const userName = profile?.full_name || "Admin";
   const userEmail = user.email ?? "";
+  const role = (profile?.role as string | null) ?? null;
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] md:flex">
@@ -28,7 +29,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
         <div className="mb-8 px-2">
           <Logo height={28} />
         </div>
-        <AdminNav />
+        <AdminNav role={role} />
         <div className="mt-auto rounded-xl border border-[var(--line)] bg-[var(--color-surface)] p-3">
           <div className="truncate text-sm font-medium text-white">{userName}</div>
           <div className="truncate text-xs text-[var(--color-faint)]">{userEmail}</div>
@@ -36,7 +37,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       </aside>
 
       {/* Barra + drawer — móvil */}
-      <AdminMobileNav userName={userName} userEmail={userEmail} />
+      <AdminMobileNav userName={userName} userEmail={userEmail} role={role} />
 
       <main className="flex-1 overflow-x-hidden p-6 sm:p-10">{children}</main>
     </div>

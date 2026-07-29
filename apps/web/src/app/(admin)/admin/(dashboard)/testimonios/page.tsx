@@ -20,7 +20,7 @@ export default async function TestimoniosPage() {
         </div>
         <Link
           href="/admin/testimonios/nuevo"
-          className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-blue)] transition-transform hover:-translate-y-0.5"
+          className="rounded-full bg-gradient-to-br from-blue-bright to-blue-deep px-5 py-2.5 text-sm font-semibold text-white shadow-cta transition-transform hover:-translate-y-0.5"
         >
           + Nuevo
         </Link>
