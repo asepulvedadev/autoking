@@ -18,7 +18,9 @@
     "plans": "Plans",
     "faq": "FAQ"
   },
-  "LangSwitch": { "aria": "Change language" },
+  "LangSwitch": {
+    "aria": "Change language"
+  },
   "Hero": {
     "badge": "An agent that never sleeps · replies in seconds",
     "titleA": "Stop losing clients and appointments by",
@@ -27,17 +29,42 @@
     "subStrong": "on its own, 24/7",
     "subB": " on your WhatsApp. Like an employee who never sleeps, never gets sick and never misses a sale.",
     "proof": [
-      { "num": "24/7", "label": "Always available" },
-      { "num": "<5 sec", "label": "Response time" },
-      { "num": "0", "label": "Unanswered messages" }
+      {
+        "num": "24/7",
+        "label": "Always available"
+      },
+      {
+        "num": "<5 sec",
+        "label": "Response time"
+      },
+      {
+        "num": "0",
+        "label": "Unanswered messages"
+      }
     ],
     "agentName": "AutoKing · Assistant",
     "online": "online",
     "chat": [
-      { "dir": "in", "text": "Hi, are you open? I'd like an appointment for tomorrow 😊", "time": "23:47" },
-      { "dir": "out", "text": "Hi! 👋 Of course, happy to book you. I have space tomorrow at 10:00, 1:30 PM and 5:00 PM. Which works best?", "time": "23:47" },
-      { "dir": "in", "text": "5:00 PM is perfect", "time": "23:48" },
-      { "dir": "out", "text": "Done! ✅ Your appointment is booked for tomorrow at 5:00 PM. I'll send a reminder. Can you confirm your name?", "time": "23:48" }
+      {
+        "dir": "in",
+        "text": "Hi, are you open? I'd like an appointment for tomorrow 😊",
+        "time": "23:47"
+      },
+      {
+        "dir": "out",
+        "text": "Hi! 👋 Of course, happy to book you. I have space tomorrow at 10:00, 1:30 PM and 5:00 PM. Which works best?",
+        "time": "23:47"
+      },
+      {
+        "dir": "in",
+        "text": "5:00 PM is perfect",
+        "time": "23:48"
+      },
+      {
+        "dir": "out",
+        "text": "Done! ✅ Your appointment is booked for tomorrow at 5:00 PM. I'll send a reminder. Can you confirm your name?",
+        "time": "23:48"
+      }
     ]
   },
   "Problem": {
@@ -46,10 +73,22 @@
     "titleHighlight": "a sale walking away",
     "subtitle": "While you work, sleep or rest, your clients are writing. And if no one replies, they go to the next guy. It's that simple.",
     "items": [
-      { "title": "Late-night messages left unanswered", "text": "Your clients write at 11 at night or on a Sunday. By the time you see it, they already found someone else." },
-      { "title": "Appointments that never get booked", "text": "The client wanted to book, but between so many messages they cooled off and never closed the appointment." },
-      { "title": "Clients who go to the competition", "text": "Whoever replies first wins. If you take hours, the client already booked somewhere else." },
-      { "title": "Hours lost on repeated questions", "text": "\"How much is it?\", \"Where are you?\", \"Do you have availability?\". The same questions, a thousand times, eating your time." }
+      {
+        "title": "Late-night messages left unanswered",
+        "text": "Your clients write at 11 at night or on a Sunday. By the time you see it, they already found someone else."
+      },
+      {
+        "title": "Appointments that never get booked",
+        "text": "The client wanted to book, but between so many messages they cooled off and never closed the appointment."
+      },
+      {
+        "title": "Clients who go to the competition",
+        "text": "Whoever replies first wins. If you take hours, the client already booked somewhere else."
+      },
+      {
+        "title": "Hours lost on repeated questions",
+        "text": "\"How much is it?\", \"Where are you?\", \"Do you have availability?\". The same questions, a thousand times, eating your time."
+      }
     ]
   },
   "Solution": {
@@ -58,16 +97,22 @@
     "titleHighlight": "3 simple steps",
     "subtitle": "Nothing weird to install, no one to hire, no hassle. We set it up for you.",
     "steps": [
-      { "n": "01", "title": "We connect your WhatsApp", "text": "We use your same WhatsApp Business number. In minutes your agent is connected and ready to reply." },
-      { "n": "02", "title": "We train the agent on your business", "text": "We load your prices, services, hours and tone. It replies the way you would, in your style." },
-      { "n": "03", "title": "It replies and books on its own, 24/7", "text": "From then on it answers, resolves questions and books appointments without you lifting a finger. Day and night." }
+      {
+        "n": "01",
+        "title": "We connect your WhatsApp",
+        "text": "We use your same WhatsApp Business number. In minutes your agent is connected and ready to reply."
+      },
+      {
+        "n": "02",
+        "title": "We train the agent on your business",
+        "text": "We load your prices, services, hours and tone. It replies the way you would, in your style."
+      },
+      {
+        "n": "03",
+        "title": "It replies and books on its own, 24/7",
+        "text": "From then on it answers, resolves questions and books appointments without you lifting a finger. Day and night."
+      }
     ]
-  },
-  "InAction": {
-    "eyebrow": "In action",
-    "titleA": "Your brand,",
-    "titleHighlight": "in motion",
-    "subtitle": "Videos and animated pieces generated by code — ready for your socials, in your identity."
   },
   "Benefits": {
     "eyebrow": "Benefits",
@@ -76,20 +121,30 @@
     "titleB": "from day one",
     "subtitle": "This isn't tech for the hype. It's money you stop losing and clients you stop giving away.",
     "items": [
-      { "title": "24/7 attention", "text": "Your business replies at any hour, every day. Never again a client waiting or a message unanswered." },
-      { "title": "Automatic booking", "text": "It books appointments straight into your calendar, no schedule clashes." },
-      { "title": "Fewer no-shows", "text": "Automatic reminders before every appointment." },
-      { "title": "Instant replies", "text": "It answers in seconds, not hours. Whoever replies first is the one who closes the sale." },
-      { "title": "Professional image", "text": "Clear, tidy and always friendly messages. Your business looks top-tier." },
-      { "title": "You recover sales", "text": "Those messages that used to get lost now turn into clients." }
-    ]
-  },
-  "Stats": {
-    "items": [
-      { "to": 24, "prefix": "", "suffix": "/7", "label": "Attention, nonstop" },
-      { "to": 5, "prefix": "<", "suffix": " sec", "label": "Response time" },
-      { "to": 0, "prefix": "", "suffix": "", "label": "Unanswered messages" },
-      { "to": 3, "prefix": "", "suffix": " days", "label": "And your agent's working" }
+      {
+        "title": "24/7 attention",
+        "text": "Your business replies at any hour, every day. Never again a client waiting or a message unanswered."
+      },
+      {
+        "title": "Automatic booking",
+        "text": "It books appointments straight into your calendar, no schedule clashes."
+      },
+      {
+        "title": "Fewer no-shows",
+        "text": "Automatic reminders before every appointment."
+      },
+      {
+        "title": "Instant replies",
+        "text": "It answers in seconds, not hours. Whoever replies first is the one who closes the sale."
+      },
+      {
+        "title": "Professional image",
+        "text": "Clear, tidy and always friendly messages. Your business looks top-tier."
+      },
+      {
+        "title": "You recover sales",
+        "text": "Those messages that used to get lost now turn into clients."
+      }
     ]
   },
   "Roi": {
@@ -110,84 +165,20 @@
     "disclaimer": "* Rough estimate: assumes {pct}% of those who don't get a timely reply go to the competition.",
     "waMessage": "Hi AutoKing 👑 The calculator says I'm losing ~${amount} per month. I want to recover it with an AI agent."
   },
-  "Comparison": {
-    "eyebrow": "The difference",
-    "titleA": "With AutoKing vs.",
-    "titleHighlight": "staying as you are",
-    "subtitle": "Whoever replies first keeps the client. See who replies first.",
-    "colAutoking": "AutoKing",
-    "colNone": "No agent",
-    "colEmployee": "Human employee",
-    "rows": [
-      { "feature": "Replies at any hour (24/7)", "autoking": true, "none": false, "employee": "Only during hours" },
-      { "feature": "Answers in seconds", "autoking": true, "none": false, "employee": "If they're free" },
-      { "feature": "Books appointments automatically", "autoking": true, "none": false, "employee": true },
-      { "feature": "Never gets sick or quits", "autoking": true, "none": false, "employee": false },
-      { "feature": "Handles a thousand people at once", "autoking": true, "none": false, "employee": false },
-      { "feature": "Monthly cost", "autoking": "From $90 USD", "none": "Lost clients", "employee": "≈ $2,000,000 COP" }
-    ]
-  },
-  "AgentChat": {
-    "eyebrow": "How your agent talks",
-    "titleA": "See how it",
-    "titleHighlight": "replies for you",
-    "subtitle": "Simulated conversations by business type. Your agent is trained with your prices and services, and replies like this 24/7.",
-    "online": "online",
-    "cards": [
-      {
-        "label": "Spa & Aesthetics",
-        "emoji": "💆",
-        "messages": [
-          { "from": "user", "text": "Hi, do you have space for a massage on Saturday?" },
-          { "from": "agent", "text": "Hi! 💆 On Saturday I have 11:00 and 4:30 PM. The 60-min massage is $120,000 COP. Shall I book it?" },
-          { "from": "user", "text": "The 11 one please" },
-          { "from": "agent", "text": "Done! You're set for Saturday at 11:00 AM. I'll send a reminder the day before. 🙌" }
-        ],
-        "result": "Books the appointment with no human involved"
-      },
-      {
-        "label": "Barbershop",
-        "emoji": "💈",
-        "messages": [
-          { "from": "user", "text": "Can I come now without an appointment?" },
-          { "from": "agent", "text": "Hey! 💈 There's a 20-min wait right now. If you want I'll book you at 6:15 PM and you go straight in." },
-          { "from": "user", "text": "Sure, 6:15" },
-          { "from": "agent", "text": "Done ✅ See you at 6:15 PM under your name." }
-        ],
-        "result": "Replies in under 5 seconds, any hour"
-      },
-      {
-        "label": "Dental office",
-        "emoji": "🦷",
-        "messages": [
-          { "from": "user", "text": "Hi, how much is a dental cleaning?" },
-          { "from": "agent", "text": "Hi! 🦷 The cleaning is $150,000 COP and includes a checkup. I have tomorrow 10:00 or Thursday 5:00 PM." },
-          { "from": "user", "text": "Tomorrow at 10 works" },
-          { "from": "agent", "text": "Perfect! You're set for tomorrow at 10:00 AM. Any change, just message me here. 😉" }
-        ],
-        "result": "Never leaves a message unanswered"
-      }
-    ]
-  },
-  "Industries": {
-    "eyebrow": "For your business",
-    "titleA": "It speaks the language of",
-    "titleHighlight": "your industry",
-    "subtitle": "Pick your type of business and see how your agent would reply. It's trained on your prices and services.",
-    "items": [
-      { "label": "Spa & Aesthetics", "emoji": "💆", "question": "Hi, do you have space for a massage on Saturday?", "answer": "Hi! 💆 Happy to help. On Saturday I have 11:00 and 4:30 PM available. The 60-min relaxing massage is $120,000 COP. Shall I book one for you?" },
-      { "label": "Dental office", "emoji": "🦷", "question": "How much is a dental cleaning?", "answer": "Hi! 🦷 The cleaning is $150,000 COP and includes a checkup. I have an opening tomorrow at 10:00 or Thursday at 5:00 PM. Which works?" },
-      { "label": "Barbershop", "emoji": "💈", "question": "Can I come now without an appointment?", "answer": "Hey! 💈 There's a 20-min wait right now. If you want I'll book you at 6:15 PM and you go straight in. Shall I put it under your name?" },
-      { "label": "Hair salon", "emoji": "💇", "question": "I want color and a cut, what days do you have?", "answer": "Hi! 💇 For color + cut I need about 2 hours. I have Wednesday 3:00 PM or Friday 11:00. The combo starts at $120,000 COP. Shall I book you?" },
-      { "label": "Aesthetic clinic", "emoji": "✨", "question": "Do you do facials? Price?", "answer": "Hi! ✨ Yes, the deep facial is $90,000 COP (50 min). I have space Tuesday 12:00 and Saturday 10:00. Shall I book it?" }
-    ]
-  },
   "Integrations": {
     "eyebrow": "Integrations",
     "titleA": "It connects with what",
     "titleHighlight": "you already use",
     "subtitle": "No switching tools. Your agent works on top of what you already have running.",
-    "tools": ["WhatsApp", "Google Calendar", "Instagram", "Messenger", "Google Sheets", "Calendly", "Outlook"]
+    "tools": [
+      "WhatsApp",
+      "Google Calendar",
+      "Instagram",
+      "Messenger",
+      "Google Sheets",
+      "Calendly",
+      "Outlook"
+    ]
   },
   "LiveDemo": {
     "eyebrow": "Try it yourself",
@@ -198,15 +189,74 @@
     "online": "online",
     "greeting": "Hi! 👋 I'm the AutoKing assistant. Ask me anything: prices, hours, or ask me for an appointment.",
     "rules": [
-      { "match": ["price", "cost", "how much", "much", "worth"], "reply": "It depends on the service 😊 For example, a consultation from $50. Want the full list or shall I book you right away?" },
-      { "match": ["hours", "open", "time", "when"], "reply": "We're open Monday to Saturday, 9 AM to 8 PM. But I reply 24/7 👌 Shall I find you an appointment?" },
-      { "match": ["where", "location", "address", "find you"], "reply": "We're downtown, a block from the park 📍 Shall I book you an appointment?" },
-      { "match": ["appointment", "book", "reserve", "tomorrow", "today", "saturday", "available", "slot"], "reply": "Great! I have space tomorrow at 10:00, 1:30 PM and 5:00 PM ✅ Which works? I'll book it right away." },
-      { "match": ["hi", "hello", "hey", "good"], "reply": "Hi! 👋 How can I help? I can give you prices, hours or book you an appointment." },
-      { "match": ["thanks", "thank", "great", "perfect", "ok"], "reply": "You're welcome! 🙌 And heads up: with AutoKing your business does this on its own, 24 hours a day." }
+      {
+        "match": [
+          "price",
+          "cost",
+          "how much",
+          "much",
+          "worth"
+        ],
+        "reply": "It depends on the service 😊 For example, a consultation from $50. Want the full list or shall I book you right away?"
+      },
+      {
+        "match": [
+          "hours",
+          "open",
+          "time",
+          "when"
+        ],
+        "reply": "We're open Monday to Saturday, 9 AM to 8 PM. But I reply 24/7 👌 Shall I find you an appointment?"
+      },
+      {
+        "match": [
+          "where",
+          "location",
+          "address",
+          "find you"
+        ],
+        "reply": "We're downtown, a block from the park 📍 Shall I book you an appointment?"
+      },
+      {
+        "match": [
+          "appointment",
+          "book",
+          "reserve",
+          "tomorrow",
+          "today",
+          "saturday",
+          "available",
+          "slot"
+        ],
+        "reply": "Great! I have space tomorrow at 10:00, 1:30 PM and 5:00 PM ✅ Which works? I'll book it right away."
+      },
+      {
+        "match": [
+          "hi",
+          "hello",
+          "hey",
+          "good"
+        ],
+        "reply": "Hi! 👋 How can I help? I can give you prices, hours or book you an appointment."
+      },
+      {
+        "match": [
+          "thanks",
+          "thank",
+          "great",
+          "perfect",
+          "ok"
+        ],
+        "reply": "You're welcome! 🙌 And heads up: with AutoKing your business does this on its own, 24 hours a day."
+      }
     ],
     "fallback": "Good question 🤔 In the real version, your agent would answer this trained on YOUR business info. Want to see prices, hours or book an appointment?",
-    "quick": ["How much is it?", "Any appointment tomorrow?", "Where are you?", "What are your hours?"],
+    "quick": [
+      "How much is it?",
+      "Any appointment tomorrow?",
+      "Where are you?",
+      "What are your hours?"
+    ],
     "placeholder": "Type your message…",
     "disclaimer": "* You're chatting with a real AutoKing AI agent. This is how well it would handle your business.",
     "cta": "I want my real agent"
@@ -224,67 +274,33 @@
     "guaranteeTitle": "30-day guarantee",
     "guaranteeText": "If your agent doesn't book you appointments in the first month, we refund the full installation.",
     "recommended": "⭐ Recommended",
-    "waMessage": "Hi AutoKing 👑 I'm interested in the {name} \"{title}\" plan.",
-    "plans": [
-      {
-        "name": "Basic",
-        "title": "Reception",
-        "desc": "To get started: your business never leaves a message unanswered, day or night.",
-        "price": "$90",
-        "usd": 90,
-        "setup": "+ one-time setup: $149 USD (one-off · setup and WhatsApp connection)",
-        "cta": "Start with Reception",
-        "features": [
-          { "text": "24/7 attention via WhatsApp", "strong": true },
-          { "text": "Answers your business info (prices, hours, location)" },
-          { "text": "Hands off to a person when needed" },
-          { "text": "Trained with your style and tone" }
-        ]
-      },
-      {
-        "name": "Pro",
-        "title": "Scheduling",
-        "desc": "Most popular: on top of replying, it books appointments and sends reminders on its own.",
-        "price": "$150",
-        "usd": 150,
-        "setup": "+ one-time setup: $249 USD (one-off · setup, calendar and WhatsApp)",
-        "cta": "I want the Scheduling plan",
-        "features": [
-          { "text": "Everything in the Reception plan", "strong": true },
-          { "text": "Booking connected to your calendar" },
-          { "text": "Automatic appointment reminders" },
-          { "text": "Client registry and database" },
-          { "text": "Metrics dashboard", "strong": true }
-        ]
-      },
-      {
-        "name": "Empire",
-        "title": "Sales",
-        "desc": "To scale: qualifies leads, recommends services and sells across all your channels.",
-        "price": "$250",
-        "usd": 250,
-        "setup": "+ one-time setup: $399 USD (one-off · full multichannel setup)",
-        "cta": "Build my Empire",
-        "features": [
-          { "text": "Everything in the Scheduling plan", "strong": true },
-          { "text": "Smart lead qualification" },
-          { "text": "Service recommendations (more sales)" },
-          { "text": "Multichannel (WhatsApp, Instagram and more)" },
-          { "text": "Monthly results reports", "strong": true }
-        ]
-      }
-    ]
+    "waMessage": "Hi AutoKing 👑 I'm interested in the {name} \"{title}\" plan."
   },
   "Faq": {
     "eyebrow": "FAQ",
     "titleA": "What you're surely",
     "titleHighlight": "wondering",
     "items": [
-      { "q": "How long until my agent is ready?", "a": "In most cases, 3 to 7 business days. We connect your WhatsApp, train the agent on your business info and leave it answering. Fast and hassle-free." },
-      { "q": "Does it work with my current WhatsApp?", "a": "Yes. We use your same number with WhatsApp Business. Your clients keep writing to the usual number; the difference is that now there's always someone —well, something— replying instantly." },
-      { "q": "Do I need technical knowledge?", "a": "Not at all. We handle 100% of the technical side. You just tell us how your business works and we set up, connect and train everything." },
-      { "q": "Can I cancel whenever I want?", "a": "Sure. No endless contracts or fine print. It's a monthly service and you can cancel whenever you want. We trust you'll stay for the results, not out of obligation." },
-      { "q": "Can the agent hand a conversation over to me?", "a": "Yes. When a query needs a human or the client asks, the agent hands the conversation to you instantly. You always have control and can take the chat whenever you want." }
+      {
+        "q": "How long until my agent is ready?",
+        "a": "In most cases, 3 to 7 business days. We connect your WhatsApp, train the agent on your business info and leave it answering. Fast and hassle-free."
+      },
+      {
+        "q": "Does it work with my current WhatsApp?",
+        "a": "Yes. We use your same number with WhatsApp Business. Your clients keep writing to the usual number; the difference is that now there's always someone —well, something— replying instantly."
+      },
+      {
+        "q": "Do I need technical knowledge?",
+        "a": "Not at all. We handle 100% of the technical side. You just tell us how your business works and we set up, connect and train everything."
+      },
+      {
+        "q": "Can I cancel whenever I want?",
+        "a": "Sure. No endless contracts or fine print. It's a monthly service and you can cancel whenever you want. We trust you'll stay for the results, not out of obligation."
+      },
+      {
+        "q": "Can the agent hand a conversation over to me?",
+        "a": "Yes. When a query needs a human or the client asks, the agent hands the conversation to you instantly. You always have control and can take the chat whenever you want."
+      }
     ]
   },
   "LeadForm": {
@@ -319,7 +335,9 @@
     "cta": "Try the agent now",
     "waMessage": "Hi AutoKing 👑 I want to try the AI agent live."
   },
-  "StickyCta": { "label": "Book your free demo" },
+  "StickyCta": {
+    "label": "Book your free demo"
+  },
   "Footer": {
     "brandDesc": "Your empire on autopilot. Custom AI agents that reply, answer and book for your business, 24/7.",
     "navTitle": "Navigation",
