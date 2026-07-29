@@ -8,7 +8,7 @@
 .item {
   background: var(--color-surface);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   transition: border-color 0.3s;
 }

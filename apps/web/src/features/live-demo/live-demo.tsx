@@ -71,10 +71,10 @@ export function LiveDemo() {
           <p>{t("subtitle")}</p>
         </div>
 
-        <div className="reveal mx-auto max-w-lg overflow-hidden rounded-[var(--radius-lg)] border border-[var(--line-strong)] bg-[var(--color-surface)] shadow-[var(--shadow-blue)]">
+        <div className="reveal mx-auto max-w-lg overflow-hidden rounded-[var(--radius-lg)] border border-line-strong bg-[var(--color-surface)] shadow-cta">
           {/* header */}
-          <div className="flex items-center gap-3 border-b border-[var(--line)] bg-[linear-gradient(120deg,#11283a,#0e2233)] px-4 py-3">
-            <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-blue-bright to-blue-deep text-sm font-bold text-white">
+          <div className="flex items-center gap-3 border-b border-line bg-[#102434] px-4 py-3">
+            <div className="grid h-10 w-10 place-items-center rounded-full bg-blue text-sm font-bold text-white">
               AK
             </div>
             <div>
@@ -93,7 +93,7 @@ export function LiveDemo() {
                 className={cn(
                   "max-w-[82%] rounded-2xl px-3.5 py-2.5 text-[14px] leading-snug animate-[fadeIn_.3s_var(--ease)]",
                   m.from === "user"
-                    ? "self-end rounded-br-md bg-[linear-gradient(135deg,#1e6bff,#1450c7)] text-white"
+                    ? "self-end rounded-br-md bg-blue text-white"
                     : "self-start rounded-bl-md bg-[#1b2630] text-[#e7eefb]",
                 )}
               >
@@ -121,12 +121,12 @@ export function LiveDemo() {
           </div>
 
           {/* quick replies */}
-          <div className="flex flex-wrap gap-2 border-t border-[var(--line)] px-3 pt-3">
+          <div className="flex flex-wrap gap-2 border-t border-line px-3 pt-3">
             {quick.map((q) => (
               <button
                 key={q}
                 onClick={() => send(q)}
-                className="rounded-full border border-[var(--line-strong)] px-3 py-1.5 text-xs text-[var(--color-muted)] transition-colors hover:border-blue-bright hover:text-white"
+                className="rounded-full border border-line-strong px-3 py-1.5 text-xs text-[var(--color-muted)] transition-colors hover:border-blue-bright hover:text-white"
               >
                 {q}
               </button>
@@ -145,12 +145,12 @@ export function LiveDemo() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={t("placeholder")}
-              className="min-w-0 flex-1 rounded-full border border-[var(--line)] bg-[var(--color-bg-2)] px-4 py-2.5 text-sm text-white outline-none placeholder:text-[var(--color-faint)] focus:border-blue-bright"
+              className="min-w-0 flex-1 rounded-full border border-line bg-[var(--color-bg-2)] px-4 py-2.5 text-sm text-white outline-none placeholder:text-[var(--color-faint)] focus:border-blue-bright"
             />
             <button
               type="submit"
               aria-label="Enviar"
-              className="grid h-10 w-10 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-bright to-blue text-white transition-transform hover:scale-105"
+              className="grid h-10 w-10 flex-none place-items-center rounded-full bg-blue text-white transition-transform hover:scale-105"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" strokeLinecap="round" strokeLinejoin="round" />

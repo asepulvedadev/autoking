@@ -21,7 +21,7 @@ export function StickyCta() {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-0 z-[95] border-t border-[var(--line)] p-3 backdrop-blur-lg transition-transform duration-300 sm:hidden",
+        "fixed inset-x-0 bottom-0 z-[95] border-t border-line p-3 backdrop-blur-lg transition-transform duration-300 sm:hidden",
         "bg-[rgb(5_7_13_/_0.92)]",
         show ? "translate-y-0" : "translate-y-full",
       )}

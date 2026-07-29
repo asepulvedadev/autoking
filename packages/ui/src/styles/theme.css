@@ -16,7 +16,12 @@
 
   --color-ink: #f4f7ff;
   --color-muted: #9aa6be;
-  --color-faint: #5e6a82;
+  /* Era #5e6a82 y daba 3.5:1 sobre el fondo — por debajo del 4.5:1 que pide
+     WCAG AA para texto normal, y se usa en 13 lugares con letra de 11-14px
+     (el "+ instalación única", la letra chica de los planes, el footer).
+     Con #7e8ba4 sube a 5.5:1 y sigue leyéndose como texto secundario:
+     apagado no tiene por qué significar ilegible. */
+  --color-faint: #7e8ba4;
 
   --color-success: #2bd47b;
   --color-danger: #ff6b6b;
@@ -27,13 +32,52 @@
   --font-sans: var(--font-inter, "Inter"), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sora, "Sora"), "Inter", sans-serif;
 
-  /* Radios */
-  --radius-card: 18px;
-  --radius-lg: 24px;
+  /* --- Líneas y separadores ---------------------------------------------
+     Van DENTRO de @theme para que Tailwind genere border-line / bg-line.
+     Estaban en :root, y por eso el código tenía ~180 valores arbitrarios
+     tipo `border-[var(--line)]`: el token existía pero no llegaba a la
+     utilidad. Un sistema que no llega al componente no es un sistema. */
+  --color-line: rgb(120 150 220 / 0.12);
+  --color-line-strong: rgb(120 150 220 / 0.28);
 
-  /* Sombras */
-  --shadow-blue: 0 18px 50px -12px rgb(30 107 255 / 0.55);
-  --shadow-blue-strong: 0 24px 60px -10px rgb(30 107 255 / 0.7);
+  /* --- Radios: TRES, y ninguno más -------------------------------------
+     Había 23 radios distintos en runtime (9 literales sueltos + 2 tokens).
+     Esa variedad es exactamente lo que hace que un diseño se lea "generado":
+     cada card inventa el suyo y el ojo no encuentra un patrón.
+     `full` queda solo para píldoras y avatares. */
+  --radius-sm: 10px;
+  --radius-card: 16px;
+  --radius-lg: 24px;
+  /* Píldora. Existía escrita de cuatro formas distintas (100px, 999px, 50% y
+     el calc(infinity) de Tailwind) para el mismo resultado visual. Una sola.
+     --radius-full redefine el `rounded-full` de Tailwind, que por defecto
+     calcula calc(infinity * 1px) — o sea 33.554.432px en el navegador. */
+  --radius-pill: 999px;
+  --radius-full: 999px;
+
+  /* --- Elevación: DOS niveles ------------------------------------------
+     Había 12 sombras distintas, casi todas literales dentro de CSS modules.
+     Acá quedan dos neutras (la profundidad la da la oscuridad, no el color)
+     más una azul reservada EXCLUSIVAMENTE al CTA principal: si todo brilla,
+     nada destaca.
+
+     Se usan como utilidad: `shadow-raised`, `shadow-float`, `shadow-cta`.
+     El token azul se llama --shadow-cta y no --shadow-blue a propósito: el
+     nombre dice PARA QUÉ es (la acción principal) en vez de de qué color es,
+     y así nadie lo aplica "porque queda lindo" en una tarjeta cualquiera.
+     Además evita la ambigüedad de `shadow-blue`, que se lee como el color
+     `blue` del theme aplicado a una sombra. */
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --shadow-float: 0 2px 4px rgb(0 0 0 / 0.4), 0 24px 48px -20px rgb(0 0 0 / 0.75);
+  --shadow-cta: 0 8px 24px -8px rgb(30 107 255 / 0.45);
+
+  /* --- Escala tipográfica ----------------------------------------------
+     Antes cada título traía su propio clamp() inline. Con la escala acá,
+     los saltos son deliberados y la jerarquía se lee de una. */
+  --text-display: clamp(38px, 6vw, 68px);
+  --text-h2: clamp(26px, 3.6vw, 40px);
+  --text-h3: clamp(19px, 2vw, 23px);
+  --text-lead: clamp(16px, 1.5vw, 19px);
 
   /* Animaciones (generan utilidades animate-*) */
   --animate-marquee: marquee 30s linear infinite;
@@ -41,14 +85,16 @@
   --animate-float: float 6s ease-in-out infinite;
 }
 
-/* Vars semánticas extra para el CSS artesanal de la landing
-   (bordes sutiles, glow, easing) — no generan utilidades Tailwind. */
+/* Alias para el CSS artesanal que todavía usa var(--line) directo,
+   y vars que no necesitan generar utilidades. */
 :root {
-  --line: rgb(120 150 220 / 0.12);
-  --line-strong: rgb(120 150 220 / 0.28);
+  --line: var(--color-line);
+  --line-strong: var(--color-line-strong);
   --blue-glow: rgb(30 107 255 / 0.45);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --maxw: 1180px;
+  --maxw: 1120px;
+  /* Ritmo vertical único: todas las secciones respiran igual. */
+  --section-y: clamp(72px, 10vw, 128px);
 }
 
 /* ============================================================

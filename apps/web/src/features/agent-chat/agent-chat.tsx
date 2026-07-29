@@ -28,13 +28,13 @@ export async function AgentChat() {
             <div
               key={card.label}
               className={cn(
-                "reveal flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--line-strong)] bg-[var(--color-surface)] shadow-[var(--shadow-blue)]",
+                "reveal flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line-strong bg-[var(--color-surface)] shadow-cta",
                 i > 0 && `d${i}`,
               )}
             >
               {/* header estilo WhatsApp */}
-              <div className="flex items-center gap-3 border-b border-[var(--line)] bg-[linear-gradient(120deg,#11283a,#0e2233)] px-4 py-3">
-                <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-blue-bright to-blue-deep text-base">
+              <div className="flex items-center gap-3 border-b border-line bg-[#102434] px-4 py-3">
+                <div className="grid h-9 w-9 place-items-center rounded-full bg-blue text-base">
                   {card.emoji}
                 </div>
                 <div>
@@ -53,7 +53,7 @@ export async function AgentChat() {
                     className={cn(
                       "max-w-[85%] rounded-2xl px-3.5 py-2.5 text-[13.5px] leading-snug",
                       m.from === "user"
-                        ? "self-end rounded-br-md bg-[linear-gradient(135deg,#1e6bff,#1450c7)] text-white"
+                        ? "self-end rounded-br-md bg-blue text-white"
                         : "self-start rounded-bl-md bg-[#1b2630] text-[#e7eefb]",
                     )}
                   >
@@ -63,7 +63,7 @@ export async function AgentChat() {
               </div>
 
               {/* micro-resultado (capacidad honesta, no testimonio) */}
-              <div className="flex items-center gap-2 border-t border-[var(--line)] px-4 py-3 text-xs font-medium text-[var(--color-muted)]">
+              <div className="flex items-center gap-2 border-t border-line px-4 py-3 text-xs font-medium text-[var(--color-muted)]">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="h-4 w-4 flex-none text-[var(--color-success)]">
                   <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

@@ -68,7 +68,7 @@ export async function Comparison() {
                 const isCost = i === rows.length - 1;
                 return (
                   <tr key={row.feature}>
-                    <td className="border-t border-[var(--line)] p-4 text-sm text-[var(--color-ink)]">{row.feature}</td>
+                    <td className="border-t border-line p-4 text-sm text-[var(--color-ink)]">{row.feature}</td>
                     <td
                       className={cn(
                         "border-x border-blue/50 bg-blue/[0.06] p-4 text-center",
@@ -77,10 +77,10 @@ export async function Comparison() {
                     >
                       <Value v={row.autoking} tone="good" emphasis={isCost} />
                     </td>
-                    <td className="border-t border-[var(--line)] p-4 text-center">
+                    <td className="border-t border-line p-4 text-center">
                       <Value v={row.none} tone="bad" />
                     </td>
-                    <td className={cn("border-t border-[var(--line)] p-4 text-center", isCost && "bg-[rgb(255_80_80_/_0.06)]")}>
+                    <td className={cn("border-t border-line p-4 text-center", isCost && "bg-[rgb(255_80_80_/_0.06)]")}>
                       <Value v={row.employee} tone={employeeTone(i)} emphasis={isCost} />
                     </td>
                   </tr>
@@ -99,7 +99,7 @@ export async function Comparison() {
                 key={row.feature}
                 className={cn(
                   "rounded-[var(--radius-card)] border p-4",
-                  isCost ? "border-blue/50 bg-blue/[0.05]" : "border-[var(--line)] bg-[var(--color-surface)]",
+                  isCost ? "border-blue/50 bg-blue/[0.05]" : "border-line bg-[var(--color-surface)]",
                 )}
               >
                 <div className="mb-3 text-sm font-semibold text-white">{row.feature}</div>

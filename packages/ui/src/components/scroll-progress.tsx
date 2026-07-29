@@ -37,7 +37,10 @@ export function ScrollProgress({ className }: { className?: string }) {
       ref={ref}
       style={{ transform: "scaleX(0)", willChange: "transform" }}
       className={cn(
-        "fixed inset-x-0 top-0 z-[200] h-[3px] origin-left bg-gradient-to-r from-blue-bright via-blue to-blue-deep",
+        // Azul plano. Una barra de progreso de 3px de alto con un degradado de
+        // tres paradas es esfuerzo que nadie percibe: a ese tamaño el ojo solo
+        // registra "hay una línea azul y va por acá".
+        "fixed inset-x-0 top-0 z-[200] h-[3px] origin-left bg-blue-bright",
         className,
       )}
     />

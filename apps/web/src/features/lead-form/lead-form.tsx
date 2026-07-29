@@ -8,7 +8,10 @@ import { waHref } from "@/lib/site";
 import { submitLead, getAgentReply, type LeadState, type Lead } from "./actions";
 
 const field =
-  "w-full rounded-xl border border-[var(--line)] bg-[var(--color-bg-2)] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-[var(--color-faint)] focus:border-blue-bright";
+  // rounded-xl era 12px: un radio inventado que no estaba en la escala. Los
+  // campos usan el mismo radio que los botones, así el formulario se lee como
+  // una pieza y no como tres controles de sitios distintos.
+  "w-full rounded-[var(--radius-sm)] border border-line bg-bg-2 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-faint focus:border-blue-bright";
 
 /** Respuesta inmediata del agente: se ve "escribiendo" y luego responde
  *  personalizado al negocio del prospecto. Es la demo en vivo del producto. */
@@ -33,10 +36,10 @@ function LeadSuccess({ lead }: { lead: Lead }) {
         {t("successTitle", { name: lead.name })}
       </p>
 
-      <div className="overflow-hidden rounded-2xl border border-[var(--line)] bg-[rgb(7_12_16_/_0.6)]">
+      <div className="overflow-hidden rounded-2xl border border-line bg-[rgb(7_12_16_/_0.6)]">
         {/* header estilo WhatsApp */}
-        <div className="flex items-center gap-3 border-b border-[var(--line)] bg-[linear-gradient(120deg,#11283a,#0e2233)] px-4 py-3">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-blue-bright to-blue-deep text-xs font-bold text-white">
+        <div className="flex items-center gap-3 border-b border-line bg-[#102434] px-4 py-3">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-blue text-xs font-bold text-white">
             AK
           </span>
           <div>
@@ -89,11 +92,7 @@ export function LeadForm() {
   const [state, action, pending] = useActionState<LeadState, FormData>(submitLead, {});
 
   return (
-    <section
-      className="section"
-      id="contacto"
-      style={{ background: "linear-gradient(180deg, transparent, rgb(30 107 255 / 0.04), transparent)" }}
-    >
+    <section className="section border-t border-line" id="contacto">
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">{t("eyebrow")}</span>
@@ -103,7 +102,9 @@ export function LeadForm() {
           <p>{t("subtitle")}</p>
         </div>
 
-        <div className="reveal mx-auto max-w-lg rounded-[var(--radius-lg)] border border-[rgb(30_107_255_/_0.3)] bg-[linear-gradient(180deg,var(--color-surface),var(--color-bg-2))] p-6 shadow-[var(--shadow-blue)] sm:p-8">
+        {/* La sombra azul se reserva al botón de acción: si la caja entera
+            brilla, el botón que está adentro deja de destacar. */}
+        <div className="reveal mx-auto max-w-lg rounded-[var(--radius-card)] border border-blue/30 bg-surface p-6 shadow-raised sm:p-8">
           {state.ok && state.lead ? (
             <LeadSuccess lead={state.lead} />
           ) : (

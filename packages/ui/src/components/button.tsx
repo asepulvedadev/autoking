@@ -4,19 +4,30 @@ import { cn } from "../lib/cn";
 type Variant = "primary" | "secondary";
 type Size = "md" | "lg";
 
+/**
+ * Botón.
+ *
+ * El primario usaba un degradado de tres paradas y se repetía en cada CTA de
+ * la página — era la mayor fuente de gradientes del sitio. Ahora es un azul
+ * PLANO: un botón sólido se lee como un botón, un botón con degradado se lee
+ * como una decoración. El color de marca alcanza para que destaque.
+ *
+ * El radio pasa de píldora a `--radius-sm`. Las píldoras estaban en todos
+ * lados (badges, chips, botones, avatares) y esa uniformidad de forma es lo
+ * que aplana la jerarquía: cuando todo tiene la misma silueta, nada manda.
+ */
 const base =
-  "inline-flex items-center justify-center gap-2.5 rounded-full font-semibold whitespace-nowrap cursor-pointer border border-transparent transition-[transform,box-shadow,background,border-color] duration-200 ease-[var(--ease)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-bright focus-visible:ring-offset-2 focus-visible:ring-offset-bg";
+  "inline-flex items-center justify-center gap-2.5 rounded-[var(--radius-sm)] font-semibold whitespace-nowrap cursor-pointer border border-transparent transition-[background-color,border-color,opacity] duration-150 ease-[var(--ease)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-bright focus-visible:ring-offset-2 focus-visible:ring-offset-bg";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-gradient-to-br from-blue-bright via-blue to-blue-deep text-white shadow-[var(--shadow-blue)] hover:-translate-y-[3px] hover:shadow-[var(--shadow-blue-strong)]",
-  secondary:
-    "bg-white/[0.03] text-ink border-[var(--line-strong)] backdrop-blur-sm hover:-translate-y-[3px] hover:border-blue-bright hover:bg-blue/[0.08]",
+  // La sombra azul queda SOLO acá: es la única acción que debe brillar.
+  primary: "bg-blue text-white shadow-cta hover:bg-blue-bright",
+  secondary: "bg-transparent text-ink border-line-strong hover:border-blue-bright hover:bg-blue/[0.06]",
 };
 
 const sizes: Record<Size, string> = {
-  md: "px-7 py-[15px] text-[15.5px]",
-  lg: "px-10 py-[19px] text-[17px]",
+  md: "px-6 py-3 text-[15px]",
+  lg: "px-8 py-4 text-base",
 };
 
 export function buttonVariants(opts?: { variant?: Variant; size?: Size; className?: string }): string {

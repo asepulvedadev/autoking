@@ -81,7 +81,7 @@ export async function Pricing() {
         </div>
 
         {/* Garantía destacada — borde azul eléctrico */}
-        <div className="reveal mx-auto mt-10 flex max-w-2xl items-center gap-4 rounded-[var(--radius-lg)] border-2 border-blue-bright bg-[linear-gradient(120deg,rgb(30_107_255_/_0.12),rgb(30_107_255_/_0.03))] p-6 shadow-[var(--shadow-blue)]">
+        <div className="reveal mx-auto mt-10 flex max-w-2xl items-center gap-4 rounded-[var(--radius-lg)] border-2 border-blue-bright bg-blue/10 p-6 shadow-cta">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-10 w-10 flex-none text-blue-bright">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinejoin="round" />
             <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
@@ -92,7 +92,7 @@ export async function Pricing() {
           </div>
         </div>
 
-        <p className="reveal mx-auto mt-8 flex max-w-fit items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--color-surface)] px-5 py-2.5 text-sm text-[var(--color-muted)]">
+        <p className="reveal mx-auto mt-8 flex max-w-fit items-center gap-2 rounded-full border border-line bg-[var(--color-surface)] px-5 py-2.5 text-sm text-[var(--color-muted)]">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4 flex-none text-[var(--color-success)]">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinejoin="round" />
             <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />

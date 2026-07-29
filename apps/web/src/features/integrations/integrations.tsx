@@ -50,9 +50,9 @@ function BrandIcon({ label }: { label: string }) {
 
 function Chip({ label }: { label: string }) {
   return (
-    <div className="flex items-center gap-2.5 rounded-full border border-[var(--line)] bg-[var(--color-surface)] px-5 py-2.5">
+    <div className="flex items-center gap-2.5 rounded-full border border-line bg-surface px-5 py-2.5">
       <BrandIcon label={label} />
-      <span className="whitespace-nowrap text-sm font-medium text-white/90">{label}</span>
+      <span className="whitespace-nowrap text-sm font-medium text-ink">{label}</span>
     </div>
   );
 }
@@ -62,16 +62,14 @@ export async function Integrations() {
   const tools = t.raw("tools") as string[];
 
   return (
-    <section className="section" id="integraciones">
-      <div className="container">
-        <div className="section-head reveal">
-          <span className="eyebrow">{t("eyebrow")}</span>
-          <h2>
-            {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
-          </h2>
-          <p>{t("subtitle")}</p>
-        </div>
-      </div>
+    // Banda de confianza, no sección. Antes tenía eyebrow + H2 + subtítulo y
+    // ocupaba una pantalla entera para decir "nos conectamos con estas
+    // herramientas" — un dato de apoyo, no un argumento de venta. Ahora es
+    // una línea de logos con un rótulo chico: informa sin robar atención.
+    <section className="border-t border-line py-12" id="integraciones" aria-label={t("titleA")}>
+      <p className="container mb-6 text-center text-xs font-semibold uppercase tracking-[0.16em] text-faint">
+        {t("eyebrow")}
+      </p>
 
       <div
         className="reveal relative"

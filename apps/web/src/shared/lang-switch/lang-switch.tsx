@@ -14,7 +14,7 @@ export function LangSwitch({ className }: { className?: string }) {
 
   return (
     <div
-      className={cn("inline-flex items-center gap-0.5 rounded-full border border-[var(--line)] p-0.5", className)}
+      className={cn("inline-flex items-center gap-0.5 rounded-full border border-line p-0.5", className)}
       role="group"
       aria-label={t("aria")}
     >

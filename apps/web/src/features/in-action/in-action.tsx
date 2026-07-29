@@ -24,7 +24,7 @@ export function InAction() {
           <p>{t("subtitle")}</p>
         </div>
 
-        <div className="reveal mx-auto max-w-3xl overflow-hidden rounded-[var(--radius-lg)] border border-[var(--line-strong)] shadow-[var(--shadow-blue)]">
+        <div className="reveal mx-auto max-w-3xl overflow-hidden rounded-[var(--radius-lg)] border border-line-strong shadow-cta">
           <BrandVideo />
         </div>
       </div>

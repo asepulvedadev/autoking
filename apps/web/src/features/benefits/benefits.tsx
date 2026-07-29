@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
-import { BentoGrid, Spotlight, cn } from "@autoking/ui";
+import { BentoGrid, cn } from "@autoking/ui";
 
 const ICONS: ReactNode[] = [
   <g key="0">
@@ -48,19 +48,27 @@ export async function Benefits() {
           <p>{t("subtitle")}</p>
         </div>
 
+        {/* Se sacó el <Spotlight>: proyectaba un glow azul que seguía al cursor
+            en CADA tarjeta — seis gradientes solo para esta sección, y el gesto
+            más asociado a plantilla de la página. El hover ahora es el mismo
+            que en el resto del sitio: se aclara el borde y sube un pixel. */}
         <BentoGrid className="reveal">
           {items.map((b, i) => (
-            <Spotlight key={b.title} className={cn("h-full rounded-[var(--radius-card)]", SPANS[i])}>
-              <div className="flex h-full flex-col rounded-[var(--radius-card)] border border-[var(--line)] bg-gradient-to-b from-[var(--color-surface)] to-[var(--color-bg-2)] p-7 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-[var(--line-strong)]">
-                <div className="ico">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    {ICONS[i]}
-                  </svg>
-                </div>
-                <h3 className="mb-2 text-[19px] font-bold text-[var(--color-ink)]">{b.title}</h3>
-                <p className="text-[15px] text-[var(--color-muted)]">{b.text}</p>
+            <div
+              key={b.title}
+              className={cn(
+                "flex h-full flex-col rounded-[var(--radius-card)] border border-line bg-surface p-7 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-line-strong",
+                SPANS[i],
+              )}
+            >
+              <div className="ico">
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                  {ICONS[i]}
+                </svg>
               </div>
-            </Spotlight>
+              <h3 className="mb-2 text-h3 font-bold text-ink">{b.title}</h3>
+              <p className="text-[15px] text-muted">{b.text}</p>
+            </div>
           ))}
         </BentoGrid>
       </div>

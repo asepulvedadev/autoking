@@ -88,7 +88,10 @@ export function RoiCalculator() {
           </div>
 
           {/* Resultado */}
-          <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-[rgb(255_90_90_/_0.28)] bg-[radial-gradient(ellipse_80%_120%_at_50%_0%,rgb(255_80_80_/_0.14),transparent_60%),linear-gradient(180deg,#160c0e,#0a0709)] p-8 text-center">
+          {/* El panel de la pérdida: dos degradados apilados pasaron a un rojo
+              muy oscuro y plano. El número que hay adentro es el que tiene que
+              impactar — el fondo no debe competir con él. */}
+          <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-[var(--radius-card)] border border-danger/30 bg-[#140a0c] p-8 text-center">
             <p className="text-sm text-[var(--color-muted)]">{t("resultPre")}</p>
             <div className="my-2 font-display text-[clamp(40px,8vw,64px)] font-extrabold leading-none text-[#ff6b6b]">
               <AnimatedNumber value={plataPerdida} prefix="$" locale={cur.locale} />

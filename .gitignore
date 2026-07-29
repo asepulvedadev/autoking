@@ -25,3 +25,7 @@ next-env.d.ts
 
 # Playwright CLI artifacts
 .playwright-cli/
+
+# Material de marketing y comercial: no lo usa el código y git no olvida
+# blobs — 4MB de PNGs + el pitch a inversionistas no van en un repo de código.
+creativos/

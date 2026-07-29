@@ -6,48 +6,58 @@
 
 /* ============================================================
    Reset + base
+
+   ⚠️ VA DENTRO DE @layer base A PROPÓSITO. En Tailwind v4 el CSS sin capa
+   gana SIEMPRE contra @layer utilities, sin importar la especificidad. Este
+   bloque estaba suelto, y por eso `a { color: inherit }` le ganaba a
+   `text-white`: TODOS los <a> del proyecto ignoraban su clase de color —
+   el CTA principal salía en gris claro en vez de blanco y quedaba en 4.26:1,
+   por debajo del mínimo de contraste. Lo mismo hacían `img` contra `hidden`
+   y `h1,h2,h3` contra `font-sans`.
    ============================================================ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
 
-body {
-  font-family: var(--font-sans);
-  background: var(--color-bg);
-  color: var(--color-ink);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  margin: 0;
-}
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+  }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-display);
-  letter-spacing: -0.02em;
-}
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-img {
-  max-width: 100%;
-  display: block;
-}
+  img {
+    max-width: 100%;
+    display: block;
+  }
 
-::selection {
-  background: var(--color-blue);
-  color: #fff;
+  ::selection {
+    background: var(--color-blue);
+    color: #fff;
+  }
 }
 
 /* Grano de película sutil sobre toda la página — sensación premium */
@@ -72,49 +82,53 @@ body::after {
 }
 
 .section {
-  padding: clamp(64px, 9vw, 130px) 0;
+  /* Un solo ritmo vertical para todas las secciones: la repetición constante
+     es lo que hace que una página se sienta compuesta y no ensamblada. */
+  padding: var(--section-y) 0;
   position: relative;
 }
 
+/* Etiqueta de sección. Sin píldora ni punto con glow: era el gesto más
+   repetido de la página y el que más la emparentaba con cualquier plantilla.
+   Ahora es una línea de texto con una regla al lado — más sobrio, más caro. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 10px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-blue-bright);
-  padding: 7px 14px;
-  border-radius: 100px;
-  background: rgb(30 107 255 / 0.08);
-  border: 1px solid rgb(30 107 255 / 0.25);
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 .eyebrow::before {
   content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-blue-bright);
-  box-shadow: 0 0 10px var(--color-blue-bright);
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
 }
 
+/* Encabezados alineados a la izquierda. Todo centrado no tiene punto de
+   entrada para el ojo: la lectura arranca donde arranca el texto. */
 .section-head {
-  max-width: 680px;
-  margin: 0 auto 56px;
-  text-align: center;
+  max-width: 640px;
+  margin: 0 0 48px;
 }
 .section-head h2 {
-  font-size: clamp(28px, 4.4vw, 46px);
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: var(--text-h2);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 .section-head p {
   color: var(--color-muted);
-  margin-top: 16px;
-  font-size: clamp(16px, 2vw, 18px);
+  margin-top: 14px;
+  font-size: var(--text-lead);
+  line-height: 1.6;
+  max-width: 58ch;
 }
 
 .text-blue {
@@ -161,54 +175,59 @@ body::after {
   grid-template-columns: repeat(3, 1fr);
 }
 
+/* Tarjeta: color PLANO, no degradado.
+   El gradiente sutil de superficie estaba en 4 lugares y sumaba decenas de
+   elementos con gradiente sin aportar información. Una superficie plana con
+   un borde bien elegido se lee más limpia y más intencional. */
 .card {
   position: relative;
   z-index: 2;
-  background: linear-gradient(180deg, var(--color-surface), var(--color-bg-2));
+  background: var(--color-surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
-  padding: 28px;
+  padding: 26px;
   transition:
-    transform 0.35s var(--ease),
-    border-color 0.35s var(--ease),
-    box-shadow 0.35s var(--ease);
+    border-color 0.25s var(--ease),
+    background-color 0.25s var(--ease);
 }
 .card:hover {
-  transform: translateY(-6px);
   border-color: var(--line-strong);
-  box-shadow: 0 24px 50px -20px rgb(0 0 0 / 0.7);
+  background: var(--color-surface-2);
 }
 
+/* Ícono: sin degradado y sin caja azul. Solo el trazo, que es lo que
+   comunica. Menos peso visual por card = más peso para el texto. */
 .ico {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
   display: grid;
   place-items: center;
-  margin-bottom: 18px;
-  background: linear-gradient(135deg, rgb(30 107 255 / 0.16), rgb(30 107 255 / 0.04));
-  border: 1px solid rgb(30 107 255 / 0.25);
+  margin-bottom: 16px;
+  background: rgb(30 107 255 / 0.1);
 }
 .ico svg {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   stroke: var(--color-blue-bright);
 }
 .card h3 {
-  font-size: 19px;
-  font-weight: 700;
+  font-size: var(--text-h3);
+  font-weight: 650;
+  line-height: 1.3;
   margin: 0 0 8px;
+  letter-spacing: -0.01em;
 }
 .card p {
   color: var(--color-muted);
   font-size: 15px;
+  line-height: 1.6;
   margin: 0;
 }
 
-/* Variante "dolor" (rojo) para la sección Problema */
+/* Variante "dolor" para la sección Problema */
 .card.pain .ico {
-  background: linear-gradient(135deg, rgb(255 80 80 / 0.14), rgb(255 80 80 / 0.03));
-  border-color: rgb(255 90 90 / 0.25);
+  background: rgb(255 80 80 / 0.1);
 }
 .card.pain .ico svg {
   stroke: var(--color-danger);
@@ -252,7 +271,7 @@ body::after {
   appearance: none;
   width: 100%;
   height: 6px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: linear-gradient(
     90deg,
     var(--color-blue-bright) var(--range-fill, 50%),

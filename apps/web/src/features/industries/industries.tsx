@@ -33,7 +33,7 @@ export function Industries() {
                   "rounded-full border px-4 py-2.5 text-sm font-medium transition-all",
                   i === active
                     ? "border-blue-bright bg-blue/[0.12] text-white"
-                    : "border-[var(--line)] text-[var(--color-muted)] hover:border-[var(--line-strong)] hover:text-white",
+                    : "border-line text-[var(--color-muted)] hover:border-line-strong hover:text-white",
                 )}
               >
                 <span className="mr-1.5">{ind.emoji}</span>
@@ -51,7 +51,7 @@ export function Industries() {
                 <div className="grid h-8 w-8 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-bright to-blue-deep text-xs font-bold text-white">
                   AK
                 </div>
-                <div className="max-w-[80%] rounded-2xl rounded-tl-md border border-[var(--line)] bg-[var(--color-surface-2)] px-4 py-3 text-[15px] text-[var(--color-ink)]">
+                <div className="max-w-[80%] rounded-2xl rounded-tl-md border border-line bg-[var(--color-surface-2)] px-4 py-3 text-[15px] text-[var(--color-ink)]">
                   {current.answer}
                 </div>
               </div>

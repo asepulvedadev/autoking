@@ -52,7 +52,7 @@
 .socials a {
   width: 40px;
   height: 40px;
-  border-radius: 11px;
+  border-radius: var(--radius-sm);
   display: grid;
   place-items: center;
   background: var(--color-surface);

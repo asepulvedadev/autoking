@@ -36,7 +36,7 @@
   font-weight: 500;
   color: var(--color-muted);
   padding: 8px 16px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   background: rgb(255 255 255 / 0.03);
   border: 1px solid var(--line);
   margin-bottom: 26px;
@@ -49,11 +49,18 @@
   box-shadow: 0 0 10px var(--color-success);
 }
 
+/* No usa --text-display a propósito: esa escala es para titulares a ancho
+   completo, y acá la columna mide ~545px. A 68px el titular rompía en CINCO
+   líneas — un titular de cinco líneas se lee palabra por palabra, no de un
+   golpe, y deja de funcionar como titular. A 52px entra en tres.
+   `balance` reparte las palabras para que las tres queden parejas y no
+   quede una sola palabra colgando al final. */
 .title {
-  font-size: clamp(36px, 6vw, 62px);
+  font-size: clamp(34px, 3.7vw, 52px);
   font-weight: 800;
-  line-height: 1.04;
+  line-height: 1.06;
   margin: 0;
+  text-wrap: balance;
 }
 .title span {
   color: var(--color-blue-bright);
@@ -110,6 +117,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+/* El chasis del teléfono es el ÚNICO gradiente que se queda en el hero:
+   no decora, representa el reflejo de la luz sobre un objeto físico. Ese es
+   el criterio para todos los demás — si no representa nada, se va. */
 .phone {
   position: relative;
   z-index: 2;
@@ -119,11 +129,12 @@
   border-radius: 44px;
   padding: 11px;
   border: 1px solid rgb(150 175 230 / 0.18);
+  /* Se le sacó el halo azul: un teléfono no irradia. La sombra ahora es
+     negra, que es lo que hace que un objeto se despegue del fondo. */
   box-shadow:
     0 50px 100px -30px rgb(0 0 0 / 0.92),
     inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 0 0 1px rgb(0 0 0 / 0.4),
-    var(--shadow-blue);
+    0 0 0 1px rgb(0 0 0 / 0.4);
   animation: phoneFloat 7s ease-in-out infinite;
 }
 @keyframes phoneFloat {
@@ -156,7 +167,7 @@
   width: 92px;
   height: 26px;
   background: #05070d;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   z-index: 6;
 }
 
@@ -168,7 +179,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px 4px;
-  background: linear-gradient(120deg, #11283a, #0e2233);
+  /* Plano: la barra de WhatsApp real no tiene degradado. */
+  background: #102434;
   font-size: 12px;
   font-weight: 600;
   color: #eaf2ff;
@@ -190,7 +202,8 @@
   align-items: center;
   gap: 11px;
   padding: 8px 14px 12px;
-  background: linear-gradient(120deg, #11283a, #0e2233);
+  /* Plano: la barra de WhatsApp real no tiene degradado. */
+  background: #102434;
   border-bottom: 1px solid rgb(255 255 255 / 0.06);
 }
 .back {
@@ -271,11 +284,11 @@
   flex-direction: column;
   gap: 8px;
   min-height: 372px;
+  /* Los dos halos azules radiales se fueron. Nadie tiene WhatsApp con luces
+     azules de fondo, y ese detalle "de más" es justo lo que delata una
+     maqueta. Queda el papel tapiz punteado, que sí existe en la app real. */
   background-color: #0b141a;
-  background-image:
-    radial-gradient(circle at 18% 12%, rgb(30 107 255 / 0.1), transparent 42%),
-    radial-gradient(circle at 85% 90%, rgb(30 107 255 / 0.07), transparent 40%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='6' cy='6' r='1.5'/%3E%3Ccircle cx='26' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='6' cy='6' r='1.5'/%3E%3Ccircle cx='26' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
 }
 .bubble {
   position: relative;
@@ -283,17 +296,19 @@
   padding: 9px 12px 7px;
   font-size: 13.5px;
   line-height: 1.42;
-  border-radius: 14px;
+  border-radius: var(--radius-sm);
   opacity: 0;
   transform: translateY(8px) scale(0.98);
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
 }
+/* Burbuja del agente: azul PLANO y sin halo. Las burbujas de un chat no
+   brillan; el degradado + glow eran los que hacían que la maqueta se leyera
+   como render y no como captura de pantalla. */
 .bubbleAgent {
-  background: linear-gradient(135deg, #1e6bff, #1450c7);
+  background: var(--color-blue);
   color: #fff;
   align-self: flex-start;
   border-bottom-left-radius: 4px;
-  box-shadow: 0 3px 12px rgb(30 107 255 / 0.32);
 }
 .bubbleClient {
   background: #2a3542;
@@ -334,7 +349,7 @@
   gap: 4px;
   padding: 12px 14px;
   background: #202c3a;
-  border-radius: 14px;
+  border-radius: var(--radius-sm);
   border-bottom-left-radius: 4px;
 }
 .typing span {
