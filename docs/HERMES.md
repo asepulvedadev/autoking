@@ -31,8 +31,13 @@ not a replacement."*
    uno solo. Para King + Mayand + clientes hay que correr **multi-gateway** (un proceso por
    perfil), que Hermes sí soporta.
 
-**Traducción:** Hermes puede reemplazar el cerebro **y también el canal**, pero antes hay que
-tapar esos dos huecos. Ver §12 para las dos rutas posibles.
+Pero para AutoKing **no hace falta usar ninguno de los dos**: Kapso publica un
+**plugin oficial para Hermes** (`gokapso/hermes-agent-plugin`) que resuelve el canal, con
+multi-número nativo — ver §12. Lo único que le falta, igual que al de Hermes, es el envío de
+plantillas.
+
+**Traducción:** Hermes puede reemplazar el cerebro **y el canal**, con el plugin oficial de
+Kapso. Queda un solo hueco: las plantillas.
 
 ---
 
@@ -285,49 +290,44 @@ modos de falla distintos: si algo se rompe, no se sabe cuál de los dos fue.
 
 ---
 
-## 12 · Las dos rutas para el canal
+## 12 · El canal: usar el plugin OFICIAL de Kapso
 
-Al descubrirse `whatsapp_cloud.py`, dejaron de ser "Kapso o nada".
+**Kapso publica un plugin oficial para Hermes.** No hay que escribir ningún adaptador:
+[`gokapso/hermes-agent-plugin`](https://github.com/gokapso/hermes-agent-plugin) ·
+[documentación](https://docs.kapso.ai/docs/whatsapp/hermes-agent).
 
-### Ruta A — Adaptador de Kapso (`plugins/platforms/kapso/`)
+```bash
+hermes plugins install gokapso/hermes-agent-plugin --enable
+hermes kapso setup --configure-webhook
+hermes gateway restart
+```
 
-Se escribe un adaptador nuevo que habla con la API de Kapso, igual que el que ya existe para
-OpenClaw pero en Python.
+Se clona en `~/.hermes/plugins/kapso`. v0.2.2, 2.461 líneas + 1.010 de tests.
 
-**A favor:** Kapso ya tiene los números configurados y andando · su **onboarding multi-tenant**
-(setup links) deja que un cliente conecte su WhatsApp sin que nadie toque su Business Manager —
-eso es mucho trabajo si se hace contra Meta directo · templates, inbox, Flows y broadcasts ya
-resueltos · **no se toca producción mientras se desarrolla**.
+| | |
+|---|---|
+| Variables | `KAPSO_API_KEY`, `KAPSO_WEBHOOK_SECRET`, `KAPSO_PHONE_NUMBER_ID` |
+| Opcionales | `KAPSO_HOME_CHANNEL`, `KAPSO_ALLOWED_USERS`, `KAPSO_ALLOW_ALL_USERS`, `KAPSO_BASE_URL`, `KAPSO_GRAPH_VERSION`, `KAPSO_HOST`, `KAPSO_PORT`, `KAPSO_WEBHOOK_PATH` |
+| Webhook | `0.0.0.0:8648`, path `/kapso/webhook`, evento `whatsapp.message.received`, payload **v2** |
+| **Multi-número** | ✅ nativo: `<phone_number_id>:<destinatario>` y sesiones `kapso:<b64>:<b64>` |
+| Envío | texto, imagen, video, voz, audio, documento, sticker |
+| **Templates** | ❌ **no tiene** |
 
-**En contra:** un intermediario más en el camino — y el diagnóstico de la lentitud de King
-(>1 min de respuesta) apuntó justamente a **intermitencia de la API de Kapso** · Kapso cuesta
-plata por encima de lo que ya cobra Meta · hay que escribir y mantener el adaptador entero.
+El multi-número nativo es lo que más importa acá: AutoKing es multi-tenant, y sin eso haría falta
+un proceso de gateway por número.
 
-### Ruta B — Extender `whatsapp_cloud.py` y hablar con Meta directo
+### Lo único que le falta: templates
 
-Se le agrega envío de templates al adaptador oficial, que es el hueco que le falta, y se corre
-un gateway por número.
+Ni el plugin oficial ni el adaptador Cloud del propio Hermes mandan plantillas. Sin eso un agente
+**puede responder pero no puede volver a escribir**: fuera de la ventana de 24 h WhatsApp solo
+acepta plantillas aprobadas.
 
-**A favor:** un salto menos de red — ataca de raíz el problema de latencia · se ahorra lo que
-cobra Kapso · el 90 % del adaptador **ya está escrito y lo mantiene Nous** · el trabajo propio
-se reduce a los templates.
+Hay una propuesta de PR escrita en `hermes/contrib/kapso-send-template/`.
 
-**En contra:** hay que gestionar el **embedded signup de Meta** para cada cliente nuevo, que es
-precisamente el dolor que Kapso resuelve · se pierden inbox, Flows y broadcasts · migrar los
-números existentes de Kapso a acceso directo no es gratis.
-
-### Lo que hay que preguntarse para elegir
-
-No es una decisión técnica, es de negocio: **¿cuántos clientes nuevos vas a onboardear por mes?**
-
-- **Pocos y a mano** → Ruta B. El embedded signup se hace una vez por cliente y el ahorro de
-  latencia y costo se cobra todos los días.
-- **Muchos y en serie** → Ruta A. El setup link de Kapso es lo que hace escalable el alta, y
-  eso vale más que el salto de red.
-
-Una tercera vía razonable: **Ruta B para los agentes propios** (King y Mayand, donde la latencia
-duele y el alta ya está hecha) y **Ruta A para los clientes** (donde el onboarding es el cuello
-de botella).
+**Para AutoKing no es bloqueante hoy:** los recordatorios y seguimientos salen de
+`scripts/enviar-recordatorios.mjs` y `enviar-seguimientos.mjs`, cron jobs que hablan con Kapso
+directo sin pasar por el agente. Lo que habilitaría es que el agente decida por sí mismo retomar
+una conversación.
 
 ---
 
@@ -340,12 +340,12 @@ En orden, sin saltear pasos:
 2. **`hermes claw migrate --dry-run`** para ver qué se lleva solo y qué no.
 3. **Probarlo por Telegram**, que Hermes soporta nativo y no arriesga ningún número de WhatsApp.
    Ahí se valida el motor: skills, memoria, MCP, perfiles, cron.
-4. **Escribir el adaptador de plataforma para Kapso** (`plugins/platforms/kapso/`). Este es el
-   trabajo de verdad, y es el que decide si la migración es viable.
+4. **Instalar el plugin oficial de Kapso** — `hermes plugins install gokapso/hermes-agent-plugin
+   --enable` y `hermes kapso setup --configure-webhook`. No hay que escribir nada.
 5. **Migrar un solo agente**, el de menos volumen, y medir latencia y costo contra OpenClaw
    durante al menos una semana.
 6. Recién ahí, el resto.
 
-**Lo que NO hay que hacer:** apagar OpenClaw antes de tener el adaptador de Kapso andando y
+**Lo que NO hay que hacer:** apagar OpenClaw antes de tener el canal de Kapso andando y
 probado. Sin eso, migrar significa mover a los clientes a WhatsApp no oficial — y eso no es una
 decisión técnica, es una decisión de negocio con riesgo de baneo para el número de cada cliente.
