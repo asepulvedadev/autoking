@@ -10,6 +10,7 @@ const TABS = [
   { slug: "conversaciones", label: "Conversaciones" },
   { slug: "leads", label: "Leads" },
   { slug: "prospeccion", label: "Prospección" },
+  { slug: "conexiones", label: "Conexiones" },
 ];
 
 export function AgenteTabs({ id }: { id: string }) {

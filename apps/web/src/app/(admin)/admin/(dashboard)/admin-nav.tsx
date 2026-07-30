@@ -30,9 +30,10 @@ const LINKS = [
       </>
     ),
   },
-  // Leads, Conversaciones y Prospección NO van acá: viven DENTRO de cada agente
-  // (/admin/agentes/[id]/…), porque son datos de ese agente y no del panel.
-  // Sacarlos del menú es lo que evita que un vendedor de un agente vea lo del otro.
+  // Leads, Conversaciones, Prospección y Conexiones (MCP) NO van acá: viven
+  // DENTRO de cada agente (/admin/agentes/[id]/…), porque son de ese agente y
+  // no del panel. Sacarlos del menú es lo que evita que el vendedor de un
+  // agente vea —o conecte— lo del otro.
   {
     href: "/admin/agentes",
     label: "Agentes",
@@ -40,18 +41,6 @@ const LINKS = [
       <>
         <rect x="4" y="8" width="16" height="11" rx="2.5" />
         <path d="M9 3v5M15 3v5M9 13h.01M15 13h.01M8.5 19v2M15.5 19v2" strokeLinecap="round" />
-      </>
-    ),
-  },
-  {
-    href: "/admin/mcp",
-    label: "Conexiones",
-    privileged: true,
-    icon: (
-      <>
-        <path d="M9 2v6M15 2v6" strokeLinecap="round" />
-        <path d="M6 8h12v4a6 6 0 01-6 6 6 6 0 01-6-6V8z" />
-        <path d="M12 18v4" strokeLinecap="round" />
       </>
     ),
   },
