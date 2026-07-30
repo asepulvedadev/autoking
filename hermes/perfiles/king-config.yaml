@@ -1,19 +1,35 @@
 model:
   provider: openai-codex
   default: gpt-5.5
+agent:
+  max_turns: 25
 terminal:
   cwd: /root/.hermes/profiles/king/home
+_config_version: 33
 mcp_servers:
   autoking-tools:
     command: bash
     args:
-      - /root/autoking-king-tools/run-mcp.sh
+    - /root/autoking-king-tools/run-mcp.sh
     env:
       AUTOKING_AGENT_ID: king
       AUTOKING_AGENT_DIR: /root/autoking-platform/agents/king
       AUTOKING_TENANT_ID: autoking
-agent:
-  max_turns: 25
+plugins:
+  enabled:
+  - kapso
+  disabled: []
+  entries:
+    kapso:
+      allow_tool_override: false
+memory:
+  memory_enabled: true
+  user_profile_enabled: false
+  memory_char_limit: 2200
+  nudge_interval: 10
+  flush_min_turns: 6
+skills:
+  creation_nudge_interval: 25
 
 # ── Notas de la migración de King a Hermes ──────────────────────────────────
 #
@@ -64,3 +80,33 @@ agent:
 #
 # agent.max_turns baja de 500 a 25: el default es para exploración abierta, y
 # una conversación de venta que necesita 500 turnos ya se fue por las ramas.
+
+# ── Bucle de aprendizaje: qué se activó y qué NO ────────────────────────────
+#
+# memory_enabled: true — lo que el AGENTE aprende del oficio (qué objeciones
+# aparecen, qué argumentos funcionan por rubro). Conocimiento general.
+#
+# ⚠️ user_profile_enabled: FALSE, y no es un olvido.
+#
+# El MemoryStore de Hermes se construye así (agent/agent_init.py:1627):
+#
+#     agent._memory_store = MemoryStore(memory_char_limit=…, user_char_limit=…)
+#     agent._memory_store.load_from_disk()
+#
+# No recibe scope de contacto ni de sesión: es UN archivo por perfil. Hermes
+# está pensado para un asistente personal, donde "el usuario" es una persona.
+# King atiende decenas de clientes distintos. Con el perfil activado guardaría
+# "tiene una barbería en Medellín, presupuesto ajustado" y se lo aplicaría al
+# siguiente, que puede ser un dentista en Bogotá. Fuga de datos entre clientes.
+#
+# Los datos POR CLIENTE van a Supabase por el MCP (identificar_contacto,
+# guardar_lead), que tiene RLS por tenant y queda auditado.
+#
+# skills.creation_nudge_interval: 25 y no el default de 15. Una conversación
+# de venta es corta y repetitiva: recordárselo muy seguido produce skills
+# triviales tipo "cómo saludar".
+#
+# Lo que el agente cree o anote se revisa los lunes:
+# /root/autoking-ops/revisar-aprendizaje.sh manda por email las skills nuevas
+# y su memoria. Un agente de ventas que se auto-modifica sin que nadie mire
+# puede empezar a prometer cosas que no existen.
