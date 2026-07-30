@@ -1,0 +1,31 @@
+model:
+  provider: openai-codex
+  default: gpt-5.5
+terminal:
+  cwd: /root/.hermes/profiles/mayand/home
+agent:
+  max_turns: 25
+mcp_servers:
+  autoking-tools:
+    command: bash
+    args:
+    - /root/autoking-king-tools/run-mcp.sh
+    env:
+      AUTOKING_AGENT_ID: mayand
+      AUTOKING_AGENT_DIR: /root/autoking-platform/agents/mayand
+      AUTOKING_TENANT_ID: autoking
+
+# ── Mayand: idéntico a King salvo tres cosas ────────────────────────────────
+#
+#   AUTOKING_AGENT_ID / _DIR  → mayand
+#   AGENTS.md                 → el suyo (14.961 bytes, público de México)
+#   país                      → cotiza en MXN
+#
+# El mismo run-mcp.sh que King, parametrizado por env. Ese es el tenant-guard:
+# un solo servidor MCP, y el agente que lo invoca decide qué datos ve.
+#
+# Verificado contra plan_precios: el Pro de México lo cotiza en $3,700 MXN/mes
+# + $7,500 MXN de instalación, que es exactamente lo que dice la base. El bug
+# histórico —Mayand inventando un precio en COP 5x el real— no se reprodujo.
+#
+# supabase queda FUERA, igual que en King: atiende desconocidos por WhatsApp.
