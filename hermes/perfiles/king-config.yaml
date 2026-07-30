@@ -12,6 +12,8 @@ mcp_servers:
       AUTOKING_AGENT_ID: king
       AUTOKING_AGENT_DIR: /root/autoking-platform/agents/king
       AUTOKING_TENANT_ID: autoking
+agent:
+  max_turns: 25
 
 # ── Notas de la migración de King a Hermes ──────────────────────────────────
 #
@@ -45,3 +47,20 @@ mcp_servers:
 # resolver lo que el grande hace en una, y cada ronda reenvía los ~19k tokens
 # de contexto. Con suscripción de ChatGPT vía Codex la cuota se gasta por
 # llamada, así que 1 llamada le gana a 5 aunque el modelo sea "más caro".
+
+# ── Rendimiento: de 20s a 11s ───────────────────────────────────────────────
+#
+# El perfil se crea con las 70 skills de fábrica de Hermes. King vende agentes
+# de WhatsApp: no necesita apple, comfyui, mlops ni github. Cada skill mete su
+# nombre y descripción en el prompt de CADA llamada.
+#
+# Dejando SOLO las 5 de AutoKing (respaldo en king-skills-backup.tgz):
+#
+#   75 skills → 20s · 400 tokens de salida
+#    5 skills → 11s · 171 tokens   ← y la respuesta es MÁS completa
+#
+# Medido tres veces: 11s, 12s, 12s. El arranque del CLI en caliente es 337ms,
+# así que casi todo el tiempo es inferencia — levantar el gateway NO lo mejora.
+#
+# agent.max_turns baja de 500 a 25: el default es para exploración abierta, y
+# una conversación de venta que necesita 500 turnos ya se fue por las ramas.
