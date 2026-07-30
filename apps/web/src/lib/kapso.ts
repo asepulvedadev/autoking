@@ -144,7 +144,9 @@ export async function crearTemplateRecordatorio(
   const body = {
     name: "recordatorio_cita",
     category: "UTILITY",
-    language: "es_CO",
+    // "es" genérico y no "es_CO": un solo template sirve para Colombia y
+    // México, y evita tener que mantener dos textos idénticos.
+    language: "es",
     parameter_format: "NAMED",
     components: [
       {
