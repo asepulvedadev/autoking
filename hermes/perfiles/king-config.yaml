@@ -23,13 +23,18 @@ plugins:
     kapso:
       allow_tool_override: false
 memory:
-  memory_enabled: true
+  memory_enabled: false
   user_profile_enabled: false
   memory_char_limit: 2200
   nudge_interval: 10
   flush_min_turns: 6
 skills:
   creation_nudge_interval: 25
+platform_toolsets:
+  kapso:
+  - skills
+  whatsapp:
+  - skills
 
 # ── Notas de la migración de King a Hermes ──────────────────────────────────
 #
@@ -110,3 +115,38 @@ skills:
 # /root/autoking-ops/revisar-aprendizaje.sh manda por email las skills nuevas
 # y su memoria. Un agente de ventas que se auto-modifica sin que nadie mire
 # puede empezar a prometer cosas que no existen.
+
+# ── INCIDENTE 2026-07-30: fuga de datos entre clientes ──────────────────────
+#
+# Probando a King, escribió esto en memories/USER.md:
+#
+#   "User is Alvaro Sepulveda and has a business in advertising/visual
+#    production offering laser cutting of acrylic and MDF."
+#
+# Un dato de UNA conversación, guardado en un archivo GLOBAL del perfil, que
+# se le habría aplicado al próximo cliente —un dentista, una barbería, quien
+# fuera. Exactamente la fuga que `user_profile_enabled: false` debía evitar.
+#
+# POR QUÉ FALLÓ: ese flag controla si el perfil se INYECTA en el prompt, no
+# si se ESCRIBE. MemoryStore._path_for("user") escribe USER.md sin consultarlo
+# (tools/memory_tool.py:318). Mientras el agente tenga la tool `memory`, puede
+# escribirlo.
+#
+# Y al mirar qué más tenía, apareció algo peor: King contaba con `terminal`,
+# `write_file`, `execute_code` y `browser_*`. Un agente que atiende
+# DESCONOCIDOS por WhatsApp con capacidad de ejecutar comandos en el VPS de
+# producción. En OpenClaw estaba en `tools.profile: minimal` y esa restricción
+# NO se replicó al migrarlo — error de la migración, no de Hermes.
+#
+# LA CLAVE CORRECTA ES `platform_toolsets`, NO `agent.toolsets`. El gateway
+# resuelve las herramientas POR PLATAFORMA (gateway/run.py:17087 →
+# hermes_cli/tools_config.py:2134). Poner agent.toolsets no hace nada, y no
+# avisa. El default de kapso hereda el de whatsapp: terminal, file, browser.
+#
+# Verificado después del arreglo:
+#   kapso    → ['autoking-tools', 'kanban', 'skills']
+#   discord  → browser, code_execution, computer_use, delegation, …  (Rey)
+#
+# ⚠️ Al probar tools NO uses el CLI: ahí la plataforma es "cli", que
+# legítimamente tiene todo, y parece que la restricción no se aplicó. Hay que
+# resolver _get_platform_tools con la plataforma real.
