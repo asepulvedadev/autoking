@@ -1,0 +1,47 @@
+model:
+  provider: openai-codex
+  default: gpt-5.5
+terminal:
+  cwd: /root/.hermes/profiles/king/home
+mcp_servers:
+  autoking-tools:
+    command: bash
+    args:
+      - /root/autoking-king-tools/run-mcp.sh
+    env:
+      AUTOKING_AGENT_ID: king
+      AUTOKING_AGENT_DIR: /root/autoking-platform/agents/king
+      AUTOKING_TENANT_ID: autoking
+
+# ── Notas de la migración de King a Hermes ──────────────────────────────────
+#
+# terminal.cwd NO es opcional. Hermes carga AGENTS.md del DIRECTORIO DE TRABAJO:
+# el CLI usa "." (donde lo corrés) y el gateway usa terminal.cwd. Sin esto el
+# gateway arranca a King sin su playbook de 14 KB y responde como un asistente
+# genérico — con el tono correcto, pero sin metodología de venta y sin precios.
+# Y no tira ningún error: parece que funciona.
+#
+# mcp_servers.autoking-tools es el mismo run-mcp.sh que usa OpenClaw,
+# parametrizado por agente con AUTOKING_AGENT_ID / _DIR / _TENANT_ID. Expone
+# 9 herramientas: buscar_conocimiento, guardar_lead, identificar_contacto,
+# crear_cliente, marcar_cliente, listar_recursos, enviar_imagen,
+# programar_seguimiento, escalar. Arranca en 205ms.
+#
+# ⚠️ supabase NO va acá, a propósito. King atiende desconocidos por WhatsApp.
+# En OpenClaw hubo que sacárselo con tools.deny después de descubrir que
+# `profile: minimal` NO quita las herramientas de un MCP. En Hermes los MCP son
+# por perfil, así que la frontera es real: nunca lo tuvo.
+#
+# El modelo es gpt-5.5 y no gpt-5.4-mini, contra la intuición. Medido con el
+# mismo prompt y el MCP conectado:
+#
+#   gpt-5.4-mini   27s   5 llamadas a la API   670 tokens de salida
+#   gpt-5.4        16s   2 llamadas            259
+#   gpt-5.5        20s   1 llamada             400   ← y es el único que se
+#                                                      presenta, como manda el
+#                                                      paso 0 del playbook
+#
+# El modelo chico NO sale más barato: necesita cinco idas y vueltas para
+# resolver lo que el grande hace en una, y cada ronda reenvía los ~19k tokens
+# de contexto. Con suscripción de ChatGPT vía Codex la cuota se gasta por
+# llamada, así que 1 llamada le gana a 5 aunque el modelo sea "más caro".
