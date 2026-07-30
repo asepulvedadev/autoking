@@ -149,7 +149,10 @@ export async function crearTemplateRecordatorio(
     components: [
       {
         type: "BODY",
-        text: "Hola {{nombre}} 👋 Te recordamos tu cita de {{servicio}} el {{fecha}} a las {{hora}}. ¿Nos confirmás que venís?",
+        // Español NEUTRO, no rioplatense: este texto lo lee un cliente en
+        // Colombia o México. Decía "¿Nos confirmás que venís?" y se propagaba
+        // a la WABA de cada cliente nuevo al provisionarlo.
+        text: "Hola {{nombre}} 👋 Te recordamos tu cita de {{servicio}} el {{fecha}} a las {{hora}}. ¿Nos confirmas que vienes?",
         example: {
           body_text_named_params: [
             { param_name: "nombre", example: "Laura" },

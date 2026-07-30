@@ -59,7 +59,7 @@ export default async function PanelConocimientoPage() {
             De AutoKing <span className="font-normal text-[var(--color-faint)]">({compartidos.length})</span>
           </h2>
           <p className="mt-1 text-xs text-[var(--color-faint)]">
-            Cómo funciona el servicio. Lo mantenemos nosotros, por eso no se edita desde acá.
+            Cómo funciona el servicio. Lo mantenemos nosotros, por eso no se edita desde aquí.
           </p>
           <div className="mt-3 flex flex-col gap-1.5">
             {compartidos.slice(0, 10).map((c) => (

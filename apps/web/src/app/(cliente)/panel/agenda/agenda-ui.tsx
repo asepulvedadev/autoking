@@ -37,7 +37,7 @@ export function Citas({ citas, tz }: { citas: Cita[]; tz: string }) {
   if (citas.length === 0) {
     return (
       <div className="rounded-[var(--radius-card)] border border-dashed border-[var(--line-strong)] p-10 text-center text-sm text-[var(--color-muted)]">
-        No hay citas próximas. Cuando tu agente agende una, aparece acá.
+        No hay citas próximas. Cuando tu agente agende una, aparece aquí.
       </div>
     );
   }

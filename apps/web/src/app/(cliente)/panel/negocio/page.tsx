@@ -20,7 +20,7 @@ export default async function PanelNegocioPage() {
     <div>
       <h1 className="font-display text-[clamp(22px,4vw,28px)] font-extrabold text-white">Mi negocio</h1>
       <p className="mt-1 text-sm text-[var(--color-muted)]">
-        Con esto tu agente sabe quién sos y cómo hablarle a tus clientes. Al guardar, los cambios
+        Con esto tu agente sabe quién eres y cómo hablarle a tus clientes. Al guardar, los cambios
         se aplican enseguida.
       </p>
       <NegocioForm n={(data ?? {}) as Negocio} />

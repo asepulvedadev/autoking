@@ -32,7 +32,7 @@ export function SubirDocumento() {
       <h2 className="font-semibold text-white">⚡ Entrenamiento rápido</h2>
       <p className="mt-1 text-sm text-[var(--color-muted)]">
         Subí un documento o una <b className="text-white">foto de tu carta o lista de precios</b> y tu
-        agente lo aprende solo. Le sacamos el texto y lo dividimos por vos.
+        agente lo aprende solo. Le sacamos el texto y lo dividimos por ti.
       </p>
       <div className="mt-4">
         <ZonaSubida accept="image/*,.txt,.md,text/plain,text/markdown" maxMB={8} ayuda="foto, .txt o .md" />

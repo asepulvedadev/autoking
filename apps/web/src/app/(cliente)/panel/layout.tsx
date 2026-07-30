@@ -42,9 +42,9 @@ export default async function PanelLayout({ children }: { children: React.ReactN
       <main className="mx-auto max-w-5xl px-5 py-8">
         {!agente ? (
           <div className="rounded-[var(--radius-card)] border border-dashed border-[var(--line-strong)] p-12 text-center">
-            <p className="text-white">Todavía no tenés un agente asignado.</p>
+            <p className="text-white">Todavía no tienes un agente asignado.</p>
             <p className="mt-1 text-sm text-[var(--color-muted)]">
-              Escribinos y lo dejamos andando.
+              Escríbenos y lo dejamos andando.
             </p>
           </div>
         ) : (

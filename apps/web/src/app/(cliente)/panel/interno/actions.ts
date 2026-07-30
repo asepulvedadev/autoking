@@ -40,7 +40,7 @@ export async function guardarInterno(_prev: InternoState, fd: FormData): Promise
   if (/^(sk-|pk_|ghp_|xox[baprs]-|AKIA|eyJ[A-Za-z0-9_-]{10,})/.test(valor)) {
     return {
       error:
-        "Eso parece una credencial o API key. No la guardes acá: el agente puede leer esta sección. Pasánosla por otro medio y la ponemos en el servidor.",
+        "Eso parece una credencial o API key. No la guardes aquí: el agente puede leer esta sección. Pásanosla por otro medio y la ponemos en el servidor.",
     };
   }
 

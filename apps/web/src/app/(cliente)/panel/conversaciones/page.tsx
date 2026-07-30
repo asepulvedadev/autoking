@@ -38,7 +38,7 @@ export default async function PanelConversacionesPage() {
         </div>
       ) : conversaciones.length === 0 ? (
         <div className="mt-6 rounded-[var(--radius-card)] border border-dashed border-[var(--line-strong)] p-12 text-center text-[var(--color-muted)]">
-          Todavía no hay conversaciones. Van a aparecer acá cuando alguien le escriba a tu WhatsApp.
+          Todavía no hay conversaciones. Van a aparecer aquí cuando alguien le escriba a tu WhatsApp.
         </div>
       ) : (
         <div className="mt-5 flex flex-col gap-2">

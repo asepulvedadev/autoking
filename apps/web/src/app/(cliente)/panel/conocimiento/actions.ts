@@ -33,7 +33,7 @@ async function embeber(texto: string): Promise<string | null> {
 export async function agregarConocimiento(_prev: ConocimientoState, fd: FormData): Promise<ConocimientoState> {
   const titulo = String(fd.get("titulo") ?? "").trim();
   const contenido = String(fd.get("contenido") ?? "").trim();
-  if (!contenido) return { error: "Escribí qué querés que tu agente sepa." };
+  if (!contenido) return { error: "Escribe qué quieres que tu agente sepa." };
   if (contenido.length > 3000) return { error: "Es muy largo: partilo en varios (máx. 3000 caracteres)." };
 
   const { agente, supabase } = await contexto();

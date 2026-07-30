@@ -51,7 +51,7 @@ export default async function PanelAgendaPage() {
       <section>
         <h2 className="text-sm font-semibold text-white">Horario de atención</h2>
         <p className="mb-3 mt-0.5 text-xs text-[var(--color-faint)]">
-          Tu agente solo ofrece turnos dentro de estas franjas. Podés cargar varias por día
+          Tu agente solo ofrece turnos dentro de estas franjas. Puedes cargar varias por día
           (por ejemplo, mañana y tarde).
         </p>
         <Horarios horarios={(horarios ?? []) as Horario[]} />

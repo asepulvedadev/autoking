@@ -63,7 +63,7 @@ export default async function PanelInicioPage() {
           icono="📅"
           titulo="Citas próximas"
           dato={String(citas ?? 0)}
-          pie="agendadas de acá en adelante"
+          pie="agendadas de aquí en adelante"
         />
       </div>
 
@@ -85,7 +85,7 @@ export default async function PanelInicioPage() {
       </div>
 
       <p className="text-center text-xs text-[var(--color-faint)]">
-        ¿Algo no anda como esperabas? Escribinos y lo revisamos.
+        ¿Algo no anda como esperabas? Escríbenos y lo revisamos.
       </p>
     </div>
   );

@@ -30,8 +30,8 @@ export default async function PanelInternoPage() {
         <p className="mt-1 text-[var(--color-muted)]">
           Tu agente <b className="text-white">lee</b> esta información para poder decidir. Le indicamos
           que no la revele y solo la comparte con alguien de tu equipo, pero eso es una instrucción,
-          no un candado. <b className="text-white">Nunca guardes acá contraseñas, API keys ni datos
-          bancarios</b> — si necesitás conectar algo con credenciales, escribinos y lo dejamos en el
+          no un candado. <b className="text-white">Nunca guardes aquí contraseñas, API keys ni datos
+          bancarios</b> — si necesitas conectar algo con credenciales, escríbenos y lo dejamos en el
           servidor, fuera del alcance del agente.
         </p>
       </div>

@@ -49,7 +49,7 @@ export function NegocioForm({ n }: { n: Negocio }) {
       <section className="rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--color-surface)] p-5">
         <h2 className="font-semibold text-white">Cómo se presenta tu agente</h2>
         <p className="mt-1 text-sm text-[var(--color-muted)]">
-          Es la cara de tu negocio en WhatsApp. Ponele el nombre y el trato que usarías vos.
+          Es la cara de tu negocio en WhatsApp. Ponle el nombre y el trato que usarías tú.
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
@@ -71,7 +71,7 @@ export function NegocioForm({ n }: { n: Negocio }) {
         <h2 className="font-semibold text-white">Qué ofrecés</h2>
         <div className="mt-4 flex flex-col gap-4">
           <div>
-            <label className={label} htmlFor="servicios">Servicios (uno por línea, con precio si querés)</label>
+            <label className={label} htmlFor="servicios">Servicios (uno por línea, con precio si quieres)</label>
             <textarea
               id="servicios"
               name="servicios"
