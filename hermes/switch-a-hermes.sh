@@ -101,8 +101,26 @@ for p in 8648 8649; do
 done
 
 echo "════ 5 · Apagar OpenClaw ════"
-systemctl stop openclaw-gateway || true
-systemctl disable openclaw-gateway || true    # que no vuelva solo al reiniciar
+# ⚠️ --user NO es opcional. OpenClaw corre bajo el systemd de USUARIO:
+#
+#     cgroup: /user.slice/user-0.slice/user@0.service/app.slice/openclaw-gateway.service
+#
+# `systemctl stop openclaw-gateway` (sin --user) consulta el systemd del
+# SISTEMA, no encuentra la unidad, devuelve éxito igual, y OpenClaw sigue
+# corriendo. De hecho `systemctl is-active openclaw-gateway` responde
+# "inactive" mientras el proceso atiende WhatsApp — por eso el bug pasa
+# desapercibido.
+systemctl --user stop openclaw-gateway || true
+systemctl --user disable openclaw-gateway || true   # que no vuelva al reiniciar
+
+# Verificación real: que el puerto quede libre. Si el proceso sigue vivo, se
+# aborta ANTES de tocar nginx — así no quedan los dos sistemas en el aire.
+sleep 3
+if ss -ltn | grep -q ':18789 '; then
+  echo "  ✗ OpenClaw SIGUE escuchando en :18789 — ABORTANDO antes de tocar nginx"
+  echo "    Revisá:  systemctl --user status openclaw-gateway"
+  exit 1
+fi
 echo "  → detenido y deshabilitado (los archivos quedan para rollback)"
 
 echo "════ 6 · Recargar nginx: el tráfico pasa a Hermes ════"
@@ -137,7 +155,7 @@ cat <<'ROLLBACK'
     cp /root/rollback-openclaw/nginx-ia.autoking.pro /etc/nginx/sites-enabled/ia.autoking.pro
     nginx -t && systemctl reload nginx
     hermes -p king gateway stop; hermes -p mayand gateway stop
-    systemctl enable --now openclaw-gateway
+    systemctl --user enable --now openclaw-gateway   # --user: la unidad NO está en el systemd del sistema
 
 Vuelve a estar como antes en menos de un minuto. Los archivos de OpenClaw
 nunca se borraron.
