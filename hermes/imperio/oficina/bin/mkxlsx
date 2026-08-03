@@ -1,0 +1,96 @@
+#!/root/imperio/venv/bin/python
+"""mkxlsx — Excel con fórmulas VIVAS (no valores congelados) desde un JSON.
+
+  mkxlsx modelo.json salida.xlsx
+
+Formato del JSON:
+{
+  "hojas": [{
+    "nombre": "Modelo",
+    "anchos": {"A": 34, "B": 14},
+    "filas": [
+      ["Ingresos 2026", null],
+      ["Plan Pro",  1200000],
+      ["Plan Base",  450000],
+      ["Total", "=SUM(B2:B3)"]
+    ],
+    "formato": {"B2:B4": "moneda"},
+    "encabezado": true
+  }]
+}
+
+Cualquier string que empiece con "=" se escribe como fórmula real de Excel.
+Formatos: moneda, porcentaje, entero, decimal, fecha.
+"""
+import json
+import sys
+
+from openpyxl import Workbook
+from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
+from openpyxl.utils import get_column_letter
+
+FORMATOS = {
+    "moneda": '#,##0 [$COP]',
+    "moneda_usd": '"US$" #,##0.00',
+    "moneda_mxn": '#,##0.00 [$MXN]',
+    "porcentaje": "0.0%",
+    "entero": "#,##0",
+    "decimal": "#,##0.00",
+    "fecha": "dd/mm/yyyy",
+}
+
+
+def main() -> int:
+    if len(sys.argv) != 3:
+        print(__doc__, file=sys.stderr)
+        return 2
+    with open(sys.argv[1], encoding="utf-8") as fh:
+        spec = json.load(fh)
+
+    wb = Workbook()
+    wb.remove(wb.active)
+    borde = Side(style="thin", color="DDDDDD")
+
+    for hoja in spec.get("hojas", []):
+        ws = wb.create_sheet(hoja.get("nombre", "Hoja"))
+        filas = hoja.get("filas", [])
+
+        for fila in filas:
+            ws.append(fila)
+
+        # Encabezado en negrita con fondo, y congelado para que no se pierda al scrollear.
+        if hoja.get("encabezado") and filas:
+            for celda in ws[1]:
+                celda.font = Font(bold=True, color="FFFFFF")
+                celda.fill = PatternFill("solid", fgColor="2F3437")
+                celda.alignment = Alignment(vertical="center")
+            ws.freeze_panes = "A2"
+
+        for rango, nombre in (hoja.get("formato") or {}).items():
+            fmt = FORMATOS.get(nombre, nombre)
+            for tira in ws[rango]:
+                for celda in (tira if isinstance(tira, tuple) else (tira,)):
+                    celda.number_format = fmt
+
+        for col, ancho in (hoja.get("anchos") or {}).items():
+            ws.column_dimensions[col].width = ancho
+
+        # Ancho automático para las columnas sin ancho explícito.
+        for i, columna in enumerate(ws.columns, start=1):
+            letra = get_column_letter(i)
+            if letra in (hoja.get("anchos") or {}):
+                continue
+            largo = max((len(str(c.value)) for c in columna if c.value is not None), default=8)
+            ws.column_dimensions[letra].width = min(max(largo + 2, 10), 48)
+
+        for tira in ws.iter_rows():
+            for celda in tira:
+                celda.border = Border(left=borde, right=borde, top=borde, bottom=borde)
+
+    wb.save(sys.argv[2])
+    print(f"{sys.argv[2]} — {len(spec.get('hojas', []))} hoja(s)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

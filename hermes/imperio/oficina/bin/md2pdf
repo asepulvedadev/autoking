@@ -1,0 +1,86 @@
+#!/root/imperio/venv/bin/python
+"""md2pdf — Markdown a PDF con tipografía decente, vía Chrome headless.
+
+  md2pdf informe.md salida.pdf [--titulo "Informe Q3"] [--horizontal]
+
+Chrome rinde el PDF, así que el CSS de acá es lo que define cómo se ve.
+Soporta tablas, código, citas y saltos de página con `<div class="salto"></div>`.
+"""
+import argparse
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+
+import markdown
+
+CSS = """
+@page { size: %(tamano)s; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font: 10.5pt/1.55 "DejaVu Sans", system-ui, sans-serif; color: #1a1a1a; margin: 0; }
+h1 { font-size: 22pt; margin: 0 0 4pt; letter-spacing: -.4pt; }
+h2 { font-size: 14pt; margin: 20pt 0 6pt; border-bottom: 1px solid #e2e2e2; padding-bottom: 3pt; }
+h3 { font-size: 11.5pt; margin: 14pt 0 4pt; }
+p, li { orphans: 3; widows: 3; }
+code { font: 9.2pt "DejaVu Sans Mono", monospace; background: #f4f4f5; padding: 1pt 3pt; border-radius: 3px; }
+pre { background: #f4f4f5; padding: 8pt 10pt; border-radius: 5px; overflow-x: auto; page-break-inside: avoid; }
+pre code { background: none; padding: 0; }
+table { border-collapse: collapse; width: 100%%; margin: 10pt 0; font-size: 9.5pt; page-break-inside: avoid; }
+th, td { border: 1px solid #dcdcdc; padding: 5pt 7pt; text-align: left; vertical-align: top; }
+th { background: #f7f7f8; font-weight: 600; }
+blockquote { margin: 10pt 0; padding: 2pt 0 2pt 12pt; border-left: 3px solid #cfcfcf; color: #444; }
+.salto { page-break-after: always; }
+.titulo { font-size: 8.5pt; text-transform: uppercase; letter-spacing: 1.2pt; color: #888; margin-bottom: 10pt; }
+img { max-width: 100%%; }
+"""
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("entrada")
+    ap.add_argument("salida")
+    ap.add_argument("--titulo", default="")
+    ap.add_argument("--horizontal", action="store_true")
+    a = ap.parse_args()
+
+    chrome = shutil.which("google-chrome") or shutil.which("chromium")
+    if not chrome:
+        print("md2pdf: falta google-chrome, no puedo rendir el PDF", file=sys.stderr)
+        return 2
+
+    with open(a.entrada, encoding="utf-8") as fh:
+        cuerpo = markdown.markdown(
+            fh.read(), extensions=["tables", "fenced_code", "toc", "sane_lists"]
+        )
+
+    encabezado = f'<div class="titulo">{a.titulo}</div>' if a.titulo else ""
+    css = CSS % {"tamano": "A4 landscape" if a.horizontal else "A4"}
+    html = f"<!doctype html><meta charset=utf-8><style>{css}</style>{encabezado}{cuerpo}"
+
+    salida = os.path.abspath(a.salida)
+    # Chrome escribe el PDF donde le digas, pero necesita un perfil descartable
+    # o se pelea con cualquier otra instancia que esté corriendo.
+    with tempfile.TemporaryDirectory() as tmp:
+        html_path = os.path.join(tmp, "doc.html")
+        with open(html_path, "w", encoding="utf-8") as fh:
+            fh.write(html)
+        r = subprocess.run(
+            [
+                chrome, "--headless", "--disable-gpu", "--no-sandbox",
+                f"--user-data-dir={tmp}/perfil",
+                "--no-pdf-header-footer",
+                f"--print-to-pdf={salida}",
+                f"file://{html_path}",
+            ],
+            capture_output=True, text=True, timeout=180,
+        )
+    if not os.path.exists(salida):
+        print(f"md2pdf: Chrome no generó el PDF\n{r.stderr[-800:]}", file=sys.stderr)
+        return 1
+    print(f"{salida} ({os.path.getsize(salida)} bytes)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

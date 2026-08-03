@@ -1,0 +1,81 @@
+#!/root/imperio/venv/bin/python
+"""grafico — PNG de un gráfico desde un JSON. Para meter en PDFs y decks.
+
+  grafico spec.json salida.png
+
+{
+  "tipo": "barras|lineas|torta|barras_h",
+  "titulo": "Leads por mes",
+  "etiquetas": ["Ene","Feb","Mar"],
+  "series": [{"nombre":"Leads","datos":[12,19,31]}],
+  "eje_y": "cantidad"
+}
+
+Paleta sobria a propósito: un gráfico no es una fiesta de colores. Los datos
+mandan, no la decoración.
+"""
+import json
+import sys
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt  # noqa: E402
+
+PALETA = ["#2F6BFF", "#2BD47B", "#FFC107", "#B388FF", "#FF6B6B", "#4ECDC4"]
+
+
+def main() -> int:
+    if len(sys.argv) != 3:
+        print(__doc__, file=sys.stderr)
+        return 2
+    with open(sys.argv[1], encoding="utf-8") as fh:
+        s = json.load(fh)
+
+    tipo = s.get("tipo", "barras")
+    etiquetas = s.get("etiquetas", [])
+    series = s.get("series", [])
+
+    fig, ax = plt.subplots(figsize=(9, 4.8), dpi=160)
+
+    if tipo == "torta":
+        ax.pie(series[0]["datos"], labels=etiquetas, autopct="%1.1f%%",
+               colors=PALETA, startangle=90,
+               wedgeprops={"edgecolor": "white", "linewidth": 1.5})
+        ax.axis("equal")
+    elif tipo == "lineas":
+        for i, serie in enumerate(series):
+            ax.plot(etiquetas, serie["datos"], marker="o", linewidth=2.2,
+                    color=PALETA[i % len(PALETA)], label=serie.get("nombre", ""))
+    elif tipo == "barras_h":
+        ax.barh(etiquetas, series[0]["datos"], color=PALETA[0])
+        ax.invert_yaxis()
+    else:  # barras agrupadas
+        n = len(series)
+        ancho = 0.8 / max(n, 1)
+        for i, serie in enumerate(series):
+            pos = [x + i * ancho for x in range(len(etiquetas))]
+            ax.bar(pos, serie["datos"], ancho, label=serie.get("nombre", ""),
+                   color=PALETA[i % len(PALETA)])
+        ax.set_xticks([x + ancho * (n - 1) / 2 for x in range(len(etiquetas))])
+        ax.set_xticklabels(etiquetas)
+
+    if s.get("titulo"):
+        ax.set_title(s["titulo"], fontsize=13, fontweight="bold", loc="left", pad=12)
+    if s.get("eje_y"):
+        ax.set_ylabel(s["eje_y"], fontsize=9)
+    if len(series) > 1 and tipo != "torta":
+        ax.legend(frameon=False, fontsize=9)
+
+    if tipo != "torta":
+        ax.spines[["top", "right"]].set_visible(False)
+        ax.grid(axis="y", alpha=0.25, linewidth=0.7)
+        ax.set_axisbelow(True)
+
+    fig.tight_layout()
+    fig.savefig(sys.argv[2], bbox_inches="tight")
+    print(sys.argv[2])
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

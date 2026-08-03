@@ -1,0 +1,113 @@
+#!/root/imperio/venv/bin/python
+"""mkdocx — Word (.docx) desde Markdown, con control de cambios opcional.
+
+  mkdocx contrato.md salida.docx [--titulo "Contrato de servicio"]
+
+Soporta: #/##/### , listas -, **negrita**, `código`, tablas de pipes, > citas.
+Para redlining, marcá lo agregado con {+texto+} y lo eliminado con {-texto-}:
+sale subrayado en verde y tachado en rojo, que es lo que un abogado espera ver.
+"""
+import argparse
+import re
+import sys
+
+from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Pt, RGBColor
+
+MARCA = re.compile(r"(\{\+.+?\+\}|\{-.+?-\}|\*\*.+?\*\*|`.+?`)")
+
+
+def escribir(par, texto: str) -> None:
+    """Pinta negritas, código y marcas de redlining dentro de un párrafo."""
+    for trozo in MARCA.split(texto):
+        if not trozo:
+            continue
+        if trozo.startswith("{+") and trozo.endswith("+}"):
+            r = par.add_run(trozo[2:-2]); r.underline = True
+            r.font.color.rgb = RGBColor(0x1B, 0x7F, 0x3B)
+        elif trozo.startswith("{-") and trozo.endswith("-}"):
+            r = par.add_run(trozo[2:-2]); r.font.strike = True
+            r.font.color.rgb = RGBColor(0xC0, 0x28, 0x28)
+        elif trozo.startswith("**") and trozo.endswith("**"):
+            par.add_run(trozo[2:-2]).bold = True
+        elif trozo.startswith("`") and trozo.endswith("`"):
+            r = par.add_run(trozo[1:-1]); r.font.name = "Consolas"
+        else:
+            par.add_run(trozo)
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("entrada")
+    ap.add_argument("salida")
+    ap.add_argument("--titulo", default="")
+    a = ap.parse_args()
+
+    doc = Document()
+    normal = doc.styles["Normal"]
+    normal.font.name = "Calibri"
+    normal.font.size = Pt(11)
+
+    if a.titulo:
+        t = doc.add_paragraph(); t.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        r = t.add_run(a.titulo); r.bold = True; r.font.size = Pt(18)
+
+    with open(a.entrada, encoding="utf-8") as fh:
+        lineas = fh.read().splitlines()
+
+    tabla: list[list[str]] = []
+
+    def cerrar_tabla() -> None:
+        nonlocal tabla
+        if not tabla:
+            return
+        t = doc.add_table(rows=0, cols=len(tabla[0]))
+        t.style = "Table Grid"
+        for i, fila in enumerate(tabla):
+            celdas = t.add_row().cells
+            for celda, valor in zip(celdas, fila):
+                celda.text = ""
+                escribir(celda.paragraphs[0], valor)
+                if i == 0:
+                    for p in celda.paragraphs:
+                        for r in p.runs:
+                            r.bold = True
+        tabla = []
+
+    for linea in lineas:
+        s = linea.rstrip()
+        if s.startswith("|") and s.endswith("|"):
+            celdas = [c.strip() for c in s.strip("|").split("|")]
+            if all(set(c) <= set("-: ") for c in celdas):
+                continue  # separador de encabezado
+            tabla.append(celdas)
+            continue
+        cerrar_tabla()
+
+        if not s:
+            continue
+        if s.startswith("### "):
+            doc.add_heading(s[4:], level=3)
+        elif s.startswith("## "):
+            doc.add_heading(s[3:], level=2)
+        elif s.startswith("# "):
+            doc.add_heading(s[2:], level=1)
+        elif s.startswith(("- ", "* ")):
+            escribir(doc.add_paragraph(style="List Bullet"), s[2:])
+        elif re.match(r"^\d+\. ", s):
+            escribir(doc.add_paragraph(style="List Number"), s.split(". ", 1)[1])
+        elif s.startswith("> "):
+            p = doc.add_paragraph(style="Quote") if "Quote" in [x.name for x in doc.styles] else doc.add_paragraph()
+            escribir(p, s[2:])
+        else:
+            escribir(doc.add_paragraph(), s)
+
+    cerrar_tabla()
+    doc.save(a.salida)
+    print(a.salida)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
