@@ -10,7 +10,7 @@ import {
   autorizarMcp,
   cambiarAsignacion,
   type McpState,
-} from "./actions";
+} from "./mcp-actions";
 
 const campo =
   "w-full rounded-xl border border-[var(--line)] bg-[var(--color-bg-2)] px-3 py-2.5 text-sm text-white outline-none focus:border-blue-bright";

@@ -47,7 +47,7 @@ export async function conectarMcp(_prev: McpState, fd: FormData): Promise<McpSta
         auth: usaOauth ? "oauth" : undefined,
         headers: pares(String(fd.get("headers") ?? "")),
       });
-      revalidatePath("/admin/mcp");
+      revalidatePath("/admin/agentes/[id]/conexiones", "page");
       return {
         ok: true,
         detalle: usaOauth
@@ -65,7 +65,7 @@ export async function conectarMcp(_prev: McpState, fd: FormData): Promise<McpSta
       args: String(fd.get("args") ?? "").split("\n").map((a) => a.trim()).filter(Boolean),
       env: pares(String(fd.get("env") ?? "")),
     });
-    revalidatePath("/admin/mcp");
+    revalidatePath("/admin/agentes/[id]/conexiones", "page");
     return { ok: true, detalle: `"${r.nombre}" conectado. Ahora asignalo a los agentes que lo necesiten.` };
   } catch (e) {
     return { error: (e as Error).message };
@@ -79,7 +79,7 @@ export async function desconectarMcp(fd: FormData) {
   } catch {
     /* la vista se recarga y muestra el estado real */
   }
-  revalidatePath("/admin/mcp");
+  revalidatePath("/admin/agentes/[id]/conexiones", "page");
 }
 
 export async function probarConexion(_prev: McpState, fd: FormData): Promise<McpState> {
@@ -102,7 +102,7 @@ export async function autorizarMcp(_prev: McpState, fd: FormData): Promise<McpSt
   const code = String(fd.get("code") ?? "").trim();
   try {
     const r = await loginMcp(nombre, code || undefined);
-    revalidatePath("/admin/mcp");
+    revalidatePath("/admin/agentes/[id]/conexiones", "page");
     if (code) return { ok: true, detalle: "Autorizado ✅ Ya podés asignarlo a un agente." };
     return r.url
       ? { ok: true, url: r.url, detalle: "Abrí este link, autorizá, y pegá el código que te devuelva." }
@@ -123,5 +123,5 @@ export async function cambiarAsignacion(fd: FormData) {
   } catch {
     /* idem */
   }
-  revalidatePath("/admin/mcp");
+  revalidatePath("/admin/agentes/[id]/conexiones", "page");
 }

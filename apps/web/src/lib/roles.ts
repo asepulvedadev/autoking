@@ -58,8 +58,6 @@ export const SECTION_ACCESS: { prefix: string; roles: Role[] }[] = [
   { prefix: "/admin/infraestructura", roles: PRIV },
   { prefix: "/admin/testimonios", roles: PRIV },
   { prefix: "/admin/equipo", roles: PRIV },
-  // Los MCP dan herramientas reales a los agentes: solo los toca el equipo.
-  { prefix: "/admin/mcp", roles: PRIV },
   // Los agentes los ve TODO el staff: adentro de cada uno viven sus leads,
   // conversaciones, prospección y creativos. Quién entra a cuál lo decide la
   // membresía (ver lib/agentes.ts), no el rol — un vendedor atado a Mayand

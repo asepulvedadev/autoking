@@ -3,7 +3,7 @@ import { getSessionProfile } from "@/lib/session";
 import { isPrivileged } from "@/lib/roles";
 import { agenteAccesible } from "@/lib/agentes";
 import { listarMcp, type McpServer } from "@/lib/control";
-import { ConectarMcp, ServidorMcp } from "../../../mcp/mcp-ui";
+import { ConectarMcp, ServidorMcp } from "./mcp-ui";
 
 export const dynamic = "force-dynamic";
 
