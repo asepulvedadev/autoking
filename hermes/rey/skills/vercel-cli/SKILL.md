@@ -18,19 +18,43 @@ CLI instalado en el VPS (`vercel --version` → 58.x).
 
 ## Autenticación
 
-No hay login interactivo posible acá (no hay navegador). Se usa un **token**:
+**Ya está autenticado** como `asepulvedadev` (device flow, 2026-08-03). La
+credencial vive en `/root/.local/share/com.vercel.cli/auth.json`.
 
 ```bash
-export VERCEL_TOKEN="<token>"        # o ya viene en el entorno
-vercel whoami --token "$VERCEL_TOKEN"
+vercel whoami        # tiene que devolver: asepulvedadev
 ```
 
-Si `vercel whoami` devuelve *"No existing credentials found"*, **el token no está
-configurado**. No intentes `vercel login`: se cuelga esperando un navegador.
-Decilo y pará — el token lo crea Álvaro en `vercel.com/account/tokens`.
+Si algún día devuelve *"No existing credentials found"*, la sesión se cayó. **No
+corras `vercel login` a secas**: en el VPS no hay navegador y se queda esperando.
+El flujo que sí funciona es el de dispositivo, y necesita que un humano abra la
+URL:
 
-Cuando esté puesto de forma permanente vive en `~/.hermes/.env` como
-`VERCEL_TOKEN`, y hay que reiniciar el gateway para que el proceso lo vea.
+```bash
+script -qec "vercel login" /dev/null    # imprime https://vercel.com/oauth/device?user_code=XXXX-XXXX
+```
+
+Pasale esa URL a Álvaro y esperá. El código expira en ~15 minutos.
+
+## ⚠️ Confirmá SIEMPRE el proyecto antes de operar
+
+`.vercel/` está en el `.gitignore`, así que **un checkout limpio no tiene el link
+del proyecto**. Sin él, `vercel ls` no falla: te devuelve deploys de **otro**
+proyecto de la cuenta (ya pasó — devolvió los de `grupo-j4-frontend`). Operar
+sobre el proyecto equivocado es el peor error posible acá.
+
+El link ya está creado en `/root/.hermes/home/autoking/.vercel/project.json`. Si
+falta, se recrea así:
+
+```bash
+cd /root/.hermes/home/autoking
+mkdir -p .vercel && cat > .vercel/project.json <<'EOF'
+{"projectId":"prj_l845yrJqDeS1hKc4EIhnYJ4TiHPD","orgId":"team_1XTXn6kpZkCb86QtlkN1EUCH","projectName":"autoking"}
+EOF
+```
+
+**Antes de cualquier comando, verificá que la salida diga `autoking`.** Si dice
+otro proyecto, pará.
 
 ## El proyecto
 
