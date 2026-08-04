@@ -63,7 +63,7 @@ Debería ir una vez en el prompt de sistema, no pegado a cada mensaje.
 
 ## 3. Plan de trabajo
 
-### Fase 1 — El cierre (lo único que mueve la aguja hoy)
+### Fase 1 — El cierre (lo único que mueve la aguja hoy) — ✅ APLICADA 2026-08-04
 
 Sin esto, todo lo demás es cosmética.
 
@@ -80,7 +80,7 @@ Sin esto, todo lo demás es cosmética.
 4. **Después del precio, si no hay respuesta: `programar_seguimiento` en el mismo turno.**
    No queda a criterio.
 
-### Fase 2 — La escritura
+### Fase 2 — La escritura — ✅ APLICADA 2026-08-04
 
 5. **Prohibir las muletillas de apertura.** Lista negra explícita: *Perfecto, Listo,
    Claro, De una, Uff, Ahí está, Excelente, Genial* como primera palabra.
@@ -113,6 +113,32 @@ Sin esto no se sabe si mejoró; se cree que mejoró.
     cuántas terminan con (a) lead guardado, (b) cierre pedido, (c) seguimiento agendado.
     Hoy la conversación de Luis da 0 de 3.
 16. **Antes/después con las mismas cinco conversaciones**, para poder comparar.
+
+---
+
+## 3.bis Resultado medido de las Fases 1 y 2
+
+Las reglas de cierre entraron **dentro de las 9 reglas duras** (ahora 12), no en una
+sección nueva al final. Es deliberado: King venía respetando las reglas duras
+("nunca invento un precio", "una pregunta a la vez") e ignorando el método que estaba
+suelto en otra parte del documento. El lugar importa tanto como el texto.
+
+Tres pruebas contra el King real, mismas situaciones que fallaron antes:
+
+| Prueba | Antes | Después |
+|---|---|---|
+| Momento del precio | Precio + qué incluye, y se detenía | *"…la instalación te queda en $980.000 COP. **¿Arrancamos con el Pro?**"* |
+| El lead escribe solo `300` | *"300 mensajes al día"* (lo supuso) | *"**¿300 al día o al mes?**"* |
+| "está muy caro" | — | Valida, reencuadra en citas recuperadas, y pregunta *"¿lo que más te frena es la instalación o la mensualidad?"* |
+
+También desaparecieron las muletillas de apertura y el nombre repetido, y los mensajes
+quedaron en tres líneas.
+
+### Un error propio, corregido en el mismo paso
+
+La sección de leads fríos que se había agregado el mismo día estaba escrita **en voseo**
+("volvé", "pedí", "andá") y la regla de King es español neutro **sin vos**. Una
+instrucción en voseo se filtra al habla del agente. Se corrigieron 15 formas.
 
 ---
 
