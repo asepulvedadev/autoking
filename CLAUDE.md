@@ -113,6 +113,36 @@ recupera esperando unas horas. Hermes marca la credencial `exhausted` y la salte
 así que la salida es tener **dos cuentas en el pool** (`hermes auth add` las suma, no
 las reemplaza) y no una sola.
 
+**Una conversación que crece sin límite hace que el modelo devuelva vacío.** El síntoma
+que ve el cliente es `⚠️ Empty response from model — retrying (1/3)` seguido de
+`❌ Model returned no content after all retries`. King se rompió así el 2026-08-06 con
+una sesión de **384 mensajes y 38.074 tokens** abierta 23 horas.
+
+La causa de fondo es que `compression.codex_gpt55_autoraise: true` (default) sube el
+umbral de compactación al **85%** del contexto en la ruta Codex/gpt-5.5, así que nunca
+se disparaba. El arreglo, que **no** pierde memoria porque resume en vez de olvidar:
+
+```yaml
+compression:
+  threshold_tokens: 30000        # tope absoluto: compacta al llegar acá
+  codex_gpt55_autoraise: false   # no subir el umbral al 85%
+```
+
+Y el efecto secundario feo: cada reintento manda un mensaje al chat, lo que dispara el
+error **131056 de WhatsApp** (*pair rate limit*) y ahí el agente queda mudo aunque el
+modelo se recupere. Los avisos internos se filtran con
+[hermes/parches/silenciar-avisos-internos.py](hermes/parches/silenciar-avisos-internos.py),
+que parchea el adaptador de Kapso **de cada perfil** — nunca el núcleo, que lo comparten
+los 21 perfiles incluidos los de J4.
+
+**Una sesión vive en DOS lugares.** `state.db` (tablas `messages`, `sessions` —
+identifica por `id`, **no** por `session_id` —, `session_model_usage`,
+`gateway_routing`, `delivery_obligations`) **y** `sessions/sessions.json`, el mapa que
+el gateway lee al arrancar. Borrar solo la base deja el log lleno de
+`Session DB append_message failed: Session '<id>' not found`. Se limpian los dos con
+[hermes/ops/olvidar-conversacion.py](hermes/ops/olvidar-conversacion.py) (que además
+lista las conversaciones gigantes) y **hay que reiniciar el gateway**.
+
 **Cada perfil de Hermes tiene su propio directorio de plugins.** Un plugin en
 `~/.hermes/plugins/` es invisible para los perfiles; hay que **copiarlo** (no symlink) a
 `~/.hermes/profiles/<perfil>/plugins/`.
