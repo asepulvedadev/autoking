@@ -87,9 +87,31 @@ rollback explícito (`/root/rollback-openclaw`). Todo lo que diga "OpenClaw" en
 `--user` el comando **devuelve éxito** y el proceso sigue atendiendo WhatsApp.
 Verificá el **puerto**, nunca el estado del servicio.
 
-**`hermes profile create` no aísla las credenciales de modelo.** El pool vive en
-`~/.hermes/auth.json` a nivel de usuario y se comparte entre perfiles. Config, MCP y
-engram sí quedan aislados solos; las credenciales no.
+**El `auth.json` de la raíz NO se comparte con los perfiles.** Cada perfil tiene el
+suyo en `~/.hermes/profiles/<perfil>/auth.json`, y **ese gana**: el de la raíz se
+ignora por completo. Verificado el 2026-08-06 — antes esta guía decía lo contrario y
+costó una hora de diagnóstico.
+
+Consecuencia: **`hermes auth add` actualiza solo la raíz**, así que agregar una cuenta
+nueva no llega a King, Mayand, Johan ni a los 12 del Imperio. El síntoma es
+inconfundible:
+
+```bash
+hermes --profile default -z "hola"   # responde
+hermes --profile king    -z "hola"   # "Codex provider quota exhausted (429)"
+```
+
+Si `default` contesta y los agentes no, los pools de los perfiles quedaron viejos.
+Se propagan con [hermes/ops/propagar-credencial.py](hermes/ops/propagar-credencial.py)
+(respalda cada uno antes de sobrescribir) y **hay que reiniciar los gateways** para que
+suelten la credencial vieja de memoria.
+
+**La cuota de Codex se agota y es compartida.** Los 21 perfiles usan el mismo pool y se
+gasta **por llamada**. Cuando se agota, el error es `429 usage_limit_reached` y trae
+`plan_type` y `resets_at`: si el plan es `free`, el límite es **mensual** y no se
+recupera esperando unas horas. Hermes marca la credencial `exhausted` y la saltea sola,
+así que la salida es tener **dos cuentas en el pool** (`hermes auth add` las suma, no
+las reemplaza) y no una sola.
 
 **Cada perfil de Hermes tiene su propio directorio de plugins.** Un plugin en
 `~/.hermes/plugins/` es invisible para los perfiles; hay que **copiarlo** (no symlink) a
