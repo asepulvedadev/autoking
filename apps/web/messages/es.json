@@ -175,6 +175,12 @@
     "titleA": "Se conecta con lo que",
     "titleHighlight": "ya usas",
     "subtitle": "Sin cambiar de herramientas. Tu agente trabaja sobre lo que ya tienes funcionando.",
+    "hubLabel": "Centro de operación",
+    "hubText": "Una capa inteligente para cada conversación.",
+    "channelLabel": "Canal",
+    "operationsLabel": "Operación",
+    "flowLabel": "Y también se integra con",
+    "footnote": "Conecta tus canales, calendario y operación sin obligar a tu equipo a cambiar su forma de trabajar.",
     "tools": [
       "WhatsApp",
       "Google Calendar",

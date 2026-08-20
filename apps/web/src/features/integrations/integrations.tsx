@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import { Marquee } from "@autoking/ui";
 import {
   siWhatsapp,
   siGooglecalendar,
@@ -57,32 +56,66 @@ function Chip({ label }: { label: string }) {
   );
 }
 
+function Connector({ label, category }: { label: string; category: string }) {
+  return (
+    <div className="group relative flex items-center gap-3 rounded-2xl border border-line bg-surface/90 p-3 shadow-[0_12px_35px_rgba(8,25,50,0.08)] transition-transform duration-300 hover:-translate-y-1">
+      <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-canvas">
+        <BrandIcon label={label} />
+      </span>
+      <span className="min-w-0">
+        <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-faint">{category}</span>
+        <span className="block truncate text-sm font-semibold text-ink">{label}</span>
+      </span>
+      <span className="ml-auto h-2 w-2 rounded-full bg-blue-bright shadow-[0_0_0_4px_rgba(36,113,255,0.12)]" aria-hidden="true" />
+    </div>
+  );
+}
+
 export async function Integrations() {
   const t = await getTranslations("Integrations");
   const tools = t.raw("tools") as string[];
+  const primaryTools = tools.slice(0, 4);
+  const secondaryTools = tools.slice(4);
 
   return (
-    // Banda de confianza, no sección. Antes tenía eyebrow + H2 + subtítulo y
-    // ocupaba una pantalla entera para decir "nos conectamos con estas
-    // herramientas" — un dato de apoyo, no un argumento de venta. Ahora es
-    // una línea de logos con un rótulo chico: informa sin robar atención.
-    <section className="border-t border-line py-12" id="integraciones" aria-label={t("titleA")}>
-      <p className="container mb-6 text-center text-xs font-semibold uppercase tracking-[0.16em] text-faint">
-        {t("eyebrow")}
-      </p>
+    <section className="border-t border-line bg-surface/35 py-20 sm:py-28" id="integraciones" aria-labelledby="integrations-title">
+      <div className="container">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-blue-bright">{t("eyebrow")}</p>
+          <h2 id="integrations-title" className="text-balance text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-5xl">
+            {t("titleA")} <span className="text-blue-bright">{t("titleHighlight")}</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-7 text-muted sm:text-lg">{t("subtitle")}</p>
+        </div>
 
-      <div
-        className="reveal relative"
-        style={{
-          maskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)",
-          WebkitMaskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)",
-        }}
-      >
-        <Marquee speed={34}>
-          {tools.map((tool) => (
-            <Chip key={tool} label={tool} />
-          ))}
-        </Marquee>
+        <div className="relative mx-auto mt-14 max-w-5xl overflow-hidden rounded-[2rem] border border-line bg-canvas p-5 shadow-[0_24px_80px_rgba(8,25,50,0.08)] sm:p-10">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(36,113,255,0.12),transparent_34%)]" />
+          <div className="relative grid items-center gap-10 lg:grid-cols-[1fr_220px_1fr]">
+            <div className="grid gap-3 sm:grid-cols-2">
+              {primaryTools.slice(0, 2).map((tool) => <Connector key={tool} label={tool} category={t("channelLabel")} />)}
+            </div>
+
+            <div className="relative mx-auto flex h-48 w-48 flex-col items-center justify-center rounded-[2rem] border border-blue-bright/30 bg-ink text-center shadow-[0_0_0_10px_rgba(36,113,255,0.06),0_20px_60px_rgba(36,113,255,0.24)]">
+              <span className="absolute -top-3 rounded-full border border-blue-bright/30 bg-canvas px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-blue-bright">{t("hubLabel")}</span>
+              <span className="text-2xl font-bold tracking-[-0.05em] text-white">AutoKing</span>
+              <span className="mt-2 max-w-[130px] text-xs leading-5 text-white/65">{t("hubText")}</span>
+              <span className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-200"><span className="h-1.5 w-1.5 rounded-full bg-emerald-300" /> 24/7</span>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {primaryTools.slice(2).map((tool) => <Connector key={tool} label={tool} category={t("operationsLabel")} />)}
+            </div>
+          </div>
+
+          <div className="relative mt-10 flex flex-col items-center gap-3 border-t border-line pt-6 text-center sm:flex-row sm:justify-between sm:text-left">
+            <p className="text-xs font-medium uppercase tracking-[0.14em] text-faint">{t("flowLabel")}</p>
+            <div className="flex flex-wrap justify-center gap-2 sm:justify-end">
+              {secondaryTools.map((tool) => <Chip key={tool} label={tool} />)}
+            </div>
+          </div>
+        </div>
+
+        <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-5 text-faint">{t("footnote")}</p>
       </div>
     </section>
   );

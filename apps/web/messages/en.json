@@ -175,6 +175,12 @@
     "titleA": "It connects with what",
     "titleHighlight": "you already use",
     "subtitle": "No switching tools. Your agent works on top of what you already have running.",
+    "hubLabel": "Operations hub",
+    "hubText": "One intelligent layer for every conversation.",
+    "channelLabel": "Channel",
+    "operationsLabel": "Operations",
+    "flowLabel": "And also works with",
+    "footnote": "Connect your channels, calendar, and operations without forcing your team to change how they work.",
     "tools": [
       "WhatsApp",
       "Google Calendar",
