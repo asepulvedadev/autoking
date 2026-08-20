@@ -22,6 +22,9 @@ export function Header() {
 
   return (
     <header className={cn(styles.header, scrolled && styles.scrolled)}>
+      <noscript>
+        <style>{`@media (max-width: 640px) { .${styles.header} { position: static; } .${styles.links} { display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 12px 0 22px; } }`}</style>
+      </noscript>
       <div className={cn("container", styles.nav)}>
         <a href="#hero" aria-label="AutoKing">
           <Logo />
@@ -47,7 +50,7 @@ export function Header() {
 
         <button
           className={styles.toggle}
-          aria-label="Menu"
+          aria-label={tCommon(open ? "closeMenu" : "openMenu")}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >

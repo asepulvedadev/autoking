@@ -8,8 +8,12 @@
   "Common": {
     "agendaDemo": "Book a demo",
     "conoceMas": "Learn more",
+    "skipToContent": "Skip to content",
     "tagline": "Your empire on autopilot",
-    "waMessage": "Hi AutoKing 👑 I want to book a demo and have an AI agent handle my business."
+    "waMessage": "Hi AutoKing I want to book a demo and have an AI agent handle my business.",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "whatsapp": "WhatsApp"
   },
   "Nav": {
     "problem": "The problem",
@@ -25,9 +29,9 @@
     "badge": "An agent that never sleeps · replies in seconds",
     "titleA": "Stop losing clients and appointments by",
     "titleHighlight": "not replying in time",
-    "subA": "AutoKing puts an artificial intelligence agent to work that replies, answers and books ",
+    "subA": "AutoKing puts an artificial intelligence agent to work that replies, answers and books",
     "subStrong": "on its own, 24/7",
-    "subB": " on your WhatsApp. Like an employee who never sleeps, never gets sick and never misses a sale.",
+    "subB": "on your WhatsApp. Like an employee who never sleeps, never gets sick and never misses a sale.",
     "proof": [
       {
         "num": "24/7",
@@ -47,12 +51,12 @@
     "chat": [
       {
         "dir": "in",
-        "text": "Hi, are you open? I'd like an appointment for tomorrow 😊",
+        "text": "Hi, are you open? I'd like an appointment for tomorrow",
         "time": "23:47"
       },
       {
         "dir": "out",
-        "text": "Hi! 👋 Of course, happy to book you. I have space tomorrow at 10:00, 1:30 PM and 5:00 PM. Which works best?",
+        "text": "Hi! Of course, happy to book you. I have space tomorrow at 10:00, 1:30 PM and 5:00 PM. Which works best?",
         "time": "23:47"
       },
       {
@@ -62,10 +66,11 @@
       },
       {
         "dir": "out",
-        "text": "Done! ✅ Your appointment is booked for tomorrow at 5:00 PM. I'll send a reminder. Can you confirm your name?",
+        "text": "Done! Your appointment is booked for tomorrow at 5:00 PM. I'll send a reminder. Can you confirm your name?",
         "time": "23:48"
       }
-    ]
+    ],
+    "typing": "The agent is typing"
   },
   "Problem": {
     "eyebrow": "The problem",
@@ -158,12 +163,12 @@
     "resultPre": "You're losing approx.",
     "resultSuffix": "per month",
     "clientsText": "clients who go to the competition",
-    "planNoteA": "AutoKing from ",
-    "planNoteBold": "$90/mo",
-    "planNoteB": " replies to all of them, 24/7.",
+    "planNoteA": "AutoKing replies to every conversation 24/7.",
+    "planNoteBold": "",
+    "planNoteB": "Find the right plan for your business.",
     "cta": "I want to recover that money",
     "disclaimer": "* Rough estimate: assumes {pct}% of those who don't get a timely reply go to the competition.",
-    "waMessage": "Hi AutoKing 👑 The calculator says I'm losing ~${amount} per month. I want to recover it with an AI agent."
+    "waMessage": "Hi AutoKing The calculator says I'm losing ~${amount} per month. I want to recover it with an AI agent."
   },
   "Integrations": {
     "eyebrow": "Integrations",
@@ -187,7 +192,7 @@
     "subtitle": "Ask it something as if you were a client. That's how fast it replies on your WhatsApp.",
     "agentName": "AutoKing · Assistant",
     "online": "online",
-    "greeting": "Hi! 👋 I'm the AutoKing assistant. Ask me anything: prices, hours, or ask me for an appointment.",
+    "greeting": "Hi! I'm the AutoKing assistant. Ask me anything: prices, hours, or ask me for an appointment.",
     "rules": [
       {
         "match": [
@@ -197,7 +202,7 @@
           "much",
           "worth"
         ],
-        "reply": "It depends on the service 😊 For example, a consultation from $50. Want the full list or shall I book you right away?"
+        "reply": "It depends on the service For example, a consultation from $50. Want the full list or shall I book you right away?"
       },
       {
         "match": [
@@ -206,7 +211,7 @@
           "time",
           "when"
         ],
-        "reply": "We're open Monday to Saturday, 9 AM to 8 PM. But I reply 24/7 👌 Shall I find you an appointment?"
+        "reply": "We're open Monday to Saturday, 9 AM to 8 PM. But I reply 24/7 Shall I find you an appointment?"
       },
       {
         "match": [
@@ -215,7 +220,7 @@
           "address",
           "find you"
         ],
-        "reply": "We're downtown, a block from the park 📍 Shall I book you an appointment?"
+        "reply": "We're downtown, a block from the park Shall I book you an appointment?"
       },
       {
         "match": [
@@ -228,7 +233,7 @@
           "available",
           "slot"
         ],
-        "reply": "Great! I have space tomorrow at 10:00, 1:30 PM and 5:00 PM ✅ Which works? I'll book it right away."
+        "reply": "Great! I have space tomorrow at 10:00, 1:30 PM and 5:00 PM Which works? I'll book it right away."
       },
       {
         "match": [
@@ -237,7 +242,7 @@
           "hey",
           "good"
         ],
-        "reply": "Hi! 👋 How can I help? I can give you prices, hours or book you an appointment."
+        "reply": "Hi! How can I help? I can give you prices, hours or book you an appointment."
       },
       {
         "match": [
@@ -247,10 +252,10 @@
           "perfect",
           "ok"
         ],
-        "reply": "You're welcome! 🙌 And heads up: with AutoKing your business does this on its own, 24 hours a day."
+        "reply": "You're welcome! And heads up: with AutoKing your business does this on its own, 24 hours a day."
       }
     ],
-    "fallback": "Good question 🤔 In the real version, your agent would answer this trained on YOUR business info. Want to see prices, hours or book an appointment?",
+    "fallback": "Good question In the real version, your agent would answer this trained on YOUR business info. Want to see prices, hours or book an appointment?",
     "quick": [
       "How much is it?",
       "Any appointment tomorrow?",
@@ -258,8 +263,13 @@
       "What are your hours?"
     ],
     "placeholder": "Type your message…",
-    "disclaimer": "* You're chatting with a real AutoKing AI agent. This is how well it would handle your business.",
-    "cta": "I want my real agent"
+    "disclaimer": "* You are interacting with an AutoKing demo sandbox. This is how your business support would look.",
+    "cta": "I want my real agent",
+    "sandboxLabel": "Demo sandbox",
+    "ariaChat": "Demo conversation with the AutoKing agent",
+    "send": "Send message",
+    "thinking": "The agent is preparing a reply…",
+    "noJs": "The interactive demo needs JavaScript. You can book a WhatsApp demo with the button below."
   },
   "Pricing": {
     "eyebrow": "Plans",
@@ -273,8 +283,11 @@
     "noPermanence": "No lock-in · cancel anytime · no long contracts",
     "guaranteeTitle": "30-day guarantee",
     "guaranteeText": "If your agent doesn't book you appointments in the first month, we refund the full installation.",
-    "recommended": "⭐ Recommended",
-    "waMessage": "Hi AutoKing 👑 I'm interested in the {name} \"{title}\" plan."
+    "recommended": "Recommended",
+    "waMessage": "Hi AutoKing I'm interested in the {name} \"{title}\" plan.",
+    "fallbackTitle": "Pricing available for your market",
+    "fallbackText": "We could not load plans right now. Message us and we will share the current price for your business.",
+    "fallbackCta": "Ask for pricing"
   },
   "Faq": {
     "eyebrow": "FAQ",
@@ -315,8 +328,8 @@
     "message": "Anything you'd like to tell us? (optional)",
     "submit": "I want my demo",
     "sending": "Sending…",
-    "success": "Done! We'll reach out very soon. 🙌",
-    "successTitle": "Got it, {name}! 👑",
+    "success": "Done! We'll reach out very soon.",
+    "successTitle": "Got it, {name}!",
     "agentName": "AutoKing · Assistant",
     "online": "online",
     "preparing": "Your agent is writing you a reply…",
@@ -324,7 +337,13 @@
     "required": "Please fill in your name and WhatsApp.",
     "error": "Something went wrong. Try again or message us on WhatsApp.",
     "consent": "I authorize the processing of my data under the <link>Privacy Policy</link> (Law 1581 of 2012).",
-    "consentRequired": "We need your authorization to contact you."
+    "consentRequired": "We need your authorization to contact you.",
+    "agentFallback": "Thank you, {name}. An AutoKing advisor will contact you on WhatsApp shortly to prepare your agent.",
+    "agentPromptIntro": "I just submitted my details on the AutoKing website to request a demo.",
+    "agentPromptName": "My name is {name}.",
+    "agentPromptBusiness": "My business is {business}.",
+    "agentPromptMessage": "I shared this context: {message}",
+    "agentPromptInstruction": "Reply warmly and personally in two or three lines: thank me by name, briefly explain how AutoKing could help a business like mine, and let me know an advisor will contact me on WhatsApp soon. Do not invent exact prices."
   },
   "Demo": {
     "eyebrow": "Try it yourself",
@@ -333,7 +352,7 @@
     "titleB": "right now",
     "subtitle": "We won't just tell you: try it. Message the agent on WhatsApp as if you were a client and watch it reply and book in seconds.",
     "cta": "Try the agent now",
-    "waMessage": "Hi AutoKing 👑 I want to try the AI agent live."
+    "waMessage": "Hi AutoKing I want to try the AI agent live."
   },
   "StickyCta": {
     "label": "Book your free demo"
@@ -348,5 +367,41 @@
     "privacy": "Privacy policy",
     "terms": "Terms & conditions",
     "rights": "AutoKing — Your empire on autopilot"
+  },
+  "RevenueLoop": {
+    "eyebrow": "WhatsApp Revenue Loop",
+    "titleA": "Every conversation can follow",
+    "titleHighlight": "the path to a booking",
+    "subtitle": "AutoKing turns a missed message into an answered, qualified and confirmed opportunity — without slowing your business down.",
+    "lossLabel": "Missed message",
+    "lossText": "“Do you have an opening tomorrow?”",
+    "replyLabel": "Instant reply",
+    "replyText": "The agent replies in seconds, in your business voice.",
+    "qualifyLabel": "Qualified client",
+    "qualifyText": "It detects intent, service and availability before the next step.",
+    "bookLabel": "Booking confirmed",
+    "bookText": "The conversation ends with a time, a name and a confirmation.",
+    "followLabel": "Active follow-up",
+    "followText": "Reminders and next steps keep the relationship moving after the booking.",
+    "beforeTitle": "Before: an inbox that goes cold",
+    "beforeText": "Unanswered messages, scattered details and bookings that depend on someone being awake.",
+    "afterTitle": "After: a loop that converts",
+    "afterText": "Every conversation has a clear next step: reply, qualify, book and follow up.",
+    "beforeLabel": "Before",
+    "afterLabel": "After",
+    "cta": "See how it works",
+    "sandbox": "Illustrative AutoKing flow"
+  },
+  "BrandPreview": {
+    "eyebrow": "A view of the loop",
+    "title": "Watch the conversation move",
+    "subtitle": "Demo preview · not a real customer conversation",
+    "play": "View the flow",
+    "replay": "Replay preview",
+    "messageLost": "Unanswered message",
+    "instantReply": "Instant reply",
+    "qualified": "Qualified client",
+    "confirmed": "Booking confirmed",
+    "followUp": "Follow-up"
   }
 }

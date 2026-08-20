@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { buttonVariants, WhatsAppIcon, cn } from "@autoking/ui";
 import { Link } from "@/i18n/navigation";
 import { waHref } from "@/lib/site";
@@ -11,7 +11,7 @@ const field =
   // rounded-xl era 12px: un radio inventado que no estaba en la escala. Los
   // campos usan el mismo radio que los botones, así el formulario se lee como
   // una pieza y no como tres controles de sitios distintos.
-  "w-full rounded-[var(--radius-sm)] border border-line bg-bg-2 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-faint focus:border-blue-bright";
+  "min-h-11 w-full rounded-[var(--radius-sm)] border border-line bg-bg-2 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-faint focus:border-blue-bright focus-visible:ring-2 focus-visible:ring-blue-bright";
 
 /** Respuesta inmediata del agente: se ve "escribiendo" y luego responde
  *  personalizado al negocio del prospecto. Es la demo en vivo del producto. */
@@ -89,6 +89,7 @@ function LeadSuccess({ lead }: { lead: Lead }) {
 
 export function LeadForm() {
   const t = useTranslations("LeadForm");
+  const locale = useLocale();
   const [state, action, pending] = useActionState<LeadState, FormData>(submitLead, {});
 
   return (
@@ -108,14 +109,30 @@ export function LeadForm() {
           {state.ok && state.lead ? (
             <LeadSuccess lead={state.lead} />
           ) : (
-            <form action={action} className="flex flex-col gap-3">
-              <input name="name" required placeholder={t("name")} className={field} autoComplete="name" />
-              <div className="grid gap-3 sm:grid-cols-2">
-                <input name="business" placeholder={t("business")} className={field} />
-                <input name="whatsapp" required placeholder={t("whatsapp")} className={field} autoComplete="tel" />
+            <form action={action} className="flex flex-col gap-4">
+              <input type="hidden" name="locale" value={locale} />
+              <div className="grid gap-1.5">
+                <label htmlFor="lead-name" className="text-sm font-medium text-ink">{t("name")}</label>
+                <input id="lead-name" name="name" required className={field} autoComplete="name" />
               </div>
-              <input name="email" type="email" placeholder={t("email")} className={field} autoComplete="email" />
-              <textarea name="message" rows={2} placeholder={t("message")} className={field} />
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="grid gap-1.5">
+                  <label htmlFor="lead-business" className="text-sm font-medium text-ink">{t("business")}</label>
+                  <input id="lead-business" name="business" className={field} autoComplete="organization" />
+                </div>
+                <div className="grid gap-1.5">
+                  <label htmlFor="lead-whatsapp" className="text-sm font-medium text-ink">{t("whatsapp")}</label>
+                  <input id="lead-whatsapp" name="whatsapp" required className={field} autoComplete="tel" inputMode="tel" />
+                </div>
+              </div>
+              <div className="grid gap-1.5">
+                <label htmlFor="lead-email" className="text-sm font-medium text-ink">{t("email")}</label>
+                <input id="lead-email" name="email" type="email" className={field} autoComplete="email" inputMode="email" />
+              </div>
+              <div className="grid gap-1.5">
+                <label htmlFor="lead-message" className="text-sm font-medium text-ink">{t("message")}</label>
+                <textarea id="lead-message" name="message" rows={2} className={field} />
+              </div>
 
               {/* Consentimiento obligatorio (Habeas Data, Ley 1581/2012). */}
               <label className="flex items-start gap-2.5 text-xs leading-snug text-[var(--color-muted)]">
@@ -142,7 +159,7 @@ export function LeadForm() {
               </label>
 
               {state.error && (
-                <p className="text-sm text-[var(--color-danger)]">
+                <p className="text-sm text-[var(--color-danger)]" role="alert">
                   {state.error === "required"
                     ? t("required")
                     : state.error === "consent"

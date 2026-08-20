@@ -14,7 +14,27 @@ export async function Pricing() {
   const pais = await getPais();
   const planes = await getPlanes(pais);
 
-  if (planes.length === 0) return null; // si la DB no responde, no rompemos la landing
+  if (planes.length === 0) {
+    return (
+      <section className={cn("section", styles.section)} id="planes">
+        <div className="container">
+          <div className="section-head reveal">
+            <span className="eyebrow">{t("eyebrow")}</span>
+            <h2>{t("fallbackTitle")}</h2>
+            <p>{t("fallbackText")}</p>
+          </div>
+          <a
+            href={waHref(t("waMessage", { name: t("fallbackCta"), title: t("fallbackTitle") }))}
+            target="_blank"
+            rel="noopener"
+            className={buttonVariants({ variant: "primary" })}
+          >
+            {t("fallbackCta")}
+          </a>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={cn("section", styles.section)} id="planes">

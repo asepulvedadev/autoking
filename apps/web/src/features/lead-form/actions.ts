@@ -4,8 +4,9 @@ import { createClient } from "@/lib/supabase/server";
 import { sendEmail, SUPPORT_EMAIL } from "@/lib/email/send";
 import { newLeadInternal, leadThanks } from "@/lib/email/templates";
 import { chatAgent } from "@/lib/agents-bridge";
+import { getTranslations } from "next-intl/server";
 
-export type Lead = { name: string; business: string | null; message: string | null };
+export type Lead = { name: string; business: string | null; message: string | null; locale: string | null };
 export type LeadState = { ok?: boolean; error?: "required" | "consent" | "fail"; lead?: Lead };
 
 // Fase 1: captura instantánea. Guarda el lead + notifica al equipo + agradece al
@@ -14,6 +15,7 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
   const str = (k: string) => String(formData.get(k) ?? "").trim();
   const name = str("name");
   const whatsapp = str("whatsapp");
+  const locale = str("locale").startsWith("en") ? "en" : "es";
   if (!name || !whatsapp) return { error: "required" };
   // Consentimiento obligatorio (Habeas Data, Ley 1581/2012). Se valida también
   // en el server, no solo con el `required` del checkbox.
@@ -40,19 +42,20 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
   }
   await Promise.allSettled(jobs);
 
-  return { ok: true, lead: { name, business: lead.business, message: lead.message } };
+  return { ok: true, lead: { name, business: lead.business, message: lead.message, locale } };
 }
 
 // Fase 2: respuesta inmediata y personalizada del agente (autoking-web, sandbox
 // sin herramientas). El prospecto EXPERIMENTA al agente respondiéndole en vivo.
 export async function getAgentReply(lead: Lead): Promise<{ reply: string }> {
-  const fallback = `¡Gracias, ${lead.name}! 👑 Un asesor de AutoKing te contacta muy pronto por WhatsApp para montar tu agente.`;
+  const t = await getTranslations({ locale: lead.locale ?? "es", namespace: "LeadForm" });
+  const fallback = t("agentFallback", { name: lead.name });
   const prompt = [
-    "Acabo de dejar mis datos en la web de AutoKing para una demo.",
-    `Me llamo ${lead.name}.`,
-    lead.business ? `Mi negocio es ${lead.business}.` : "",
-    lead.message ? `Te cuento: ${lead.message}` : "",
-    "Respóndeme cálido y personalizado (2-3 líneas): agradéceme por mi nombre, dime brevemente cómo AutoKing ayudaría a un negocio como el mío, y avísame que un asesor me contacta muy pronto por WhatsApp. No inventes precios exactos.",
+    t("agentPromptIntro"),
+    t("agentPromptName", { name: lead.name }),
+    lead.business ? t("agentPromptBusiness", { business: lead.business }) : "",
+    lead.message ? t("agentPromptMessage", { message: lead.message }) : "",
+    t("agentPromptInstruction"),
   ]
     .filter(Boolean)
     .join(" ");

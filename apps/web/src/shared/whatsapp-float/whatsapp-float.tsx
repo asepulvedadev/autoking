@@ -11,7 +11,7 @@ export async function WhatsAppFloat() {
       target="_blank"
       rel="noopener"
       className={styles.float}
-      aria-label="WhatsApp"
+      aria-label={t("whatsapp")}
     >
       <WhatsAppIcon className="h-8 w-8" />
     </a>

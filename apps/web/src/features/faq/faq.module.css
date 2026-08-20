@@ -63,10 +63,13 @@
 }
 .answer {
   display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s var(--ease);
+  grid-template-rows: 1fr;
 }
-.item.open .answer {
+.js .answer {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s var(--ease);
+}
+.js .item.open .answer {
   grid-template-rows: 1fr;
 }
 .answer > div {
@@ -77,4 +80,10 @@
   color: var(--color-muted);
   font-size: 15.5px;
   margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .answer {
+    transition: none;
+  }
 }

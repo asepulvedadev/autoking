@@ -13,6 +13,7 @@ import { useEffect } from "react";
  */
 export function ScrollReveal() {
   useEffect(() => {
+    document.documentElement.classList.add("js");
     const reveal = (el: Element) => el.classList.add("visible");
     const remaining = () =>
       Array.from(document.querySelectorAll<HTMLElement>(".reveal:not(.visible)"));
@@ -57,6 +58,7 @@ export function ScrollReveal() {
     window.addEventListener("resize", onScroll, { passive: true });
 
     return () => {
+      document.documentElement.classList.remove("js");
       observer.disconnect();
       clearTimeout(settle);
       window.removeEventListener("scroll", onScroll);

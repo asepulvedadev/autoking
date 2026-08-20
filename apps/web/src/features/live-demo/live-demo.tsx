@@ -69,6 +69,7 @@ export function LiveDemo() {
             {t("titleA")} <span className="text-blue">{t("titleHighlight")}</span>
           </h2>
           <p>{t("subtitle")}</p>
+          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-faint)]">{t("sandboxLabel")}</p>
         </div>
 
         <div className="reveal mx-auto max-w-lg overflow-hidden rounded-[var(--radius-lg)] border border-line-strong bg-[var(--color-surface)] shadow-cta">
@@ -86,7 +87,7 @@ export function LiveDemo() {
           </div>
 
           {/* body */}
-          <div ref={bodyRef} className="flex h-[340px] flex-col gap-2.5 overflow-y-auto bg-[rgb(7_12_16_/_0.6)] p-4">
+          <div ref={bodyRef} className="flex h-[340px] flex-col gap-2.5 overflow-y-auto bg-[rgb(7_12_16_/_0.6)] p-4" aria-live="polite" aria-label={t("ariaChat")}>
             {messages.map((m, i) => (
               <div
                 key={i}
@@ -113,7 +114,7 @@ export function LiveDemo() {
                 </div>
                 {slowHint && (
                   <span className="px-1 text-xs text-[var(--color-faint)]">
-                    Pensando la mejor respuesta… 💭
+                    {t("thinking")}
                   </span>
                 )}
               </div>
@@ -126,7 +127,7 @@ export function LiveDemo() {
               <button
                 key={q}
                 onClick={() => send(q)}
-                className="rounded-full border border-line-strong px-3 py-1.5 text-xs text-[var(--color-muted)] transition-colors hover:border-blue-bright hover:text-white"
+                className="min-h-11 rounded-full border border-line-strong px-3 py-1.5 text-xs text-[var(--color-muted)] transition-colors hover:border-blue-bright hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-bright"
               >
                 {q}
               </button>
@@ -141,7 +142,9 @@ export function LiveDemo() {
               send(input);
             }}
           >
+            <label className="sr-only" htmlFor="live-demo-message">{t("placeholder")}</label>
             <input
+              id="live-demo-message"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={t("placeholder")}
@@ -149,14 +152,17 @@ export function LiveDemo() {
             />
             <button
               type="submit"
-              aria-label="Enviar"
-              className="grid h-10 w-10 flex-none place-items-center rounded-full bg-blue text-white transition-transform hover:scale-105"
+              aria-label={t("send")}
+              className="grid h-11 w-11 flex-none place-items-center rounded-full bg-blue text-white transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-bright"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
           </form>
+          <noscript>
+            <p className="border-t border-line px-4 pb-4 text-sm text-muted">{t("noJs")}</p>
+          </noscript>
         </div>
 
         <div className="reveal mt-6 text-center">

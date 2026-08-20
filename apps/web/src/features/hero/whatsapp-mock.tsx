@@ -11,12 +11,17 @@ export function WhatsAppMock() {
   const t = useTranslations("Hero");
   const chat = t.raw("chat") as Msg[];
   const bodyRef = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState<boolean[]>(() => chat.map(() => false));
+  // El HTML inicial muestra toda la conversación: si JavaScript no carga, la
+  // promesa de valor sigue siendo legible. La animación se activa después.
+  const [shown, setShown] = useState<boolean[]>(() => chat.map(() => true));
   const [typing, setTyping] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const body = bodyRef.current;
     if (!body) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let timers: ReturnType<typeof setTimeout>[] = [];
     let loop: ReturnType<typeof setInterval> | undefined;
@@ -26,6 +31,7 @@ export function WhatsAppMock() {
       timers = [];
       setShown(chat.map(() => false));
       setTyping(false);
+      setIsAnimating(true);
       let time = 600;
       chat.forEach((msg, i) => {
         // El agente "escribe" antes de responder
@@ -132,7 +138,7 @@ export function WhatsAppMock() {
             return (
               <div
                 key={i}
-                className={cn(styles.bubble, styles.bubbleShow, isAgent ? styles.bubbleAgent : styles.bubbleClient)}
+                className={cn(styles.bubble, isAnimating && styles.bubbleShow, isAgent ? styles.bubbleAgent : styles.bubbleClient)}
               >
                 {msg.text}
                 <div className={styles.meta}>
@@ -147,7 +153,7 @@ export function WhatsAppMock() {
             );
           })}
           {typing && (
-            <div className={styles.typing} aria-label="escribiendo">
+            <div className={styles.typing} aria-label={t("typing")}>
               <span />
               <span />
               <span />
