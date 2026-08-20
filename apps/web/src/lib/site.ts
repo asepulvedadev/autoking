@@ -37,7 +37,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const CONTACT = {
-  email: "hola@autoking.pro",
+  email: "soporte@autoking.com",
   // Redes sociales: agregar acá SOLO cuando existan perfiles reales.
   // Mientras estén vacías no se renderizan en el footer (nada de enlaces a "#").
 } as const;
