@@ -47,26 +47,18 @@ function BrandIcon({ label }: { label: string }) {
   return <span className="h-2 w-2 flex-none rounded-full bg-blue-bright" />;
 }
 
-function Chip({ label }: { label: string }) {
+function IntegrationCard({ label, featured = false, featuredText }: { label: string; featured?: boolean; featuredText: string }) {
   return (
-    <div className="flex items-center gap-2.5 rounded-full border border-line bg-surface px-5 py-2.5">
-      <BrandIcon label={label} />
-      <span className="whitespace-nowrap text-sm font-medium text-ink">{label}</span>
-    </div>
-  );
-}
-
-function Connector({ label, category }: { label: string; category: string }) {
-  return (
-    <div className="group relative flex items-center gap-3 rounded-2xl border border-line bg-surface/90 p-3 shadow-[0_12px_35px_rgba(8,25,50,0.08)] transition-transform duration-300 hover:-translate-y-1">
-      <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-canvas">
+    <div className={`group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-line bg-surface/90 p-4 shadow-[0_12px_35px_rgba(8,25,50,0.08)] transition-transform duration-300 hover:-translate-y-1 ${featured ? "min-h-36 md:col-span-2 md:row-span-2 md:items-end" : "min-h-24"}`}>
+      {featured && <div className="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full bg-blue-bright/15 blur-2xl" />}
+      <span className={`relative flex items-center justify-center rounded-2xl border border-line bg-canvas ${featured ? "h-14 w-14" : "h-10 w-10"}`}>
         <BrandIcon label={label} />
       </span>
-      <span className="min-w-0">
-        <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-faint">{category}</span>
+      <span className="relative min-w-0">
         <span className="block truncate text-sm font-semibold text-ink">{label}</span>
+        {featured && <span className="mt-1 block max-w-48 text-xs leading-5 text-muted">{featuredText}</span>}
       </span>
-      <span className="ml-auto h-2 w-2 rounded-full bg-blue-bright shadow-[0_0_0_4px_rgba(36,113,255,0.12)]" aria-hidden="true" />
+      <span className="relative ml-auto h-2 w-2 rounded-full bg-blue-bright shadow-[0_0_0_4px_rgba(36,113,255,0.12)]" aria-hidden="true" />
     </div>
   );
 }
@@ -74,9 +66,6 @@ function Connector({ label, category }: { label: string; category: string }) {
 export async function Integrations() {
   const t = await getTranslations("Integrations");
   const tools = t.raw("tools") as string[];
-  const primaryTools = tools.slice(0, 4);
-  const secondaryTools = tools.slice(4);
-
   return (
     <section className="border-t border-line bg-surface/35 py-20 sm:py-28" id="integraciones" aria-labelledby="integrations-title">
       <div className="container">
@@ -88,30 +77,18 @@ export async function Integrations() {
           <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-7 text-muted sm:text-lg">{t("subtitle")}</p>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-5xl overflow-hidden rounded-[2rem] border border-line bg-canvas p-5 shadow-[0_24px_80px_rgba(8,25,50,0.08)] sm:p-10">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(36,113,255,0.12),transparent_34%)]" />
-          <div className="relative grid items-center gap-10 lg:grid-cols-[1fr_220px_1fr]">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {primaryTools.slice(0, 2).map((tool) => <Connector key={tool} label={tool} category={t("channelLabel")} />)}
+        <div className="relative mx-auto mt-14 grid max-w-5xl gap-4 overflow-hidden rounded-[2rem] border border-line bg-canvas p-5 shadow-[0_24px_80px_rgba(8,25,50,0.08)] sm:p-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div className="relative flex flex-col justify-between rounded-3xl border border-blue-bright/20 bg-blue-bright/[0.07] p-6 sm:p-8">
+            <div>
+              <span className="inline-flex rounded-full border border-blue-bright/25 bg-blue-bright/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-bright">{t("flowLabel")}</span>
+              <h3 className="mt-6 max-w-xs text-2xl font-semibold tracking-[-0.04em] text-ink sm:text-3xl">{t("panelTitle")}</h3>
+              <p className="mt-4 max-w-sm text-sm leading-6 text-muted">{t("panelText")}</p>
             </div>
-
-            <div className="relative mx-auto flex h-48 w-48 flex-col items-center justify-center rounded-[2rem] border border-blue-bright/30 bg-ink text-center shadow-[0_0_0_10px_rgba(36,113,255,0.06),0_20px_60px_rgba(36,113,255,0.24)]">
-              <span className="absolute -top-3 rounded-full border border-blue-bright/30 bg-canvas px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-blue-bright">{t("hubLabel")}</span>
-              <span className="text-2xl font-bold tracking-[-0.05em] text-white">AutoKing</span>
-              <span className="mt-2 max-w-[130px] text-xs leading-5 text-white/65">{t("hubText")}</span>
-              <span className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-200"><span className="h-1.5 w-1.5 rounded-full bg-emerald-300" /> 24/7</span>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2">
-              {primaryTools.slice(2).map((tool) => <Connector key={tool} label={tool} category={t("operationsLabel")} />)}
-            </div>
+            <div className="mt-12 flex items-center gap-3 text-xs font-semibold text-ink"><span className="h-2 w-2 rounded-full bg-emerald-400" /> {t("status")}</div>
           </div>
 
-          <div className="relative mt-10 flex flex-col items-center gap-3 border-t border-line pt-6 text-center sm:flex-row sm:justify-between sm:text-left">
-            <p className="text-xs font-medium uppercase tracking-[0.14em] text-faint">{t("flowLabel")}</p>
-            <div className="flex flex-wrap justify-center gap-2 sm:justify-end">
-              {secondaryTools.map((tool) => <Chip key={tool} label={tool} />)}
-            </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {tools.map((tool, index) => <IntegrationCard key={tool} label={tool} featured={index === 0} featuredText={t("featuredText")} />)}
           </div>
         </div>
 
